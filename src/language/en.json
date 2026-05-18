@@ -1,0 +1,229 @@
+{
+    "nav": {
+        "home": "Home",
+        "services": "Services",
+        "work": "Portfolio",
+        "about": "About",
+        "why": "Why",
+        "contact": "Contact",
+        "cta": "Get Started"
+    },
+    "lang": {
+        "en": "EN",
+        "ar": "AR"
+    },
+    "home": {
+        "hero": {
+            "badge": "MAYSTACK",
+            "badgeLine": "Premium Web & Mobile Development",
+            "titleTop": "We Build Digital",
+            "titleAccent": "Experiences That Scale",
+            "subtitle": "Transform your vision into reality with sharp web and mobile applications. We craft digital solutions that drive growth and delight users.",
+            "headline1": "A bold headline",
+            "headline2": "that delivers",
+            "ctaPrimary": "Start Your Project",
+            "ctaSecondary": "View Our Work",
+            "line1": "WEB & MOBILE APP",
+            "line2": "DEVELOPMENT",
+            "line3": "STUDIO"
+        },
+        "servicesSection": {
+            "title": "What We Do Best",
+            "subtitle": "Focused digital services for clean, modern products."
+        },
+        "laptop": {
+            "eyebrow": "Selected work",
+            "title": "Projects Live Inside The Product",
+            "previewAlt": "Project preview inside laptop screen"
+        },
+        "sections": {
+            "servicesTitle": "Our Services",
+            "portfolioTitle": "Portfolio Highlights",
+            "portfolioSub": "Selected projects showcasing real-world solutions.",
+            "whyTitle": "Why MayStack",
+            "contactTitle": "Get In Touch"
+        },
+        "services": {
+            "uiux": "UI/UX Design",
+            "uiuxDesc": "Modern UI and a clear, smooth user experience.",
+            "web": "Web Development",
+            "webDesc": "Fast, responsive websites with clean UI and solid structure.",
+            "mobile": "Mobile Apps",
+            "mobileDesc": "High-performance mobile apps with a polished experience.",
+            "custom": "Custom Solutions"
+        },
+        "why": {
+            "eyebrow": "Why MayStack",
+            "title": "Built clean. Styled sharp.",
+            "items": {
+                "quality": { "title": "Clean & thoughtful UI", "desc": "Pixel-consistent layouts with strong hierarchy and spacing." },
+                "scale": { "title": "Built to scale", "desc": "Reusable components and structure that grows with your product." },
+                "fast": { "title": "Fast performance", "desc": "Optimized rendering, smooth interactions, and lightweight pages." },
+                "support": { "title": "Reliable delivery", "desc": "Clear communication, milestones, and on-time execution." }
+            }
+        }
+    },
+    "portfolio": {
+        "eyebrow": "Work",
+        "title": "Portfolio",
+        "titlePrefix": "Our",
+        "titleAccent": "Portfolio",
+        "subtitle": "Selected projects and interface systems built for real products, launches, and growing teams.",
+        "gridEyebrow": "Full portfolio",
+        "gridTitle": "Recent Work",
+        "filtersList": ["All Projects", "Mobile", "Web", "Custom Solutions"],
+        "filters": {
+            "all": "All",
+            "website": "Website Design",
+            "mobile": "Mobile App",
+            "desktop": "Desktop App",
+            "branding": "Branding"
+        },
+        "projects": {
+            "commerce": {
+                "title": "E-Commerce Platform",
+                "type": "Web",
+                "desc": "Full-stack commerce solution with payment integration and inventory management."
+            },
+            "health": {
+                "title": "Healthcare Mobile App",
+                "type": "Mobile",
+                "desc": "Patient management and telemedicine app for healthcare providers."
+            },
+            "finance": {
+                "title": "Finance Dashboard",
+                "type": "Web",
+                "desc": "Real-time analytics dashboard for financial data visualization."
+            }
+        }
+    },
+    "servicesPage": {
+        "titlePrefix": "Our",
+        "titleAccent": "Services",
+        "subtitle": "Comprehensive web and mobile development services to bring your ideas to life.",
+        "main": {
+            "mobile": {
+                "title": "Mobile App Development",
+                "desc": "Native and cross-platform mobile applications that deliver exceptional user experiences on iOS and Android.",
+                "items": ["Native iOS & Android", "Cross-platform apps", "Store deployment", "Real-time features"]
+            },
+            "web": {
+                "title": "Web Development",
+                "desc": "Modern, responsive web applications built with sharp technologies and clean best practices.",
+                "items": ["React and Next.js", "Progressive Web Apps", "E-commerce platforms", "SEO and performance"]
+            },
+            "custom": {
+                "title": "Custom Software Solutions",
+                "desc": "Tailored software development to meet your unique business requirements and workflows.",
+                "items": ["Enterprise apps", "API integration", "Microservices", "Legacy modernization"]
+            },
+            "uiux": {
+                "title": "UI/UX Design",
+                "desc": "Beautiful, intuitive interfaces designed to engage users and drive conversions.",
+                "items": ["User research", "Wireframes", "Design systems", "Usability testing"]
+            }
+        },
+        "additional": {
+            "title": "Additional Services",
+            "items": {
+                "backend": { "title": "Backend Development", "desc": "Robust, scalable backend systems and APIs" },
+                "cloud": { "title": "Cloud Services", "desc": "AWS, Azure, and Google Cloud deployment" },
+                "security": { "title": "Security & Testing", "desc": "Security audits and quality assurance" },
+                "performance": { "title": "Performance Optimization", "desc": "Speed and efficiency improvements" }
+            }
+        },
+        "process": {
+            "title": "Our Process",
+            "subtitle": "A proven approach to deliver exceptional results.",
+            "items": {
+                "discovery": { "title": "Discovery", "desc": "We understand your vision, goals, and requirements through detailed consultation." },
+                "planning": { "title": "Planning", "desc": "Strategic planning and roadmap creation with clear milestones and timelines." },
+                "design": { "title": "Design", "desc": "Creating intuitive designs and prototypes that align with your brand." },
+                "development": { "title": "Development", "desc": "Agile development with regular updates and continuous collaboration." },
+                "testing": { "title": "Testing", "desc": "Rigorous quality assurance to ensure flawless functionality." },
+                "launch": { "title": "Launch & Support", "desc": "Smooth deployment and ongoing maintenance and support." }
+            }
+        }
+    },
+    "about": {
+        "titlePrefix": "About",
+        "subtitle": "We're a team of passionate developers and designers dedicated to creating exceptional digital experiences.",
+        "story": {
+            "title": "Our Story",
+            "paragraphs": [
+                "Founded with a simple mission, Maystack helps businesses transform ideas into powerful digital solutions.",
+                "We specialize in custom web and mobile applications that look polished and deliver real value to clients and users.",
+                "Today, we are proud to build clean interfaces, scalable systems, and digital products that help businesses grow."
+            ]
+        },
+        "stats": {
+            "projects": "Projects Completed",
+            "clients": "Happy Clients",
+            "years": "Years Experience",
+            "satisfaction": "Client Satisfaction"
+        },
+        "values": {
+            "title": "Our Values",
+            "items": {
+                "client": { "title": "Client-Focused", "desc": "Your success is our success. We prioritize your needs and goals in every decision." },
+                "innovation": { "title": "Innovation", "desc": "We stay ahead of the curve, using modern technologies and thoughtful methods." },
+                "quality": { "title": "Quality", "desc": "We never compromise on quality, delivering robust and reliable solutions." },
+                "collaboration": { "title": "Collaboration", "desc": "We work closely with clients as partners, ensuring transparency throughout." }
+            }
+        }
+    },
+    "contactPage": {
+        "titlePrefix": "Get In",
+        "titleAccent": "Touch",
+        "subtitle": "Have a project in mind? Let's discuss how we can help bring your vision to life.",
+        "infoTitle": "Contact Information",
+        "followTitle": "Follow Us",
+        "formTitle": "Send us a message",
+        "info": {
+            "email": { "title": "Email Us", "value": "hello@maystack.com" },
+            "phone": { "title": "Call Us", "value": "+1 (555) 123-4567" },
+            "visit": { "title": "Visit Us", "value": "123 Tech Street, San Francisco, CA 94105" },
+            "hours": { "title": "Business Hours", "value": "Mon-Fri: 9:00 AM - 6:00 PM" }
+        },
+        "fields": {
+            "name": "Full Name *",
+            "email": "Email Address *",
+            "phone": "Phone Number",
+            "service": "Service Interested In",
+            "budget": "Project Budget",
+            "details": "Project Details *"
+        },
+        "placeholders": {
+            "name": "John Doe",
+            "email": "john@example.com",
+            "phone": "+1 (555) 123-4567",
+            "details": "Tell us about your project..."
+        },
+        "options": {
+            "service": "Select a service",
+            "budget": "Select budget range"
+        },
+        "send": "Send Message"
+    },
+    "contact": {
+        "eyebrow": "Contact Us",
+        "title": "I usually reply within 24 hours.",
+        "heroTitle": "Let's build the next screen.",
+        "heroText": "Send the idea, the goal, or the messy sketch. MayStack can turn it into a clean interface and reusable frontend.",
+        "perks": {
+            "quick": { "title": "Quick Response", "desc": "I don't keep you waiting." },
+            "clear": { "title": "Clear Communication", "desc": "" },
+            "ready": { "title": "Ready to Build", "desc": "From idea to launch." }
+        },
+        "placeholders": {
+            "name": "Your Name",
+            "email": "Your Email",
+            "phone": "Phone Number",
+            "service": "Project or Service",
+            "message": "Tell me about your idea..."
+        },
+        "actions": {
+            "send": "Send Message"
+        }
+    }
+}

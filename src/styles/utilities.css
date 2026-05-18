@@ -1,0 +1,265 @@
+@layer components {
+    .app-shell { @apply min-h-screen overflow-x-hidden; }
+    .smooth-wrapper {
+        @apply overflow-hidden;
+    }
+
+    .smooth-content {
+        @apply min-h-screen;
+        will-change: transform;
+    }
+
+    .main-wrap { @apply min-h-screen pb-14; }
+    .container-shell,
+    .container-wide,
+    .ms-container {
+        @apply mx-auto w-full px-5;
+        max-width: 1180px;
+    }
+
+    .ms-page {
+        @apply mx-auto min-h-screen w-full overflow-hidden;
+        max-width: 100vw;
+    }
+
+    .ms-section {
+        @apply relative py-10 md:py-14;
+    }
+
+    .ms-hero-section {
+        @apply relative px-5 pb-8 pt-20 text-center md:pb-10 md:pt-24;
+    }
+
+    .portfolio-hero {
+        position: relative;
+    }
+
+    .portfolio-card {
+        backdrop-filter: blur(18px);
+    }
+
+    .portfolio-card-visual {
+        @apply grid aspect-[1.88] place-items-center overflow-hidden rounded-t-3xl;
+        background:
+            radial-gradient(65% 70% at 18% 0%, color-mix(in oklab, var(--project-accent) 52%, transparent), transparent 70%),
+            radial-gradient(70% 72% at 100% 18%, rgba(90, 188, 228, 0.34), transparent 70%),
+            linear-gradient(145deg, #07344a 0%, #087184 52%, #08283f 100%);
+    }
+
+    .portfolio-mini-laptop {
+        @apply relative w-[72%];
+    }
+
+    .portfolio-mini-screen {
+        @apply overflow-hidden rounded-2xl border border-white/18 p-3 shadow-2xl;
+        aspect-ratio: 16 / 10;
+        background:
+            radial-gradient(66% 64% at 78% 0%, color-mix(in oklab, var(--project-accent) 32%, transparent), transparent 66%),
+            linear-gradient(145deg, rgba(7, 16, 23, 0.96), rgba(8, 47, 63, 0.94));
+    }
+
+    .portfolio-mini-nav {
+        @apply mb-5 flex gap-2;
+    }
+
+    .portfolio-mini-nav span {
+        @apply h-2 w-2 rounded-full bg-white/35;
+    }
+
+    .portfolio-mini-content {
+        @apply grid gap-4 text-white;
+    }
+
+    .portfolio-mini-content svg {
+        color: var(--project-accent);
+    }
+
+    .portfolio-mini-content strong {
+        @apply max-w-[15rem] text-xl leading-tight;
+    }
+
+    .portfolio-mini-lines {
+        @apply grid max-w-[18rem] gap-2;
+    }
+
+    .portfolio-mini-lines span {
+        @apply h-2 rounded-full bg-white/20;
+    }
+
+    .portfolio-mini-lines span:nth-child(2) {
+        width: 74%;
+    }
+
+    .portfolio-mini-lines span:nth-child(3) {
+        width: 46%;
+        background: color-mix(in oklab, var(--project-accent) 70%, white 8%);
+    }
+
+    .portfolio-mini-base {
+        @apply mx-auto h-3 w-[86%] rounded-b-2xl;
+        background: linear-gradient(180deg, #3a4650, #161b20);
+        box-shadow: 0 20px 30px rgba(0, 0, 0, 0.24);
+    }
+
+    .ms-glass {
+        @apply relative overflow-hidden rounded-3xl border shadow-2xl backdrop-blur-xl;
+        border-color: var(--ms-glass-edge);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045) 46%, rgba(255, 255, 255, 0.09)),
+            var(--ms-glass-bg);
+        box-shadow:
+            0 24px 62px var(--ms-glass-shadow),
+            inset 0 1px 0 rgba(255, 255, 255, 0.28),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(24px) saturate(1.35);
+    }
+
+    .ms-glass-panel {
+        @apply rounded-3xl border p-6 shadow-2xl backdrop-blur-xl md:p-8;
+        border-color: var(--ms-glass-edge);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.045) 46%, rgba(255, 255, 255, 0.09)),
+            var(--ms-glass-bg);
+        box-shadow:
+            0 24px 62px var(--ms-glass-shadow),
+            inset 0 1px 0 rgba(255, 255, 255, 0.28),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(24px) saturate(1.35);
+    }
+
+    .ms-card {
+        @apply relative overflow-hidden rounded-3xl border p-5 shadow-2xl backdrop-blur-xl md:p-7;
+        border-color: var(--ms-glass-edge);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04) 48%, rgba(255, 255, 255, 0.085)),
+            var(--ms-glass-bg);
+        box-shadow:
+            0 22px 58px var(--ms-glass-shadow),
+            inset 0 1px 0 rgba(255, 255, 255, 0.25),
+            inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(24px) saturate(1.35);
+    }
+
+    .ms-badge {
+        @apply inline-flex items-center gap-2 rounded-full border px-5 py-2 text-sm font-semibold backdrop-blur-xl;
+        border-color: var(--ms-glass-edge);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+            var(--ms-glass-bg);
+        color: var(--ms-muted-text);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 14px 32px rgba(0, 16, 24, 0.16);
+    }
+
+    .ms-eyebrow {
+        @apply flex items-center gap-2 text-[10px] font-semibold uppercase text-white/58;
+        letter-spacing: 0.14em;
+    }
+
+    .ms-title {
+        @apply text-2xl font-semibold leading-tight text-white md:text-3xl;
+    }
+
+    .ms-muted {
+        @apply text-sm leading-relaxed;
+        color: var(--ms-muted-text);
+    }
+
+    .ms-button {
+        @apply inline-flex min-h-10 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold transition;
+    }
+
+    .ms-button-primary {
+        @apply inline-flex min-h-14 min-w-44 items-center justify-center gap-2 rounded-2xl px-8 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-slate-950/20 transition;
+        background: linear-gradient(135deg, #5abce4 0%, #18dbc9 56%, #7dad65 100%);
+        box-shadow: 0 18px 44px rgba(0, 16, 24, 0.26), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    }
+
+    .ms-button-primary:hover {
+        filter: brightness(1.08);
+    }
+
+    .ms-button-ghost {
+        @apply inline-flex min-h-14 min-w-44 items-center justify-center gap-2 rounded-2xl border px-8 py-3 text-sm font-bold transition backdrop-blur-xl;
+        border-color: var(--ms-glass-edge);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035)),
+            var(--ms-glass-bg);
+        color: var(--ms-text);
+        box-shadow: 0 14px 34px rgba(0, 16, 24, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.22);
+    }
+
+    .ms-input {
+        @apply h-12 rounded-2xl border px-4 text-sm outline-none transition placeholder:text-current/40 focus:border-emerald-300/70;
+        border-color: var(--ms-glass-edge);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.055)),
+            var(--ms-glass-bg);
+        color: var(--ms-text);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32);
+        backdrop-filter: blur(18px) saturate(1.25);
+    }
+
+    .ms-textarea {
+        @apply h-32 resize-none rounded-2xl border px-4 py-3 text-sm outline-none transition placeholder:text-current/40 focus:border-emerald-300/70;
+        border-color: var(--ms-glass-edge);
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.055)),
+            var(--ms-glass-bg);
+        color: var(--ms-text);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32);
+        backdrop-filter: blur(18px) saturate(1.25);
+    }
+
+    .ms-footer {
+        background: transparent;
+        color: var(--ms-text);
+    }
+
+    .ms-filter {
+        @apply min-h-10 rounded-2xl px-5 text-sm font-semibold transition;
+        color: var(--ms-text);
+    }
+
+    .ms-filter:hover,
+    .ms-filter.is-selected {
+        background: linear-gradient(135deg, #5abce4 0%, #18dbc9 56%, #7dad65 100%);
+        color: #061018;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48), 0 12px 28px rgba(0, 16, 24, 0.18);
+    }
+
+    .home-laptop-showcase {
+        @apply relative pb-0 pt-2 md:pt-4;
+    }
+
+    .home-laptop-scroll {
+        @apply relative flex min-h-[58vh] items-end overflow-hidden md:min-h-[86vh];
+    }
+
+    .home-laptop-stage {
+        @apply relative z-10 mx-auto w-full max-w-[1500px] select-none overflow-hidden;
+        aspect-ratio: 16 / 7.6;
+    }
+
+    .home-laptop-frame {
+        @apply h-full w-full max-w-none object-cover;
+        object-position: center bottom;
+        mix-blend-mode: screen;
+        filter: saturate(1.12) contrast(1.08);
+        -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 100%);
+        mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 100%);
+    }
+
+    @media (max-width: 640px) {
+        .home-laptop-scroll {
+            min-height: 42vh;
+        }
+
+        .home-laptop-stage {
+            width: 138vw;
+            max-width: none;
+            aspect-ratio: 16 / 8.8;
+            transform: translateX(-12%);
+        }
+    }
+
+}

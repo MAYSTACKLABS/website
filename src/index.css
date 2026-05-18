@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@import "./styles/tokens.css";
+@import "./styles/utilities.css";
+@import "./styles/animations.css";
+@import "./styles/navbar.css";
+@import "./styles/backgrounds.css";
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply min-h-screen bg-background font-sans text-foreground antialiased;
+    overflow-x: hidden;
+    background:
+      radial-gradient(85% 72% at 4% 0%, rgba(103, 145, 87, 0.34), transparent 62%),
+      radial-gradient(82% 72% at 96% 4%, rgba(58, 150, 184, 0.36), transparent 64%),
+      radial-gradient(70% 62% at 48% 34%, rgba(18, 168, 158, 0.16), transparent 68%),
+      linear-gradient(145deg, #365f4d 0%, #066f7f 34%, #052f43 66%, #061018 100%);
+    background-attachment: fixed;
+    background-size: cover;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  [dir="rtl"] {
+    font-family: var(--font-arabic);
+  }
+
+  [dir="ltr"] {
+    font-family: var(--font-english);
+  }
+}
