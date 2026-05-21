@@ -39,8 +39,6 @@ export default function Footer() {
                             </span>
                         ))}
                     </div>
-
-                    <p className="text-xs text-current/42">Designed and built by MayStack.</p>
                 </div>
             </div>
         </footer>

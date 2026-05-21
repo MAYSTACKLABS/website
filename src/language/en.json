@@ -31,11 +31,6 @@
             "title": "What We Do Best",
             "subtitle": "Focused digital services for clean, modern products."
         },
-        "laptop": {
-            "eyebrow": "Selected work",
-            "title": "Projects Live Inside The Product",
-            "previewAlt": "Project preview inside laptop screen"
-        },
         "sections": {
             "servicesTitle": "Our Services",
             "portfolioTitle": "Portfolio Highlights",
@@ -157,8 +152,8 @@
             ]
         },
         "stats": {
-            "projects": "Projects Completed",
-            "clients": "Happy Clients",
+            "projects": "Projects",
+            "clients": "Happy Customers",
             "years": "Years Experience",
             "satisfaction": "Client Satisfaction"
         },
@@ -179,9 +174,11 @@
         "infoTitle": "Contact Information",
         "followTitle": "Follow Us",
         "formTitle": "Send us a message",
+        "asideIntro": "Share the idea, timeline, or rough scope. I will keep the next step clear and practical.",
+        "asideNote": "Prefer email? Send the full brief whenever it is ready. Prefer phone? A quick call works beautifully for early ideas.",
         "info": {
-            "email": { "title": "Email Us", "value": "hello@maystack.com" },
-            "phone": { "title": "Call Us", "value": "+1 (555) 123-4567" },
+            "email": { "title": "Email Us", "value": "mtmaleisawy@gmail.com" },
+            "phone": { "title": "Call Us", "value": "+905019565125" },
             "visit": { "title": "Visit Us", "value": "123 Tech Street, San Francisco, CA 94105" },
             "hours": { "title": "Business Hours", "value": "Mon-Fri: 9:00 AM - 6:00 PM" }
         },

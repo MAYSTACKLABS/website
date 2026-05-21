@@ -2,9 +2,9 @@ import { Award, Heart, Lightbulb, Medal, Rocket, Shield, Target, Users } from "l
 import { useTranslation } from "react-i18next";
 
 const stats = [
-    { value: "150+", key: "projects", Icon: Target },
+    { value: "5", key: "projects", Icon: Target },
     { value: "50+", key: "clients", Icon: Users },
-    { value: "5+", key: "years", Icon: Medal },
+    { value: "1+", key: "years", Icon: Medal },
     { value: "98%", key: "satisfaction", Icon: Lightbulb },
 ];
 

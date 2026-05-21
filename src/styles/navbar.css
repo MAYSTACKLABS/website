@@ -8,6 +8,7 @@
 
     .topbar-inner {
         @apply mx-auto flex h-20 max-w-[1180px] items-center px-5;
+        position: relative;
     }
 
     .nav-ms {
@@ -70,6 +71,12 @@
         transform: translateX(calc(var(--nav-active-index, 0) * (5rem + 2rem)));
     }
 
+    [dir="rtl"] .nav-ms-active-capsule {
+        left: auto;
+        right: 1.25rem;
+        transform: translateX(calc(var(--nav-active-index, 0) * -1 * (5rem + 2rem)));
+    }
+
     .nav-ms-link:hover {
         color: #5abce4;
     }
@@ -127,12 +134,31 @@
         display: none;
     }
 
+    .nav-ms-menu-button {
+        display: none;
+    }
+
+    .nav-mobile-actions {
+        display: none;
+    }
+
+    .nav-mobile-panel {
+        display: none;
+    }
+
+    @media (min-width: 641px) {
+        .nav-mobile-actions,
+        .nav-mobile-panel {
+            display: none !important;
+        }
+    }
+
     @media (max-width: 640px) {
         .topbar-inner { @apply h-16 px-3; }
 
         .nav-ms {
             @apply gap-2;
-            grid-template-columns: auto minmax(0, 1fr) auto;
+            grid-template-columns: auto 1fr auto;
         }
 
         .nav-ms-brand {
@@ -140,24 +166,6 @@
         }
 
         .nav-ms-links {
-            @apply gap-2 px-3 py-1.5;
-            min-width: 0;
-        }
-
-        .nav-ms-link {
-            @apply w-16 text-xs;
-            padding: 6px 0;
-        }
-
-        .nav-ms-active-capsule {
-            top: 0.375rem;
-            bottom: 0.375rem;
-            left: 0.75rem;
-            width: 4rem;
-            transform: translateX(calc(min(var(--nav-active-index, 0), 1) * (4rem + 0.5rem)));
-        }
-
-        .nav-ms-link:nth-child(n+3) {
             display: none;
         }
 
@@ -165,20 +173,136 @@
             display: none;
         }
 
-        .nav-ms-btn {
-            display: none;
+        .nav-mobile-actions {
+            display: flex !important;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.45rem;
+            position: absolute;
+            top: 50%;
+            right: 0.75rem;
+            z-index: 4;
+            direction: ltr;
+            transform: translateY(-50%);
+        }
+
+        [dir="rtl"] .nav-mobile-actions {
+            right: auto;
+            left: 0.75rem;
+            flex-direction: row-reverse;
+        }
+
+        .nav-ms-menu-button {
+            display: inline-grid !important;
+            position: relative;
+            width: 5.75rem;
+            height: 2.5rem;
+            place-items: center;
+            gap: 0;
+            border: 1px solid rgba(205, 247, 255, 0.28);
+            border-radius: 999px;
+            background:
+                linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.035)),
+                rgba(9, 82, 99, 0.42);
+            box-shadow:
+                0 14px 30px rgba(0, 16, 24, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.16);
+            backdrop-filter: blur(20px) saturate(1.25);
+        }
+
+        .nav-ms-menu-button span {
+            display: block;
+            width: 1.25rem;
+            height: 2px;
+            grid-area: 1 / 1;
+            border-radius: 999px;
+            background: #24d8cf;
+            transition: transform 220ms ease, opacity 160ms ease;
+        }
+
+        .nav-ms-menu-button span:first-child {
+            transform: translateY(-6px);
+        }
+
+        .nav-ms-menu-button span:nth-child(2) {
+            transform: translateY(0);
+        }
+
+        .nav-ms-menu-button span:last-child {
+            transform: translateY(6px);
+        }
+
+        .nav-ms-menu-button.is-open span:first-child {
+            transform: rotate(45deg);
+        }
+
+        .nav-ms-menu-button.is-open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-ms-menu-button.is-open span:last-child {
+            transform: rotate(-45deg);
+        }
+
+        .nav-mobile-panel {
+            @apply absolute left-3 right-3 top-[4.65rem] grid gap-2 rounded-3xl border p-3 shadow-2xl backdrop-blur-xl;
+            display: grid !important;
+            border-color: var(--ms-glass-edge);
+            background:
+                radial-gradient(circle at top left, rgba(24, 219, 201, 0.16), transparent 42%),
+                linear-gradient(135deg, rgba(7, 16, 24, 0.94), rgba(6, 47, 67, 0.9)),
+                var(--ms-glass-bg);
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(-8px);
+            transition: opacity 180ms ease, transform 180ms ease;
+        }
+
+        .nav-mobile-panel.is-open {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .nav-mobile-link {
+            @apply flex min-h-12 items-center justify-center rounded-2xl px-4 text-sm font-bold text-white transition;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .nav-mobile-link.is-active,
+        .nav-mobile-link:hover {
+            background: linear-gradient(135deg, #5abce4 0%, #18dbc9 56%, #7dad65 100%);
+            border-color: transparent;
+            color: #061018;
         }
 
         .nav-lang-toggle {
-            @apply h-9 w-[5rem];
+            @apply h-10 w-[5.75rem];
         }
 
         .nav-lang-thumb {
-            @apply h-7 w-8;
+            @apply h-8 w-10;
         }
 
         .nav-lang-toggle.is-ar .nav-lang-thumb {
-            transform: translateX(2.25rem);
+            transform: translateX(2.5rem);
+        }
+
+        .nav-mobile-actions .nav-lang-toggle {
+            display: inline-grid;
+            position: relative;
+            border-color: rgba(255, 255, 255, 0.26);
+            background: rgba(9, 82, 99, 0.42);
+            color: rgba(255, 255, 255, 0.72);
+            box-shadow:
+                0 14px 30px rgba(0, 16, 24, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.16);
+        }
+
+        .nav-mobile-actions .nav-lang-thumb {
+            background: #24d8cf;
+            box-shadow: 0 8px 20px rgba(0, 16, 24, 0.22);
         }
     }
 }

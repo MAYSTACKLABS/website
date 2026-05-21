@@ -1,11 +1,9 @@
-import { Clock, Github, Instagram, Linkedin, Mail, MapPin, MessageSquare, Phone, Send } from "lucide-react";
+import { ChevronDown, Github, Instagram, Linkedin, Mail, MessageSquare, Phone, Send } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 const contactInfo = [
     { key: "email", Icon: Mail },
     { key: "phone", Icon: Phone },
-    { key: "visit", Icon: MapPin },
-    { key: "hours", Icon: Clock },
 ];
 
 const socials = [Instagram, Linkedin, Github];
@@ -28,9 +26,15 @@ const Contact = () => {
 
             <section className="px-5 pb-24">
                 <div className="mx-auto grid max-w-[1280px] gap-8 lg:grid-cols-[0.72fr_1.5fr]">
-                    <aside className="grid gap-6 lg:grid-rows-[auto_1fr]">
-                        <div className="ms-card p-8">
-                            <h2 className="text-2xl font-bold" style={{ color: "var(--ms-text)" }}>{t("contactPage.infoTitle")}</h2>
+                    <aside>
+                        <div className="ms-card flex h-full flex-col p-8">
+                            <div>
+                                <h2 className="text-2xl font-bold" style={{ color: "var(--ms-text)" }}>{t("contactPage.infoTitle")}</h2>
+                                <p className="mt-3 leading-relaxed" style={{ color: "var(--ms-muted-text)" }}>
+                                    {t("contactPage.asideIntro")}
+                                </p>
+                            </div>
+
                             <div className="mt-7 grid gap-6">
                                 {contactInfo.map(({ key, Icon }) => (
                                     <div key={key} className="flex gap-4">
@@ -44,20 +48,18 @@ const Contact = () => {
                                     </div>
                                 ))}
                             </div>
-                        </div>
 
-                        <div className="ms-card flex flex-col p-8">
-                            <h2 className="text-2xl font-bold" style={{ color: "var(--ms-text)" }}>{t("contactPage.followTitle")}</h2>
-                            <div className="mt-5 flex gap-4">
-                                {socials.map((Icon, index) => (
-                                    <span key={index} className="grid h-11 w-11 place-items-center rounded-2xl bg-current/8" style={{ color: "var(--ms-muted-text)" }}>
-                                        <Icon className="h-5 w-5" />
-                                    </span>
-                                ))}
+                            <div className="mt-8 border-t pt-7" style={{ borderColor: "var(--ms-border)" }}>
+                                <h3 className="text-lg font-bold" style={{ color: "var(--ms-text)" }}>{t("contactPage.followTitle")}</h3>
+                                <div className="mt-4 flex gap-3">
+                                    {socials.map((Icon, index) => (
+                                        <span key={index} className="grid h-11 w-11 place-items-center rounded-2xl bg-current/8 transition hover:text-[#18dbc9]" style={{ color: "var(--ms-muted-text)" }}>
+                                            <Icon className="h-5 w-5" />
+                                        </span>
+                                    ))}
+                                </div>
                             </div>
-                            <div className="mt-auto hidden pt-8 text-sm leading-relaxed lg:block" style={{ color: "var(--ms-muted-text)" }}>
-                                Share the idea, timeline, or rough scope. I will keep the next step clear.
-                            </div>
+
                         </div>
                     </aside>
 
@@ -72,38 +74,44 @@ const Contact = () => {
                         <div className="grid gap-6 md:grid-cols-2">
                             <label className="grid gap-2 text-sm font-bold" style={{ color: "var(--ms-text)" }}>
                                 {t("contactPage.fields.name")}
-                                <input className="ms-input" placeholder={t("contactPage.placeholders.name")} />
+                                <input className="ms-input" />
                             </label>
                             <label className="grid gap-2 text-sm font-bold" style={{ color: "var(--ms-text)" }}>
                                 {t("contactPage.fields.email")}
-                                <input className="ms-input" placeholder={t("contactPage.placeholders.email")} />
+                                <input className="ms-input" />
                             </label>
                             <label className="grid gap-2 text-sm font-bold" style={{ color: "var(--ms-text)" }}>
                                 {t("contactPage.fields.phone")}
-                                <input className="ms-input" placeholder={t("contactPage.placeholders.phone")} />
+                                <input className="ms-input" />
                             </label>
                             <label className="grid gap-2 text-sm font-bold" style={{ color: "var(--ms-text)" }}>
                                 {t("contactPage.fields.service")}
-                                <select className="ms-input">
-                                    <option>{t("contactPage.options.service")}</option>
-                                    <option>{t("home.services.web")}</option>
-                                    <option>{t("home.services.mobile")}</option>
-                                    <option>{t("home.services.uiux")}</option>
-                                    <option>{t("home.services.custom")}</option>
-                                </select>
+                                <span className="ms-select-wrap">
+                                    <select className="ms-input ms-select">
+                                        <option>{t("contactPage.options.service")}</option>
+                                        <option>{t("home.services.web")}</option>
+                                        <option>{t("home.services.mobile")}</option>
+                                        <option>{t("home.services.uiux")}</option>
+                                        <option>{t("home.services.custom")}</option>
+                                    </select>
+                                    <ChevronDown className="ms-select-icon h-4 w-4" aria-hidden="true" />
+                                </span>
                             </label>
                             <label className="grid gap-2 text-sm font-bold md:col-span-2" style={{ color: "var(--ms-text)" }}>
                                 {t("contactPage.fields.budget")}
-                                <select className="ms-input">
-                                    <option>{t("contactPage.options.budget")}</option>
-                                    <option>$2k - $5k</option>
-                                    <option>$5k - $15k</option>
-                                    <option>$15k+</option>
-                                </select>
+                                <span className="ms-select-wrap">
+                                    <select className="ms-input ms-select">
+                                        <option>{t("contactPage.options.budget")}</option>
+                                        <option>$2k - $5k</option>
+                                        <option>$5k - $15k</option>
+                                        <option>$15k+</option>
+                                    </select>
+                                    <ChevronDown className="ms-select-icon h-4 w-4" aria-hidden="true" />
+                                </span>
                             </label>
                             <label className="grid gap-2 text-sm font-bold md:col-span-2" style={{ color: "var(--ms-text)" }}>
                                 {t("contactPage.fields.details")}
-                                <textarea className="ms-textarea min-h-44" placeholder={t("contactPage.placeholders.details")} />
+                                <textarea className="ms-textarea min-h-44" />
                             </label>
                         </div>
 
