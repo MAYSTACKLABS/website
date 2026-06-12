@@ -138,7 +138,9 @@ export default function ProjectDetail() {
                     </div>
                     <div className="project-desktop-gallery">
                         {project.desktopImages.map((image, index) => (
-                            <img key={image} src={image} alt={`${project.title[lang]} desktop ${index + 1}`} />
+                            <div key={image} className="project-desktop-shot">
+                                <img src={image} alt={`${project.title[lang]} desktop ${index + 1}`} />
+                            </div>
                         ))}
                     </div>
                     <div className="project-mobile-gallery">
