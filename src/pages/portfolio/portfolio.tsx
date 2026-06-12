@@ -11,7 +11,6 @@ const filters: Array<{ key: FilterKey; label: { en: string; ar: string } }> = [
     { key: "all", label: { en: "All Projects", ar: "كل المشاريع" } },
     { key: "website", label: { en: "Websites", ar: "المواقع" } },
     { key: "platform", label: { en: "Platforms", ar: "المنصات" } },
-    { key: "mobile", label: { en: "Mobile Apps", ar: "تطبيقات الموبايل" } },
 ];
 
 const Portfolio = () => {

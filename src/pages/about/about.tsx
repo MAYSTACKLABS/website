@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 const stats = [
     { value: "5", key: "projects", Icon: Target },
     { value: "50+", key: "clients", Icon: Users },
-    { value: "1+", key: "years", Icon: Medal },
+    { value: "2+", key: "years", Icon: Medal },
     { value: "98%", key: "satisfaction", Icon: Lightbulb },
 ];
 

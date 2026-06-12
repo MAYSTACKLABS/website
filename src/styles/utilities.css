@@ -113,20 +113,6 @@
         padding-inline: 0.75rem;
     }
 
-    .hero-project-showcase::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        top: 5.5rem;
-        z-index: -2;
-        width: min(78rem, 112vw);
-        height: clamp(13rem, 22vw, 19rem);
-        border-top: 1px solid rgba(90, 188, 228, 0.3);
-        border-radius: 50% 50% 0 0;
-        background: radial-gradient(62% 80% at 50% 0%, rgba(24, 219, 201, 0.12), transparent 72%);
-        transform: translateX(-50%);
-    }
-
     .hero-project-showcase::after {
         content: "";
         position: absolute;
@@ -164,10 +150,10 @@
     .hero-project-heading span::before,
     .hero-project-heading span::after {
         content: "";
-        width: 2rem;
+        width: 2.25rem;
         height: 1px;
         background: linear-gradient(90deg, transparent, rgba(24, 219, 201, 0.82));
-        box-shadow: 0 0 14px rgba(24, 219, 201, 0.45);
+        box-shadow: 0 0 14px rgba(24, 219, 201, 0.35);
     }
 
     .hero-project-heading span::after {
@@ -180,33 +166,13 @@
         margin-top: 1.15rem;
         perspective: 1200px;
         overflow: visible;
+        cursor: grab;
+        touch-action: pan-y;
+        user-select: none;
     }
 
-    .hero-project-stage::before {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: 2.85rem;
-        z-index: 0;
-        width: min(58rem, 92vw);
-        height: 8rem;
-        border-radius: 999px;
-        background: radial-gradient(closest-side, rgba(24, 219, 201, 0.12), rgba(4, 18, 33, 0.28) 54%, transparent 76%);
-        filter: blur(10px);
-        transform: translateX(-50%);
-    }
-
-    .hero-project-stage::after {
-        content: "";
-        position: absolute;
-        left: 50%;
-        bottom: 5.7rem;
-        z-index: 0;
-        width: min(70rem, 108vw);
-        height: 13rem;
-        border-top: 1px solid rgba(205, 247, 255, 0.18);
-        border-radius: 50% 50% 0 0;
-        transform: translateX(-50%);
+    .hero-project-stage.is-dragging {
+        cursor: grabbing;
     }
 
     .hero-project-preview {
@@ -227,7 +193,7 @@
             0 30px 70px rgba(0, 11, 20, 0.42),
             inset 0 1px 0 rgba(255, 255, 255, 0.18);
         transform-style: preserve-3d;
-        transition: transform 560ms cubic-bezier(0.2, 0.82, 0.2, 1), filter 560ms ease, opacity 560ms ease, border-color 560ms ease, box-shadow 560ms ease;
+        transition: transform 680ms cubic-bezier(0.22, 0.78, 0.18, 1), filter 520ms ease, opacity 520ms ease, border-color 520ms ease, box-shadow 520ms ease;
         will-change: transform;
     }
 
@@ -236,7 +202,7 @@
         filter: brightness(1.08) contrast(1.04);
     }
 
-    .hero-project-preview img {
+    .hero-project-background {
         display: block;
         width: 100%;
         aspect-ratio: 0.76;
@@ -244,7 +210,7 @@
         object-position: top center;
         border-radius: 25px;
         opacity: 1;
-        filter: brightness(1.08) contrast(1.04) saturate(1.06);
+        filter: brightness(0.86) contrast(1.04) saturate(1.02);
     }
 
     .hero-project-card-meta {
@@ -329,39 +295,6 @@
         opacity: 0;
         pointer-events: none;
         transform: translateX(-50%) translateY(2rem) scale(0.54);
-    }
-
-    .hero-project-arrow {
-        position: absolute;
-        top: 46%;
-        z-index: 8;
-        display: grid;
-        width: 2.45rem;
-        height: 2.45rem;
-        place-items: center;
-        border-radius: 999px;
-        border: 1px solid rgba(205, 247, 255, 0.36);
-        background: rgba(5, 20, 36, 0.58);
-        color: var(--ms-text);
-        box-shadow: 0 16px 38px rgba(0, 11, 20, 0.28);
-        backdrop-filter: blur(14px);
-        transform: translateY(-50%);
-        transition: border-color 220ms ease, box-shadow 220ms ease, color 220ms ease, background 220ms ease;
-    }
-
-    .hero-project-arrow:hover {
-        border-color: rgba(24, 219, 201, 0.72);
-        background: rgba(9, 42, 55, 0.72);
-        color: #18dbc9;
-        box-shadow: 0 0 24px rgba(24, 219, 201, 0.2);
-    }
-
-    .hero-project-arrow-left {
-        left: max(0.25rem, 2vw);
-    }
-
-    .hero-project-arrow-right {
-        right: max(0.25rem, 2vw);
     }
 
     .hero-project-dots {
@@ -460,6 +393,102 @@
         pointer-events: none;
         color: var(--ms-text);
         transform: translateY(-50%);
+    }
+
+    .contact-form-status {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        font-weight: 700;
+    }
+
+    .contact-form-status.is-success {
+        color: #80f0c4;
+    }
+
+    .contact-form-status.is-error {
+        color: #ffadad;
+    }
+
+    .contact-form-card {
+        overflow: visible;
+    }
+
+    .contact-select {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        border: 1px solid var(--ms-glass-edge);
+        border-radius: 1rem;
+        background:
+            linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.055)),
+            var(--ms-glass-bg);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.32);
+        transition: border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .contact-select-trigger {
+        display: flex;
+        width: 100%;
+        height: 3rem;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        border: 0;
+        border-radius: 0;
+        padding: 0 1rem;
+        background: transparent;
+        color: var(--ms-text);
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-align: start;
+        box-shadow: none;
+    }
+
+    .contact-select-trigger .is-placeholder {
+        color: color-mix(in oklab, var(--ms-text) 40%, transparent);
+    }
+
+    .contact-select-trigger svg {
+        flex: 0 0 auto;
+        transition: transform 180ms ease;
+    }
+
+    .contact-select.is-open {
+        border-color: rgba(24, 219, 201, 0.72);
+        box-shadow: 0 0 0 3px rgba(24, 219, 201, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.32);
+    }
+
+    .contact-select.is-open .contact-select-trigger svg {
+        transform: rotate(180deg);
+    }
+
+    .contact-select-menu {
+        display: grid;
+        gap: 0.3rem;
+        border-top: 1px solid rgba(205, 247, 255, 0.14);
+        padding: 0.4rem;
+        background: rgba(3, 20, 30, 0.48);
+    }
+
+    .contact-select-menu button {
+        display: flex;
+        min-height: 2.75rem;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        border-radius: 0.8rem;
+        padding: 0.7rem 0.85rem;
+        color: var(--ms-muted-text);
+        font-size: 0.86rem;
+        font-weight: 700;
+        text-align: start;
+        transition: background 160ms ease, color 160ms ease;
+    }
+
+    .contact-select-menu button:hover,
+    .contact-select-menu button.is-selected {
+        background: rgba(24, 219, 201, 0.13);
+        color: #cffff7;
     }
 
     .ms-footer {
@@ -696,6 +725,60 @@
         gap: 1.25rem;
     }
 
+    .project-case-study-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.25rem;
+    }
+
+    .project-case-label {
+        display: inline-block;
+        margin-bottom: 0.75rem;
+        color: color-mix(in oklab, var(--project-accent) 78%, white 22%);
+        font-size: 0.75rem;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .project-technology-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.55rem;
+        margin-top: 1.25rem;
+    }
+
+    .project-technology-list span {
+        border-radius: 999px;
+        padding: 0.55rem 0.8rem;
+        background: rgba(255, 255, 255, 0.09);
+        color: var(--ms-text);
+        font-size: 0.76rem;
+        font-weight: 750;
+    }
+
+    .project-live-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        margin-top: 1.25rem;
+        color: #18dbc9;
+        font-weight: 800;
+    }
+
+    .project-link-note,
+    .project-testimonial-note {
+        margin-top: 1.25rem !important;
+        color: var(--ms-muted-text);
+        font-size: 0.82rem;
+        font-style: italic;
+    }
+
+    .project-testimonial-note {
+        padding-top: 1rem;
+        border-top: 1px solid var(--ms-border);
+    }
+
     .project-detail-copy,
     .project-detail-highlights {
         @apply p-6 md:p-8;
@@ -806,11 +889,14 @@
     }
 
     [dir="rtl"] .ms-hero-section h1 {
-        line-height: 1.12;
+        max-width: 58rem;
+        line-height: 1.24;
+        padding-block: 0.08em;
     }
 
     [dir="rtl"] .ms-hero-section h1 span {
-        line-height: 1.08;
+        line-height: 1.2;
+        padding-block: 0.04em;
     }
 
     @media (max-width: 760px) {
@@ -822,6 +908,16 @@
             max-width: 100%;
             font-size: clamp(2rem, 9vw, 2.45rem);
             line-height: 1.16;
+        }
+
+        [dir="rtl"] .ms-hero-section h1 {
+            max-width: 23rem;
+            font-size: clamp(2rem, 8.4vw, 2.4rem);
+            line-height: 1.28;
+        }
+
+        [dir="rtl"] .ms-hero-section h1 span {
+            line-height: 1.22;
         }
 
         .ms-hero-section h1 span,
@@ -853,7 +949,7 @@
             border-radius: 24px;
         }
 
-        .hero-project-preview img {
+        .hero-project-background {
             border-radius: 20px;
         }
 
@@ -891,26 +987,13 @@
             transform: translateX(88%) translateY(1.1rem) rotateY(-8deg) scale(0.64);
         }
 
-        .hero-project-arrow {
-            top: 45%;
-            width: 2.15rem;
-            height: 2.15rem;
-        }
-
-        .hero-project-arrow-left {
-            left: 0.65rem;
-        }
-
-        .hero-project-arrow-right {
-            right: 0.65rem;
-        }
-
         .hero-project-dots {
             bottom: 2.25rem;
         }
 
         .portfolio-card-grid,
         .portfolio-card-grid.compact,
+        .project-case-study-grid,
         .project-mobile-gallery,
         .project-detail-showcase-grid,
         .project-detail-overview,

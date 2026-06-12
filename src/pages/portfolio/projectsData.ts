@@ -43,7 +43,7 @@ type Localized = {
     ar: string;
 };
 
-export type ProjectKind = "website" | "platform" | "mobile";
+export type ProjectKind = "website" | "platform";
 
 export type Project = {
     slug: string;
@@ -87,7 +87,7 @@ export const projects: Project[] = [
         slug: "snowball",
         title: { en: "Snowball Foundation", ar: "سنوبول فاونديشن" },
         category: { en: "Student platform", ar: "منصة طلابية" },
-        kinds: ["platform", "mobile"],
+        kinds: ["platform"],
         intro: {
             en: "A focused platform experience for students, tasks, reviews, and program visibility.",
             ar: "منصة مركزة للطلاب والمهام والمراجعات ورؤية البرامج بوضوح.",
