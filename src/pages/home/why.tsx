@@ -1,36 +1,76 @@
-import { Code2, Gauge, Layers3, ShieldCheck, Sparkles } from "lucide-react";
-import { useTranslation } from "react-i18next";
+import { ArrowRight, Binoculars, Blocks, Compass, Rocket, TrendingUp } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useLanguage } from "../../context/LanguageContext.tsx";
+import fullStackVisual from "../../assets/home/fullStackVisual.webp";
 
-const reasons = [
-    { label: "React", value: "100%", Icon: Code2 },
-    { label: "UI Systems", value: "95%", Icon: Layers3 },
-    { label: "Performance", value: "90%", Icon: Gauge },
-    { label: "Security", value: "85%", Icon: ShieldCheck },
-    { label: "Motion", value: "80%", Icon: Sparkles },
+const journey = [
+    {
+        title: { en: "Discover", ar: "الاكتشاف" },
+        description: { en: "Find the real opportunity, audience, and constraints before we design.", ar: "نحدد الفرصة الحقيقية والجمهور والقيود قبل أن نبدأ التصميم." },
+        Icon: Binoculars,
+    },
+    {
+        title: { en: "Design", ar: "التصميم" },
+        description: { en: "Turn the direction into a clear, testable product experience.", ar: "نحوّل الاتجاه إلى تجربة منتج واضحة وقابلة للاختبار." },
+        Icon: Compass,
+    },
+    {
+        title: { en: "Build", ar: "البناء" },
+        description: { en: "Develop a fast, maintainable system with reusable foundations.", ar: "نطوّر نظاماً سريعاً وسهل الصيانة بأساس قابل لإعادة الاستخدام." },
+        Icon: Blocks,
+    },
+    {
+        title: { en: "Launch", ar: "الإطلاق" },
+        description: { en: "Ship confidently with quality checks, analytics, and a clean handoff.", ar: "نطلق بثقة بعد اختبارات الجودة والتحليلات وتسليم واضح." },
+        Icon: Rocket,
+    },
+    {
+        title: { en: "Scale", ar: "النمو" },
+        description: { en: "Learn from real use, improve the product, and extend what works.", ar: "نتعلم من الاستخدام الحقيقي ونحسن المنتج ونوسع ما ينجح." },
+        Icon: TrendingUp,
+    },
 ];
 
 export default function Why() {
-    const { t } = useTranslation();
+    const { lang } = useLanguage();
 
     return (
-        <section className="ms-section" id="why">
-            <div className="ms-container">
-                <div className="mb-8 text-center">
-                    <p className="ms-eyebrow justify-center" style={{ color: "var(--ms-muted-text)" }}>{t("home.why.eyebrow")}</p>
-                    <h2 className="mt-3 text-4xl font-bold" style={{ color: "var(--ms-text)" }}>{t("home.why.title")}</h2>
+        <section className="ms-full-stack" id="why">
+            <div className="ms-container ms-full-stack-layout">
+                <div className="ms-full-stack-copy ms-animate">
+                    <p className="ms-section-label">{lang === "ar" ? "طريقة العمل" : "How the work moves"}</p>
+                    <h2>
+                        {lang === "ar" ? "فريق واحد. كل الخبرات." : <>One team.<br />The full stack.</>}
+                    </h2>
+                    <span>
+                        {lang === "ar"
+                            ? "من الفكرة إلى الإطلاق، يبقى الاستراتيجية والتصميم والتطوير في مسار واحد بلا تسليمات ضائعة."
+                            : "From first idea to a confident launch, strategy, design, and engineering stay in one connected flow."}
+                    </span>
+                    <Link className="ms-outline-cta" to="/contact">
+                        {lang === "ar" ? "ابدأ مشروعاً" : "Start a project"}
+                        <ArrowRight aria-hidden="true" />
+                    </Link>
                 </div>
 
-                <div className="ms-glass grid gap-5 rounded-lg p-5 sm:grid-cols-2 md:grid-cols-5 md:p-7">
-                    {reasons.map(({ label, value, Icon }) => (
-                        <div key={label} className="grid justify-items-center gap-3 text-center">
-                            <div className="relative grid h-24 w-24 place-items-center rounded-full border-[7px] border-white/12">
-                                <div className="absolute inset-[-7px] rounded-full border-[7px] border-emerald-300 border-r-white/12" />
-                                <Icon className="relative h-7 w-7 text-white/78" />
+                <ol className="ms-journey-list ms-animate">
+                    {journey.map(({ title, description, Icon }, index) => (
+                        <li className="ms-journey-step" key={title.en}>
+                            <span className="ms-journey-node"><Icon aria-hidden="true" /></span>
+                            <div>
+                                <small>{String(index + 1).padStart(2, "0")}</small>
+                                <h3>{title[lang]}</h3>
+                                <p>{description[lang]}</p>
                             </div>
-                            <div className="text-xl font-bold text-[#18dbc9]">{value}</div>
-                            <div className="text-sm font-semibold" style={{ color: "var(--ms-muted-text)" }}>{label}</div>
-                        </div>
+                        </li>
                     ))}
+                </ol>
+
+                <div className="ms-full-stack-visual ms-animate" aria-hidden="true">
+                    <div className="ms-full-stack-glow" />
+                    <div className="ms-full-stack-media">
+                        <img src={fullStackVisual} alt="" loading="lazy" decoding="async" />
+                    </div>
                 </div>
             </div>
         </section>

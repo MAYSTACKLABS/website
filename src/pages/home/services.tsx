@@ -1,67 +1,46 @@
-import { Code2, Globe2, Palette, Smartphone } from "lucide-react";
+import { ArrowUpRight, Code2, Globe2, Palette, Smartphone } from "lucide-react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import mobileArt from "../../assets/home/services/mobile-app.png";
+import webArt from "../../assets/home/services/website-builder.png";
+import customArt from "../../assets/home/services/local-server.png";
+import designArt from "../../assets/home/services/design-tools.png";
 
-type Card = {
-    key: string;
-    title: string;
-    Icon: typeof Code2;
-};
+const serviceDefs = [
+    { key: "mobile", Icon: Smartphone, art: mobileArt },
+    { key: "web", Icon: Globe2, art: webArt },
+    { key: "custom", Icon: Code2, art: customArt },
+    { key: "uiux", Icon: Palette, art: designArt },
+] as const;
 
-const Services = () => {
+export default function Services() {
     const { t } = useTranslation();
 
-    const cards: Card[] = [
-        {
-            key: "mobile",
-            title: t("home.services.mobile"),
-            Icon: Smartphone,
-        },
-        {
-            key: "web",
-            title: t("home.services.web"),
-            Icon: Globe2,
-        },
-        {
-            key: "custom",
-            title: t("home.services.custom"),
-            Icon: Code2,
-        },
-        {
-            key: "uiux",
-            title: t("home.services.uiux"),
-            Icon: Palette,
-        },
-    ];
-
     return (
-        <section className="py-20 md:py-24" id="services">
-            <div className="ms-container">
-                <div className="ms-animate mx-auto mb-16 max-w-2xl text-center">
-                    <h2 className="text-4xl font-bold" style={{ color: "var(--ms-text)" }}>{t("home.servicesSection.title")}</h2>
-                    <p className="mt-5 text-lg" style={{ color: "var(--ms-muted-text)" }}>
-                        {t("home.servicesSection.subtitle")}
-                    </p>
+        <section className="ms-home-services" id="services">
+            <div className="ms-container ms-services-layout">
+                <div className="ms-home-section-intro ms-animate">
+                    <p>{t("home.servicesSection.kicker")}</p>
+                    <h2>{t("home.servicesSection.title")}</h2>
+                    <span>{t("home.servicesSection.subtitle")}</span>
+                    <Link className="ms-outline-cta" to="/services">
+                        {t("home.servicesSection.link")}
+                        <ArrowUpRight aria-hidden="true" />
+                    </Link>
                 </div>
-
-                <div className="mx-auto grid max-w-5xl grid-cols-1 gap-5 md:grid-cols-2">
-                    {cards.map((c) => {
-                        const Icon = c.Icon;
-                        return (
-                            <article
-                                key={c.key}
-                                className="ms-card group flex min-h-36 items-center gap-5 transition duration-300 hover:-translate-y-1"
-                            >
-                                <div className="grid h-16 w-16 shrink-0 place-items-center rounded-2xl bg-[#18dbc9]/16 text-[#18dbc9] transition group-hover:bg-[#18dbc9]/24">
-                                    <Icon className="h-8 w-8" />
-                                </div>
-                                <h3 className="text-2xl font-bold" style={{ color: "var(--ms-text)" }}>{c.title}</h3>
-                            </article>
-                        );
-                    })}
+                <div className="ms-capability-list">
+                    {serviceDefs.map(({ key, Icon, art }, index) => (
+                        <Link to="/services" className="ms-capability-row ms-animate" key={key}>
+                            <small>{String(index + 1).padStart(2, "0")}</small>
+                            <h3>{t(`home.services.${key}`)}</h3>
+                            <p>{t(`home.services.${key}Desc`)}</p>
+                            <img className="ms-capability-art" src={art} alt="" loading="lazy" aria-hidden="true" />
+                            <span className="ms-capability-icon"><Icon aria-hidden="true" /></span>
+                            <ArrowUpRight className="ms-capability-arrow" aria-hidden="true" />
+                        </Link>
+                    ))}
                 </div>
             </div>
         </section>
     );
-};
-
-export default Services;
+}

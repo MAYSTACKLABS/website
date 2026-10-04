@@ -15,21 +15,24 @@
     "home": {
         "hero": {
             "badge": "MAYSTACK",
-            "badgeLine": "Premium Web & Mobile Development",
-            "titleTop": "We Build Digital",
-            "titleAccent": "Experiences That Scale",
-            "subtitle": "We build fast websites, mobile apps, and business platforms for startups and organizations.",
+            "badgeLine": "Strategy, design and engineering",
+            "titleTop": "FROM IDEA",
+            "titleAccent": "TO ALTITUDE",
+            "subtitle": "We turn ambitious ideas into digital products built to rise, scale, and last.",
             "headline1": "A bold headline",
             "headline2": "that delivers",
-            "ctaPrimary": "Start Your Project",
-            "ctaSecondary": "View Our Work",
+            "ctaPrimary": "Start a Project",
+            "ctaSecondary": "Explore Our Project",
+            "scroll": "Scroll to Explore",
             "line1": "WEB & MOBILE APP",
             "line2": "DEVELOPMENT",
             "line3": "STUDIO"
         },
         "servicesSection": {
+            "kicker": "Capabilities",
             "title": "What We Do Best",
-            "subtitle": "Focused digital services for clean, modern products."
+            "subtitle": "One focused team for product strategy, interface design, and dependable engineering—from the first sketch to a confident launch.",
+            "link": "Explore every service"
         },
         "sections": {
             "servicesTitle": "Our Services",
@@ -45,11 +48,23 @@
             "webDesc": "Fast, responsive websites with clean UI and solid structure.",
             "mobile": "Mobile Apps",
             "mobileDesc": "High-performance mobile apps with a polished experience.",
-            "custom": "Custom Solutions"
+            "custom": "Custom Solutions",
+            "customDesc": "Purpose-built platforms and workflows shaped around how your business actually works."
+        },
+        "work": {
+            "kicker": "Selected work",
+            "title": "Proof at every altitude.",
+            "subtitle": "A selection of websites and platforms designed to clarify the offer, strengthen the brand, and make the next action obvious.",
+            "all": "View all projects"
         },
         "why": {
             "eyebrow": "Why MayStack",
             "title": "Built clean. Styled sharp.",
+            "statement": "One team. Full stack. No lost handoffs.",
+            "statementBody": "Strategy, design, and engineering move together, so the idea stays intact from the first conversation to the final release.",
+            "ctaTitle": "Ready for the next ascent?",
+            "ctaBody": "Bring the idea, the rough brief, or the product that needs a sharper direction. We will turn it into a clear next step.",
+            "cta": "Start a project",
             "items": {
                 "quality": { "title": "Clean & thoughtful UI", "desc": "Pixel-consistent layouts with strong hierarchy and spacing." },
                 "scale": { "title": "Built to scale", "desc": "Reusable components and structure that grows with your product." },
@@ -116,27 +131,6 @@
                 "title": "UI/UX Design",
                 "desc": "Beautiful, intuitive interfaces designed to engage users and drive conversions.",
                 "items": ["User research", "Wireframes", "Design systems", "Usability testing"]
-            }
-        },
-        "additional": {
-            "title": "Additional Services",
-            "items": {
-                "backend": { "title": "Backend Development", "desc": "Robust, scalable backend systems and APIs" },
-                "cloud": { "title": "Cloud Services", "desc": "AWS, Azure, and Google Cloud deployment" },
-                "security": { "title": "Security & Testing", "desc": "Security audits and quality assurance" },
-                "performance": { "title": "Performance Optimization", "desc": "Speed and efficiency improvements" }
-            }
-        },
-        "process": {
-            "title": "Our Process",
-            "subtitle": "A proven approach to deliver exceptional results.",
-            "items": {
-                "discovery": { "title": "Discovery", "desc": "We understand your vision, goals, and requirements through detailed consultation." },
-                "planning": { "title": "Planning", "desc": "Strategic planning and roadmap creation with clear milestones and timelines." },
-                "design": { "title": "Design", "desc": "Creating intuitive designs and prototypes that align with your brand." },
-                "development": { "title": "Development", "desc": "Agile development with regular updates and continuous collaboration." },
-                "testing": { "title": "Testing", "desc": "Rigorous quality assurance to ensure flawless functionality." },
-                "launch": { "title": "Launch & Support", "desc": "Smooth deployment and ongoing maintenance and support." }
             }
         }
     },

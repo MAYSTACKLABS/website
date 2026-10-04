@@ -1,36 +1,30 @@
-import { useLayoutEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { useLocation } from "react-router-dom";
 import gsap from "gsap";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Navbar from "./Navbar.tsx";
 import Footer from "./Footer.tsx";
 
-gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     const location = useLocation();
+    const isHome = location.pathname === "/";
 
-    useLayoutEffect(() => {
-        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        const isSmallScreen = window.matchMedia("(max-width: 767px)").matches;
+    useEffect(() => {
+        const currentUrl = window.location.href.split("#")[0];
+        const canonical = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+        const openGraphUrl = document.head.querySelector<HTMLMetaElement>('meta[property="og:url"]');
+        if (canonical) canonical.href = currentUrl;
+        if (openGraphUrl) openGraphUrl.content = currentUrl;
 
-        if (prefersReducedMotion || isSmallScreen) {
+        if (location.hash) {
+            requestAnimationFrame(() => document.querySelector(location.hash)?.scrollIntoView());
             return;
         }
 
-        const smoother = ScrollSmoother.create({
-            wrapper: "#smooth-wrapper",
-            content: "#smooth-content",
-            smooth: 1.15,
-            effects: true,
-            normalizeScroll: true,
-        });
-
-        return () => {
-            smoother.kill();
-        };
-    }, []);
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    }, [location.hash, location.pathname]);
 
     useLayoutEffect(() => {
         const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -40,35 +34,24 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         }
 
         const ctx = gsap.context(() => {
-            gsap.fromTo(
-                ".ms-animate",
-                { y: 22 },
-                {
-                    y: 0,
-                    duration: 0.72,
-                    ease: "power3.out",
-                    stagger: 0.08,
-                },
-            );
-
-            gsap.utils.toArray<HTMLElement>(".ms-card, .ms-glass-panel").forEach((element) => {
+            gsap.utils.toArray<HTMLElement>(".ms-animate").forEach((element) => {
                 gsap.fromTo(
                     element,
-                    { autoAlpha: 0.82, y: 28 },
+                    { autoAlpha: 0.86, y: 22 },
                     {
                         autoAlpha: 1,
                         y: 0,
-                        duration: 0.62,
+                        duration: 0.72,
                         ease: "power3.out",
                         scrollTrigger: {
                             trigger: element,
-                            start: "top 86%",
+                            start: "top 90%",
                             once: true,
                         },
                     },
                 );
             });
-        });
+        }, document.body);
 
         return () => {
             ctx.revert();
@@ -76,14 +59,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     }, [location.pathname]);
 
     return (
-        <div className="app-shell ms-app-shell">
+        <div className={`app-shell ms-app-shell${isHome ? " is-home" : ""}`}>
             <Navbar />
-            <div id="smooth-wrapper" className="smooth-wrapper">
-                <div id="smooth-content" className="smooth-content">
-                    <main className="main-wrap">{children}</main>
-                    <Footer />
-                </div>
-            </div>
+            <main className="main-wrap">{children}</main>
+            <Footer />
         </div>
     );
 }
+

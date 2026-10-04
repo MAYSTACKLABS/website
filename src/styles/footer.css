@@ -1,0 +1,7 @@
+@layer components {
+    .ms-footer {
+        border-top: 0;
+        color: var(--color-text);
+        background: transparent;
+    }
+}

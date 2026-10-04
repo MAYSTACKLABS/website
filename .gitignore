@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Local review and backup artifacts
+/screenshots/
+/maystack website.zip
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

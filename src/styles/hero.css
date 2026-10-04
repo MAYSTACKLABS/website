@@ -1,0 +1,359 @@
+@layer components {
+    .ms-hero-shell {
+        position: relative;
+        isolation: isolate;
+        z-index: 2;
+    }
+
+    .ms-alpine-hero {
+        position: relative;
+        isolation: isolate;
+        min-height: 100svh;
+        overflow: hidden;
+        color: white;
+        background: oklch(0.64 0.17 252);
+    }
+
+    .ms-alpine-sky {
+        position: absolute;
+        inset: 0;
+        transition: opacity 1100ms cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    .ms-alpine-sky-day {
+        background:
+            radial-gradient(circle at 68% 30%, rgb(255 229 156 / 0.18), transparent 22%),
+            linear-gradient(180deg, #1155df 0%, #3777e7 74%, #83aef1 100%);
+        opacity: 1;
+    }
+
+    .ms-alpine-sky-night {
+        background:
+            radial-gradient(circle at 72% 25%, oklch(0.66 0.13 250 / 0.16), transparent 22%),
+            linear-gradient(180deg, oklch(0.12 0.07 270) 0%, oklch(0.2 0.11 260) 66%, oklch(0.34 0.13 253) 100%);
+        opacity: 0;
+    }
+
+    .dark .ms-alpine-sky-day { opacity: 0; }
+    .dark .ms-alpine-sky-night { opacity: 1; }
+
+    .ms-alpine-stars {
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 900ms ease 120ms;
+    }
+
+    .dark .ms-alpine-stars { opacity: 1; }
+
+    .ms-alpine-stars span {
+        position: absolute;
+        border-radius: 50%;
+        background: white;
+        box-shadow: 0 0 11px 3px oklch(0.9 0.06 245 / 0.55);
+        animation: alpine-star-pulse 4s ease-in-out infinite;
+    }
+
+    .ms-alpine-orbit-parallax {
+        position: absolute;
+        z-index: 2;
+        left: 70.2%;
+        top: 42.8%;
+        bottom: auto;
+        width: clamp(240px, 22vw, 380px);
+        aspect-ratio: 1;
+        pointer-events: none;
+        transform: translateX(-50%);
+        will-change: transform;
+    }
+
+    .ms-alpine-orbit-entrance,
+    .ms-alpine-orbit {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+
+    .ms-alpine-orb {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        transition: opacity 1050ms cubic-bezier(0.65, 0, 0.35, 1), transform 1300ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .ms-alpine-sun {
+        opacity: 1;
+        transform: translateY(2%) scale(1);
+    }
+
+    .ms-alpine-moon {
+        opacity: 0;
+        transform: translateY(24%) scale(0.82) rotate(-8deg);
+    }
+
+    .dark .ms-alpine-sun {
+        opacity: 0;
+        transform: translateY(22%) scale(1.12);
+    }
+
+    .dark .ms-alpine-moon {
+        opacity: 0.92;
+        transform: translateY(0) scale(1) rotate(0);
+    }
+
+    .ms-alpine-orbit-path {
+        position: absolute;
+        inset: -7%;
+        width: 114%;
+        height: 114%;
+        overflow: visible;
+        opacity: 0.58;
+        pointer-events: none;
+    }
+
+    .ms-alpine-orbit-path ellipse {
+        stroke: oklch(0.98 0.015 245 / 0.52);
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        stroke-dasharray: 16 10 3 10;
+    }
+
+    .ms-alpine-brand-parallax {
+        position: absolute;
+        z-index: 5;
+        top: 9.9%;
+        right: 2.6%;
+        width: min(32vw, 550px);
+        pointer-events: none;
+        will-change: transform;
+    }
+
+    .ms-alpine-brand-entrance,
+    .ms-alpine-brand-flight {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 2.8 / 1;
+        animation: ms-brand-flight 7s ease-in-out infinite;
+    }
+
+    .ms-alpine-brand-bird {
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        width: 36%;
+        filter: drop-shadow(0 10px 10px oklch(0.1 0.07 260 / 0.16));
+        animation: ms-brand-bird-bank 7s ease-in-out infinite;
+    }
+
+    .ms-alpine-brand-trails {
+        position: absolute;
+        right: 13%;
+        bottom: -2%;
+        width: 87%;
+        overflow: visible;
+    }
+
+    .ms-alpine-brand-trails path {
+        stroke: oklch(0.98 0.015 245 / 0.48);
+        stroke-width: 2;
+        stroke-linecap: round;
+    }
+
+    .ms-alpine-brand-trails path + path {
+        stroke: oklch(0.98 0.015 245 / 0.25);
+        stroke-width: 1.35;
+    }
+
+    .ms-alpine-copy {
+        position: relative;
+        z-index: 10;
+        width: min(650px, calc(100% - 48px));
+        padding-top: clamp(170px, 22svh, 230px);
+        margin-left: 8.9vw;
+        color: white;
+    }
+
+    .ms-alpine-kicker {
+        margin: 18px 0 0;
+        font-family: "Quicksand", var(--font-english);
+        font-size: clamp(1rem, 1.35vw, 1.5rem);
+        font-weight: 400;
+        line-height: 0.86;
+        letter-spacing: 0.03em;
+    }
+
+    .ms-alpine-title {
+        max-width: none;
+        margin: 0;
+        font-family: "Bebas Neue", var(--font-display);
+        font-size: clamp(4.5rem, 7vw, 7.5rem);
+        font-weight: 400;
+        line-height: 0.859;
+        letter-spacing: 0.03em;
+        text-align: start;
+        text-wrap: balance;
+    }
+
+    .ms-alpine-title span { display: block; }
+
+    .ms-alpine-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin-top: 32px;
+    }
+
+    .ms-alpine-button {
+        display: inline-flex;
+        width: min(260px, 42vw);
+        min-height: 56px;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        border-radius: 999px;
+        padding: 0 18px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: clamp(0.78rem, 1vw, 1rem);
+        font-weight: 400;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1), color 260ms ease, background-color 260ms ease;
+    }
+
+    .ms-alpine-button:hover { transform: translateY(-2px); }
+
+    .ms-alpine-button-primary {
+        color: oklch(0.2 0.06 260);
+        background: white;
+    }
+
+    .ms-alpine-button-secondary {
+        border: 1px solid oklch(1 0 0 / 0.62);
+        color: white;
+        background: transparent;
+    }
+
+    .ms-alpine-button svg { width: 15px; height: 15px; }
+
+    .ms-alpine-mountain-layer {
+        position: absolute;
+        z-index: 6;
+        left: 50%;
+        bottom: 0;
+        width: 101.6vw;
+        pointer-events: none;
+        transform: translateX(-50%);
+    }
+
+    .ms-alpine-mountain-parallax,
+    .ms-alpine-mountain-entrance,
+    .ms-alpine-mountain {
+        width: 100%;
+    }
+
+    .ms-alpine-mountain-parallax {
+        will-change: transform;
+    }
+
+    .ms-alpine-mountain {
+        max-width: none;
+        filter: saturate(0.98) contrast(1.04);
+    }
+
+    .ms-hero-transition {
+        position: absolute;
+        z-index: 20;
+        left: 50%;
+        bottom: clamp(-88px, -4.6vw, -48px);
+        width: 119.7vw;
+        max-width: none;
+        pointer-events: none;
+        transform: translateX(-50%);
+    }
+
+    .ms-hero-transition-parallax {
+        will-change: transform;
+    }
+
+    .ms-hero-transition img {
+        width: 100%;
+        max-width: none;
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    [dir="rtl"] .ms-alpine-copy { margin-right: clamp(24px, 7vw, 122px); margin-left: 0; }
+    [dir="rtl"] .ms-alpine-title { text-align: right; }
+    [dir="rtl"] .ms-alpine-title {
+        max-width: 10ch;
+        font-family: var(--font-arabic);
+        font-size: clamp(3.4rem, 6.6vw, 5.4rem);
+        line-height: 1.14;
+    }
+    [dir="rtl"] .ms-alpine-button-secondary svg { transform: scaleX(-1); }
+
+    @media (max-width: 920px) {
+        .ms-alpine-mountain-layer { width: 128vw; }
+    }
+
+    @media (max-width: 760px) {
+        .ms-alpine-copy { width: calc(100% - 40px); padding-top: 112px; margin-inline: 20px; }
+        .ms-alpine-title { font-size: clamp(3rem, 14vw, 3.7rem); }
+        [dir="rtl"] .ms-alpine-title { max-width: 9ch; font-size: clamp(3rem, 13vw, 4rem); }
+        .ms-alpine-orbit-parallax { top: auto; bottom: 8%; left: 62%; width: 52vw; }
+        [dir="rtl"] .ms-alpine-orbit-parallax { left: 38%; }
+        .ms-alpine-brand-parallax { top: 48%; right: 4%; width: 145px; opacity: 0.9; }
+        [dir="rtl"] .ms-alpine-brand-parallax { right: auto; left: 3%; }
+        [dir="rtl"] .ms-alpine-brand-flight { transform: scaleX(-1); }
+        .ms-alpine-mountain-layer { bottom: 0; width: 148vw; }
+        .ms-hero-transition { bottom: -4rem; width: 152vw; }
+    }
+
+    @media (max-width: 480px) {
+        .ms-alpine-hero { min-height: 100svh; }
+        .ms-alpine-kicker { font-size: 0.68rem; }
+        .ms-alpine-title { font-size: clamp(2.9rem, 14vw, 3.35rem); }
+        .ms-alpine-actions { gap: 8px; margin-top: 24px; }
+        .ms-alpine-button { width: auto; min-height: 41px; padding-inline: 16px; font-size: 0.72rem; }
+    }
+}
+
+@keyframes ms-brand-flight {
+    0%, 100% { transform: translate3d(0, 0, 0) rotate(-1deg); }
+    28% { transform: translate3d(-18px, -9px, 0) rotate(1.5deg); }
+    58% { transform: translate3d(-4px, 8px, 0) rotate(-0.5deg); }
+    82% { transform: translate3d(12px, -4px, 0) rotate(1deg); }
+}
+
+@keyframes ms-brand-bird-bank {
+    0%, 100% { transform: rotate(-2deg); }
+    28% { transform: rotate(4deg); }
+    58% { transform: rotate(-3deg); }
+    82% { transform: rotate(2deg); }
+}
+
+@keyframes alpine-star-pulse {
+    0%, 100% { opacity: 0.35; transform: scale(0.75); }
+    50% { opacity: 1; transform: scale(1.25); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .ms-alpine-hero *,
+    .ms-alpine-hero *::before,
+    .ms-alpine-hero *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    .ms-alpine-brand-flight,
+    .ms-alpine-brand-bird { animation: none !important; }
+    .ms-alpine-orbit-parallax,
+    .ms-alpine-brand-parallax,
+    .ms-alpine-mountain-parallax,
+    .ms-hero-transition-parallax { transform: none !important; }
+}

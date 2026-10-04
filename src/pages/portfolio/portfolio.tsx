@@ -27,7 +27,7 @@ const Portfolio = () => {
             <section className="portfolio-hero ms-animate px-5 pb-14 pt-24 text-center md:pb-16 md:pt-28">
                 <div className="ms-container">
                     <h1 className="text-4xl font-bold leading-tight md:text-6xl" style={{ color: "var(--ms-text)" }}>
-                        {t("portfolio.titlePrefix")} <span className="text-[#18dbc9]">{t("portfolio.titleAccent")}</span>
+                        {t("portfolio.titlePrefix")} <span className="text-primary">{t("portfolio.titleAccent")}</span>
                     </h1>
                     <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: "var(--ms-muted-text)" }}>
                         {t("portfolio.subtitle")}
@@ -57,7 +57,7 @@ const Portfolio = () => {
                             style={{ "--project-accent": project.accent } as CSSProperties}
                         >
                             <div className="portfolio-work-visual">
-                                <img src={project.cover} alt={project.title[lang]} />
+                                <img src={project.cover} alt={project.title[lang]} loading="lazy" decoding="async" />
                             </div>
 
                             <div className="portfolio-work-copy">
@@ -77,3 +77,4 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
+

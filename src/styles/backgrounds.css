@@ -1,26 +1,67 @@
 .ms-app-shell {
-    --ms-bg: #0a3340;
-    --ms-bg-soft: rgba(255, 255, 255, 0.08);
-    --ms-surface: rgba(255, 255, 255, 0.14);
-    --ms-surface-2: rgba(255, 255, 255, 0.2);
-    --ms-text: #ffffff;
-    --ms-muted-text: rgba(255, 255, 255, 0.72);
-    --ms-border: rgba(255, 255, 255, 0.14);
-    --ms-glass-bg: rgba(5, 34, 45, 0.28);
-    --ms-glass-strong: rgba(255, 255, 255, 0.14);
-    --ms-glass-edge: rgba(255, 255, 255, 0.22);
-    --ms-glass-shadow: rgba(0, 14, 22, 0.34);
+    position: relative;
+    isolation: isolate;
     min-height: 100vh;
     color: var(--ms-text);
+    background: transparent;
+    transition: color 900ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ms-app-shell::before,
+.ms-app-shell::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    transition: opacity 1100ms cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.ms-app-shell::before {
     background:
-        radial-gradient(85% 72% at 4% 0%, rgba(103, 145, 87, 0.34), transparent 62%),
-        radial-gradient(82% 72% at 96% 4%, rgba(58, 150, 184, 0.36), transparent 64%),
-        radial-gradient(70% 62% at 48% 34%, rgba(18, 168, 158, 0.16), transparent 68%),
-        linear-gradient(145deg, #365f4d 0%, #066f7f 34%, #052f43 66%, #061018 100%);
-    background-attachment: fixed;
-    background-size: cover;
+        radial-gradient(80% 65% at 12% 4%, oklch(0.78 0.115 244 / 0.34), transparent 66%),
+        radial-gradient(74% 62% at 92% 14%, oklch(0.72 0.13 252 / 0.28), transparent 68%),
+        linear-gradient(150deg, oklch(0.98 0.012 248), oklch(0.88 0.06 247));
+    opacity: 1;
+}
+
+.ms-app-shell::after {
+    background:
+        radial-gradient(80% 65% at 12% 4%, oklch(0.38 0.14 250 / 0.34), transparent 66%),
+        radial-gradient(74% 62% at 92% 14%, oklch(0.3 0.14 262 / 0.3), transparent 68%),
+        linear-gradient(150deg, oklch(0.16 0.065 264), oklch(0.09 0.045 270));
+    opacity: 0;
 }
 
 .dark .ms-app-shell {
-    --ms-bg: #061018;
+    color: var(--color-text);
 }
+
+.dark .ms-app-shell::before {
+    opacity: 0;
+}
+
+.dark .ms-app-shell::after {
+    opacity: 1;
+}
+
+.ms-app-shell.is-home {
+    --ms-text: oklch(0.98 0.01 248);
+    --ms-muted-text: oklch(0.76 0.035 248);
+    --ms-border: oklch(0.72 0.08 240 / 0.24);
+    --ms-surface-2: oklch(0.25 0.075 258 / 0.72);
+    color: var(--ms-text);
+}
+
+.ms-app-shell.is-home::before,
+.ms-app-shell.is-home::after {
+    background:
+        radial-gradient(circle at 84% 32%, oklch(0.31 0.13 245 / 0.28), transparent 34%),
+        radial-gradient(circle at 18% 70%, oklch(0.24 0.11 252 / 0.18), transparent 32%),
+        linear-gradient(145deg, oklch(0.105 0.045 262), oklch(0.15 0.065 251) 55%, oklch(0.09 0.04 266));
+}
+
+.ms-app-shell.is-home::before { opacity: 1; }
+.ms-app-shell.is-home::after { opacity: 0; }
+.dark .ms-app-shell.is-home::before { opacity: 1; }
+.dark .ms-app-shell.is-home::after { opacity: 0; }

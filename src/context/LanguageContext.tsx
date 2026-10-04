@@ -1,4 +1,5 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 type Lang = "en" | "ar";
@@ -24,8 +25,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         return saved === "ar" ? "ar" : "en";
     });
 
-    const apply = (next: Lang) => {
-        setLangState(next);
+    const syncLanguage = useCallback((next: Lang) => {
         localStorage.setItem("lang", next);
 
         const cfg = LANG_CFG[next];
@@ -39,20 +39,23 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
         if (i18n.language !== next) {
             void i18n.changeLanguage(next);
         }
-    };
+    }, [i18n]);
+
+    const setLang = useCallback((next: Lang) => {
+        setLangState(next);
+    }, []);
 
     useEffect(() => {
-        apply(lang);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+        syncLanguage(lang);
+    }, [lang, syncLanguage]);
 
     const value = useMemo<LanguageContextValue>(
         () => ({
             lang,
-            setLang: apply,
-            toggleLang: () => apply(lang === "en" ? "ar" : "en"),
+            setLang,
+            toggleLang: () => setLang(lang === "en" ? "ar" : "en"),
         }),
-        [lang, i18n.language]
+        [lang, setLang]
     );
 
     return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;

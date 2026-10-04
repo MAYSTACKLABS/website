@@ -1,9 +1,10 @@
-import { type CSSProperties, useEffect } from "react";
+import { type CSSProperties } from "react";
 import { ArrowLeft, ArrowUpRight, CheckCircle2, Image, MonitorSmartphone } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext.tsx";
 import { projectCaseStudies } from "./projectCaseStudies.ts";
 import { getProject } from "./projectsData.ts";
+import { usePageMetadata } from "../../hooks/usePageMetadata.ts";
 
 const kindLabels = {
     website: { en: "Website", ar: "موقع" },
@@ -17,15 +18,10 @@ export default function ProjectDetail() {
     const project = getProject(slug);
     const caseStudy = slug ? projectCaseStudies[slug] : undefined;
 
-    useEffect(() => {
-        if (!project) return;
-
-        const previousTitle = document.title;
-        document.title = `${project.title[lang]} Case Study | Maystack`;
-        return () => {
-            document.title = previousTitle;
-        };
-    }, [lang, project]);
+    usePageMetadata({
+        title: project ? `${project.title[lang]} Case Study | Maystack` : "Project not found | Maystack",
+        description: project?.intro[lang] ?? "Explore Maystack website, app, and business platform projects.",
+    });
 
     if (!project || !caseStudy) {
         return <Navigate to="/portfolio" replace />;
@@ -52,7 +48,10 @@ export default function ProjectDetail() {
                             </div>
                         </div>
                         <div className="project-detail-cover">
-                            <img src={project.cover} alt={project.title[lang]} />
+                            <div className="project-detail-laptop-screen">
+                                <img src={project.cover} alt={project.title[lang]} decoding="async" />
+                            </div>
+                            <div className="project-detail-laptop-base" aria-hidden="true"><span /></div>
                         </div>
                     </div>
                 </div>
@@ -100,11 +99,7 @@ export default function ProjectDetail() {
                                     {lang === "ar" ? "زيارة الموقع" : "Visit live website"}
                                     <ArrowUpRight className="h-4 w-4" />
                                 </a>
-                            ) : (
-                                <p className="project-link-note">
-                                    {lang === "ar" ? "رابط الموقع متاح عند الطلب." : "Live website link available on request."}
-                                </p>
-                            )}
+                            ) : null}
                         </div>
 
                         <div className="project-detail-highlights">
@@ -118,9 +113,7 @@ export default function ProjectDetail() {
                                     <span>{highlight[lang]}</span>
                                 </div>
                             ))}
-                            <div className="project-testimonial-note">
-                                {caseStudy.testimonial?.[lang] ?? (lang === "ar" ? "يمكن إضافة شهادة العميل عند توفرها." : "Client testimonial can be added when available.")}
-                            </div>
+                            {caseStudy.testimonial ? <blockquote className="project-testimonial-note">{caseStudy.testimonial[lang]}</blockquote> : null}
                         </div>
                     </div>
                 </div>
@@ -139,14 +132,14 @@ export default function ProjectDetail() {
                     <div className="project-desktop-gallery">
                         {project.desktopImages.map((image, index) => (
                             <div key={image} className="project-desktop-shot">
-                                <img src={image} alt={`${project.title[lang]} desktop ${index + 1}`} />
+                                <img src={image} alt={`${project.title[lang]} desktop ${index + 1}`} loading="lazy" decoding="async" />
                             </div>
                         ))}
                     </div>
                     <div className="project-mobile-gallery">
                         {project.mobileImages.map((image, index) => (
                             <div key={image} className="project-phone-frame">
-                                <img src={image} alt={`${project.title[lang]} mobile ${index + 1}`} />
+                                <img src={image} alt={`${project.title[lang]} mobile ${index + 1}`} loading="lazy" decoding="async" />
                             </div>
                         ))}
                     </div>
@@ -155,3 +148,4 @@ export default function ProjectDetail() {
         </div>
     );
 }
+
