@@ -1,7 +1,6 @@
 import mountains from "../../../assets/hero/optimized/mountains.webp";
 import moon from "../../../assets/hero/optimized/moon.webp";
 import sun from "../../../assets/hero/optimized/sun.webp";
-import bird from "../../../assets/logos/white.png";
 
 const STARS = [
     { left: "8%", top: "20%", size: 3, delay: "0s" },
@@ -33,27 +32,8 @@ export default function HeroScene({ mountainAlt }: { mountainAlt: string }) {
             </div>
 
             <div className="ms-alpine-orbit-parallax" aria-hidden="true">
-                <div className="ms-alpine-orbit-entrance">
-                    <div className="ms-alpine-orbit">
-                        <img className="ms-alpine-orb ms-alpine-sun" src={sun} alt="" />
-                        <img className="ms-alpine-orb ms-alpine-moon" src={moon} alt="" />
-                        <svg className="ms-alpine-orbit-path" viewBox="0 0 500 500" fill="none">
-                            <ellipse cx="250" cy="250" rx="232" ry="174" />
-                        </svg>
-                    </div>
-                </div>
-            </div>
-
-            <div className="ms-alpine-brand-parallax" aria-hidden="true">
-                <div className="ms-alpine-brand-entrance">
-                    <div className="ms-alpine-brand-flight">
-                        <svg className="ms-alpine-brand-trails" viewBox="0 0 430 150" fill="none">
-                            <path d="M8 132C116 143 236 104 353 28" />
-                            <path d="M38 145C154 151 264 113 374 46" />
-                        </svg>
-                        <img className="ms-alpine-brand-bird" src={bird} alt="" />
-                    </div>
-                </div>
+                <img className="ms-alpine-orb ms-alpine-sun" src={sun} alt="" />
+                <img className="ms-alpine-orb ms-alpine-moon" src={moon} alt="" />
             </div>
 
             <div className="ms-alpine-mountain-layer">

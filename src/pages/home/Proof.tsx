@@ -12,12 +12,12 @@ export default function Proof() {
         <section className="ms-proof-section" aria-labelledby="proof-title">
             <div className="ms-container">
                 <div className="ms-proof-heading ms-animate">
-                    <p className="ms-section-label">{lang === "ar" ? "أثر العمل" : "Project impact"}</p>
-                    <h2 id="proof-title">{lang === "ar" ? "ما الذي تغيّر بعد الإطلاق." : "What changed after launch."}</h2>
+                    <p className="ms-section-label">{lang === "ar" ? "نتائج العملاء" : "Client outcomes"}</p>
+                    <h2 id="proof-title">{lang === "ar" ? "النتيجة أهم من الزينة." : "The result matters more than decoration."}</h2>
                     <span>
                         {lang === "ar"
                             ? "نركّز على التحسين الواضح الذي قدّمه كل مشروع للتجربة والمنتج."
-                            : "A concise view of the practical improvement delivered through each project."}
+                            : "A clear look at how each build improved the experience, sharpened the message, and made the product easier to use."}
                     </span>
                 </div>
 

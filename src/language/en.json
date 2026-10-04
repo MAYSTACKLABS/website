@@ -30,7 +30,7 @@
         },
         "servicesSection": {
             "kicker": "Capabilities",
-            "title": "What We Do Best",
+            "title": "Design. Build. Ship.",
             "subtitle": "One focused team for product strategy, interface design, and dependable engineering—from the first sketch to a confident launch.",
             "link": "Explore every service"
         },
@@ -171,7 +171,7 @@
         "asideIntro": "Share the idea, timeline, or rough scope. I will keep the next step clear and practical.",
         "asideNote": "Prefer email? Send the full brief whenever it is ready. Prefer phone? A quick call works beautifully for early ideas.",
         "info": {
-            "email": { "title": "Email Us", "value": "mtmaleisawy@gmail.com" },
+            "email": { "title": "Email Us", "value": "contact@mestack.com" },
             "phone": { "title": "Call Us", "value": "+905019565125" },
             "visit": { "title": "Visit Us", "value": "123 Tech Street, San Francisco, CA 94105" },
             "hours": { "title": "Business Hours", "value": "Mon-Fri: 9:00 AM - 6:00 PM" }

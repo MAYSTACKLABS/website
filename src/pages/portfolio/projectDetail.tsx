@@ -5,12 +5,8 @@ import { useLanguage } from "../../context/LanguageContext.tsx";
 import { projectCaseStudies } from "./projectCaseStudies.ts";
 import { getProject } from "./projectsData.ts";
 import { usePageMetadata } from "../../hooks/usePageMetadata.ts";
-
-const kindLabels = {
-    website: { en: "Website", ar: "موقع" },
-    platform: { en: "Platform", ar: "منصة" },
-    mobile: { en: "Mobile app", ar: "تطبيق موبايل" },
-};
+import laptopFrame from "../../assets/generated/laptop-frame-v2.png";
+import phoneFrame from "../../assets/generated/phone-frame-v2.png";
 
 export default function ProjectDetail() {
     const { slug } = useParams();
@@ -38,20 +34,30 @@ export default function ProjectDetail() {
 
                     <div className="project-detail-showcase-grid mt-8">
                         <div className="project-detail-intro">
-                            <p className="project-kicker">{project.category[lang]}</p>
                             <h1>{project.title[lang]}</h1>
                             <p>{project.intro[lang]}</p>
-                            <div className="project-detail-meta">
-                                <span>{project.kinds.map((kind) => kindLabels[kind][lang]).join(" / ")}</span>
-                                <span>{lang === "ar" ? `${project.desktopImages.length} شاشات كمبيوتر` : `${project.desktopImages.length} desktop screens`}</span>
-                                <span>{lang === "ar" ? `${project.mobileImages.length} شاشات موبايل` : `${project.mobileImages.length} mobile views`}</span>
-                            </div>
+                            {caseStudy.liveUrl ? (
+                                <a className="project-top-live" href={caseStudy.liveUrl} target={caseStudy.liveUrl.startsWith("http") ? "_blank" : undefined} rel={caseStudy.liveUrl.startsWith("http") ? "noreferrer" : undefined}>
+                                    {lang === "ar" ? "عرض الموقع مباشرة" : "View live site"}<ArrowUpRight aria-hidden="true" />
+                                </a>
+                            ) : null}
                         </div>
                         <div className="project-detail-cover">
-                            <div className="project-detail-laptop-screen">
-                                <img src={project.cover} alt={project.title[lang]} decoding="async" />
+                            {caseStudy.liveUrl ? (
+                                <a className="project-device-laptop" href={caseStudy.liveUrl} target={caseStudy.liveUrl.startsWith("http") ? "_blank" : undefined} rel={caseStudy.liveUrl.startsWith("http") ? "noreferrer" : undefined} aria-label={lang === "ar" ? "فتح الموقع مباشرة" : "Open live site"}>
+                                    <span className="project-device-laptop-screen"><img src={project.cover} alt={project.title[lang]} decoding="async" /></span>
+                                    <img className="project-device-laptop-frame" src={laptopFrame} alt="" aria-hidden="true" />
+                                </a>
+                            ) : (
+                                <div className="project-device-laptop">
+                                    <span className="project-device-laptop-screen"><img src={project.cover} alt={project.title[lang]} decoding="async" /></span>
+                                    <img className="project-device-laptop-frame" src={laptopFrame} alt="" aria-hidden="true" />
+                                </div>
+                            )}
+                            <div className="project-device-phone" aria-label={lang === "ar" ? "معاينة الموبايل" : "Mobile preview"}>
+                                <span className="project-device-phone-screen"><img src={project.mobileImages[0]} alt="" /></span>
+                                <img className="project-device-phone-frame" src={phoneFrame} alt="" aria-hidden="true" />
                             </div>
-                            <div className="project-detail-laptop-base" aria-hidden="true"><span /></div>
                         </div>
                     </div>
                 </div>
@@ -89,17 +95,6 @@ export default function ProjectDetail() {
                             <div className="project-technology-list">
                                 {caseStudy.technologies.map((technology) => <span key={technology}>{technology}</span>)}
                             </div>
-                            {caseStudy.liveUrl ? (
-                                <a
-                                    className="project-live-link"
-                                    href={caseStudy.liveUrl}
-                                    target={caseStudy.liveUrl.startsWith("http") ? "_blank" : undefined}
-                                    rel={caseStudy.liveUrl.startsWith("http") ? "noreferrer" : undefined}
-                                >
-                                    {lang === "ar" ? "زيارة الموقع" : "Visit live website"}
-                                    <ArrowUpRight className="h-4 w-4" />
-                                </a>
-                            ) : null}
                         </div>
 
                         <div className="project-detail-highlights">

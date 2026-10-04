@@ -13,6 +13,7 @@
 @import "./styles/contact.css";
 @import "./styles/portfolio.css";
 @import "./styles/footer.css";
+@import "./styles/cohesive.css";
 
 @layer base {
   html {

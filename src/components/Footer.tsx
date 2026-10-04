@@ -30,11 +30,11 @@ export default function Footer() {
                     </nav>
 
                     <a
-                        href="mailto:mtmaleisawy@gmail.com"
+                        href="mailto:contact@mestack.com"
                         className="inline-flex min-h-11 items-center gap-2 rounded-full border border-current/12 px-4 text-sm font-semibold text-current/70 transition hover:text-primary"
                     >
                         <Mail className="h-4 w-4" />
-                        mtmaleisawy@gmail.com
+                        contact@mestack.com
                     </a>
                 </div>
             </div>

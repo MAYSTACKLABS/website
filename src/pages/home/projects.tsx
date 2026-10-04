@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../../context/LanguageContext.tsx";
 import { projects } from "../portfolio/projectsData.ts";
+import laptopFrame from "../../assets/generated/laptop-frame-v2.png";
 
 export default function Projects() {
     const { t } = useTranslation();
@@ -30,18 +31,12 @@ export default function Projects() {
                 </div>
 
                 <div className="ms-project-stage ms-animate">
-                    <div className="ms-project-side ms-project-side-left" aria-hidden="true">
-                        <img src={featured[(activeIndex + featured.length - 1) % featured.length].cover} alt="" />
-                    </div>
-                    <div className="ms-project-laptop">
-                        <div className="ms-project-screen">
+                    <Link className="ms-real-laptop" to={`/portfolio/${activeProject.slug}`} aria-label={`${activeProject.title[lang]} case study`}>
+                        <div className="ms-real-laptop-screen">
                             <img src={activeProject.cover} alt={activeProject.title[lang]} decoding="async" />
                         </div>
-                        <div className="ms-project-laptop-base" aria-hidden="true"><span /></div>
-                    </div>
-                    <div className="ms-project-side ms-project-side-right" aria-hidden="true">
-                        <img src={featured[(activeIndex + 1) % featured.length].cover} alt="" />
-                    </div>
+                        <img className="ms-real-laptop-frame" src={laptopFrame} alt="" aria-hidden="true" />
+                    </Link>
                 </div>
 
                 <div className="ms-project-story ms-animate">

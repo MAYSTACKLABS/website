@@ -1,9 +1,11 @@
-import { type CSSProperties, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useLanguage } from "../../context/LanguageContext.tsx";
 import { type ProjectKind, projects } from "./projectsData.ts";
+import { projectCaseStudies } from "./projectCaseStudies.ts";
+import FlightCta from "../home/FlightCta.tsx";
 
 type FilterKey = "all" | ProjectKind;
 
@@ -24,12 +26,13 @@ const Portfolio = () => {
 
     return (
         <div className="ms-page portfolio-page" id="work">
-            <section className="portfolio-hero ms-animate px-5 pb-14 pt-24 text-center md:pb-16 md:pt-28">
+            <section className="portfolio-hero ms-animate">
                 <div className="ms-container">
-                    <h1 className="text-4xl font-bold leading-tight md:text-6xl" style={{ color: "var(--ms-text)" }}>
-                        {t("portfolio.titlePrefix")} <span className="text-primary">{t("portfolio.titleAccent")}</span>
+                    <p className="portfolio-kicker">{lang === "ar" ? "أعمال مختارة" : "Selected work"}</p>
+                    <h1>
+                        {lang === "ar" ? "منتجات صممت لتجعل الخطوة التالية واضحة." : "Products designed to make the next move obvious."}
                     </h1>
-                    <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed md:text-lg" style={{ color: "var(--ms-muted-text)" }}>
+                    <p className="portfolio-intro">
                         {t("portfolio.subtitle")}
                     </p>
                     <div className="portfolio-filter-row">
@@ -47,31 +50,30 @@ const Portfolio = () => {
                 </div>
             </section>
 
-            <section className="px-5 pb-24">
-                <div className="portfolio-card-grid mx-auto max-w-[1180px]">
-                    {visibleProjects.map((project) => (
+            <section className="portfolio-work-list-section">
+                <div className="portfolio-work-list ms-container">
+                    {visibleProjects.map((project, index) => (
                         <Link
                             key={project.slug}
                             to={`/portfolio/${project.slug}`}
-                            className="portfolio-work-card"
-                            style={{ "--project-accent": project.accent } as CSSProperties}
+                            className="portfolio-work-row"
                         >
-                            <div className="portfolio-work-visual">
-                                <img src={project.cover} alt={project.title[lang]} loading="lazy" decoding="async" />
+                            <div className="portfolio-work-visual" data-index={String(index + 1).padStart(2, "0")}>
+                                <img src={project.cover} alt={project.title[lang]} loading="eager" decoding="async" />
                             </div>
-
                             <div className="portfolio-work-copy">
                                 <span>{project.category[lang]}</span>
                                 <h2>{project.title[lang]}</h2>
                                 <p>{project.intro[lang]}</p>
-                                <div className="portfolio-work-action" aria-hidden="true">
-                                    <ArrowUpRight className="h-5 w-5" />
-                                </div>
+                                <small>{lang === "ar" ? "النتيجة" : "Outcome"}</small>
+                                <p>{projectCaseStudies[project.slug].result[lang]}</p>
+                                <div className="portfolio-work-link">{lang === "ar" ? "عرض دراسة الحالة" : "View case study"}<ArrowUpRight aria-hidden="true" /></div>
                             </div>
                         </Link>
                     ))}
                 </div>
             </section>
+            <FlightCta />
         </div>
     );
 };

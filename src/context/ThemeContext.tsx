@@ -12,6 +12,9 @@ type ThemeContextValue = {
 const ThemeContext = createContext<ThemeContextValue | null>(null);
 
 function getInitialTheme(): Theme {
+    const requested = new URLSearchParams(window.location.search).get("theme");
+    if (requested === "light" || requested === "dark") return requested;
+
     const saved = localStorage.getItem("theme");
     if (saved === "light" || saved === "dark") return saved;
 

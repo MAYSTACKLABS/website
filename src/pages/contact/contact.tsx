@@ -2,10 +2,9 @@ import { type FormEvent, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, Mail, MessageCircle, Send } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext.tsx";
 import mountains from "../../assets/hero/optimized/mountains.webp";
-import cloudBank from "../../assets/hero/optimized/cloud-bank.webp";
-import floatingClouds from "../../assets/hero/optimized/floating-clouds.webp";
+import cloudBank from "../../assets/generated/cloud-bank-v2.png";
 
-const email = "mtmaleisawy@gmail.com";
+const email = "contact@mestack.com";
 const whatsappNumber = "905019565125";
 
 type Answers = {
@@ -231,7 +230,6 @@ export default function Contact() {
     return (
         <main className="contact-experience">
             <div className="contact-sky" aria-hidden="true" />
-            <img className="contact-floating-clouds" src={floatingClouds} alt="" />
             <img className="contact-mountains" src={mountains} alt="" />
             <img className="contact-cloud-bank" src={cloudBank} alt="" />
 

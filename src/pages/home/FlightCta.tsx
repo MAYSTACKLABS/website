@@ -1,12 +1,16 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext.tsx";
+import mountains from "../../assets/hero/optimized/mountains.webp";
+import clouds from "../../assets/generated/cloud-bank-v2.png";
 
 export default function FlightCta() {
     const { lang } = useLanguage();
 
     return (
         <section className="ms-flight-cta" aria-labelledby="flight-title">
+            <img className="ms-flight-mountains" src={mountains} alt="" aria-hidden="true" />
+            <img className="ms-flight-clouds" src={clouds} alt="" aria-hidden="true" />
             <div className="ms-flight-content ms-animate">
                 <p>{lang === "ar" ? "لنبدأ ما هو قادم" : "Let’s build what’s next"}</p>
                 <h2 id="flight-title">{lang === "ar" ? "جاهز للإقلاع؟" : "Ready to take off?"}</h2>
