@@ -1,4 +1,4 @@
-import cloudBank from "../../../assets/generated/cloud-bank-v2.png";
+import cloudBank from "../../../assets/hero/optimized/cloud-bank.webp";
 
 export default function HeroTransition() {
     return (

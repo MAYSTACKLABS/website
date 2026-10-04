@@ -2,7 +2,7 @@ import { type FormEvent, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, Mail, MessageCircle, Send } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext.tsx";
 import mountains from "../../assets/hero/optimized/mountains.webp";
-import cloudBank from "../../assets/generated/cloud-bank-v2.png";
+import cloudBank from "../../assets/hero/optimized/cloud-bank.webp";
 
 const email = "contact@mestack.com";
 const whatsappNumber = "905019565125";

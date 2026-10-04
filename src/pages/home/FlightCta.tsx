@@ -2,7 +2,7 @@ import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext.tsx";
 import mountains from "../../assets/hero/optimized/mountains.webp";
-import clouds from "../../assets/generated/cloud-bank-v2.png";
+import clouds from "../../assets/hero/optimized/cloud-bank.webp";
 
 export default function FlightCta() {
     const { lang } = useLanguage();

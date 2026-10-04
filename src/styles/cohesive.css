@@ -102,18 +102,19 @@
         background: radial-gradient(circle at 70% 38%, oklch(0.68 0.09 247 / 0.2), transparent 16rem);
     }
     .ms-alpine-copy { width: min(620px, calc(100% - 48px)); padding-top: clamp(170px, 22svh, 220px); margin-left: max(7vw, calc((100vw - var(--container-width)) / 2)); color: var(--ms-text); }
-    .ms-alpine-title { font-size: clamp(4.8rem, 7.5vw, 7.8rem); }
+    .ms-alpine-title { max-width: 640px; font-size: clamp(4.2rem, 5.6vw, 6.4rem); line-height: 0.88; }
+    .ms-alpine-title span { white-space: nowrap; }
     .ms-alpine-kicker { max-width: 48ch; font: 600 clamp(0.88rem, 1.2vw, 1.1rem)/1.55 var(--font-ui); letter-spacing: 0; color: var(--ms-muted-text); }
     .ms-alpine-button-primary { color: oklch(0.18 0.06 260); background: var(--color-brand); }
     .ms-alpine-button-secondary { border-color: var(--ms-border); color: var(--ms-text); }
-    .ms-alpine-orbit-parallax { z-index: 3; top: auto; bottom: 19%; left: 70%; width: clamp(150px, 15vw, 230px); }
+    .ms-alpine-orbit-parallax { z-index: 3; top: auto; bottom: 12%; left: 55%; width: clamp(135px, 10vw, 175px); }
     .ms-alpine-orbit-entrance,
     .ms-alpine-orbit { display: contents; }
     .ms-alpine-orbit-path,
     .ms-alpine-brand-parallax { display: none; }
-    .ms-alpine-mountain-layer { z-index: 6; bottom: -3%; width: min(980px, 72vw); }
+    .ms-alpine-mountain-layer { z-index: 6; bottom: -7%; width: min(760px, 54vw); }
     .ms-alpine-mountain { filter: saturate(0.9) contrast(1.02); }
-    .ms-hero-transition { z-index: 20; bottom: -190px; width: 112vw; }
+    .ms-hero-transition { z-index: 20; bottom: -440px; width: 104vw; }
     .ms-hero-transition img { width: 100%; filter: drop-shadow(0 -10px 22px oklch(0.3 0.08 248 / 0.08)); }
 
     /* Homepage shared */
@@ -323,9 +324,9 @@
         .ms-alpine-copy { padding-top: 126px; margin-inline: 20px; }
         .ms-alpine-title { font-size: clamp(3.5rem, 16vw, 5rem); }
         .ms-alpine-kicker { max-width: 34ch; font-size: 0.82rem; }
-        .ms-alpine-orbit-parallax { bottom: 22%; left: 65%; width: 130px; }
-        .ms-alpine-mountain-layer { bottom: 2%; width: 142vw; }
-        .ms-hero-transition { bottom: -105px; width: 176vw; }
+        .ms-alpine-orbit-parallax { bottom: 11%; left: 57%; width: 112px; }
+        .ms-alpine-mountain-layer { bottom: -2%; width: 118vw; }
+        .ms-hero-transition { bottom: -245px; width: 176vw; }
         .ms-home-content { padding-top: 54px; }
         .ms-full-stack,
         .ms-home-services,

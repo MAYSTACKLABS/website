@@ -2,7 +2,7 @@ import { ArrowRight, Binoculars, Blocks, Code2, Compass, Globe2, Palette, Rocket
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext.tsx";
 import mountains from "../../assets/hero/optimized/mountains.webp";
-import cloudBank from "../../assets/generated/cloud-bank-v2.png";
+import cloudBank from "../../assets/hero/optimized/cloud-bank.webp";
 import sun from "../../assets/hero/optimized/sun.webp";
 import moon from "../../assets/hero/optimized/moon.webp";
 import mobilePreview from "../../assets/projects/snowball/mobile1.png";
