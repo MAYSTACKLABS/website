@@ -1,0 +1,19 @@
+@layer components {
+    .device-showcase { position: relative; width: 100%; padding: 0 5% 6% 0; isolation: isolate; }
+    .device-laptop { position: relative; display: block; width: 100%; aspect-ratio: 1.5; }
+    .device-laptop-frame { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .device-laptop-screen { position: absolute; z-index: 1; left: 14%; top: 9.5%; width: 72%; height: 61.5%; overflow: hidden; clip-path: polygon(1.7% 0,98.3% 0,100% 100%,0 100%); background: #07121a; border-radius: 3px; }
+    .device-laptop-screen img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .phone-mockup { position:relative; aspect-ratio:2/3; isolation:isolate; }
+    .phone-mockup-frame { position:absolute; inset:0; width:100%; height:100%; transform:scaleX(-1); }
+    .phone-mockup-screen { position:absolute; left:19.5%; top:5.6%; width:60%; height:87.8%; border-radius:15% / 7%; overflow:hidden; background:#030810; }
+    .phone-mockup-screen img { position:relative; left:-1.5%; width:103%; max-width:none; height:100%; object-fit:cover; object-position:top center; }
+    .phone-mockup-island { position:absolute; top:7.3%; left:41%; width:18%; height:3.7%; background:#030406; border:1px solid #181d24; border-radius:999px; }
+    .phone-mockup-island i { position:absolute; right:10%; top:25%; height:50%; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle,#203c77,#080c19); }
+    .device-phone { position:absolute; z-index:2; right:-7%; bottom:2%; width:34%; filter:drop-shadow(8px 15px 12px #0003); }
+    .device-showcase::before { content:""; position:absolute; z-index:-1; inset:76% 0 3%; border-radius:50%; background:radial-gradient(ellipse,#15263835,transparent 68%); pointer-events:none; }
+    .dark .device-showcase::before { background:radial-gradient(ellipse,#86b9f532 0%,#4678b914 42%,transparent 72%); }
+    a.device-laptop:focus-visible { outline-offset: 0; border-radius: 20px; }
+    .device-caption { margin-top: 8px; display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 10px; color: var(--color-text-muted); letter-spacing: .03em; }
+    .device-caption::before { content:""; width: 5px; height: 5px; border-radius:50%; background:var(--color-brand); }
+}

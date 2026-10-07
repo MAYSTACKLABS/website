@@ -1,88 +1,44 @@
 :root {
-    --font-english: "Manrope", sans-serif;
-    --font-arabic: "Cairo", sans-serif;
-    --font-ui: var(--font-english);
-    --font-display: "Barlow Condensed", var(--font-arabic), sans-serif;
-
-    --color-bg: oklch(0.96 0.025 247);
-    --color-bg-soft: oklch(0.9 0.045 247 / 0.72);
-    --color-surface: oklch(1 0 0 / 0.78);
-    --color-surface-strong: oklch(1 0 0 / 0.92);
-    --color-surface-muted: oklch(0.93 0.035 247 / 0.84);
-    --color-text: oklch(0.22 0.055 258);
-    --color-text-muted: oklch(0.42 0.045 255);
-    --color-brand: oklch(0.8 0.15 174);
-    --color-brand-strong: oklch(0.64 0.14 174);
-    --color-brand-secondary: oklch(0.74 0.13 237);
-    --color-border: oklch(0.67 0.075 251 / 0.35);
-    --color-focus: oklch(0.78 0.15 174);
-    --color-danger: oklch(0.63 0.2 28);
-    --color-success: oklch(0.72 0.16 158);
-
-    --radius-sm: 0.5rem;
-    --radius-md: 0.75rem;
-    --radius-lg: 1rem;
-    --radius-pill: 999px;
-    --container-width: 73.75rem;
-    --space-section: clamp(4.5rem, 9vw, 8.125rem);
-    --shadow-card: 0 12px 28px oklch(0.18 0.06 260 / 0.16);
-
-    /* Temporary aliases keep existing feature CSS stable during migration. */
-    --background: var(--color-bg);
-    --foreground: var(--color-text);
-    --card: var(--color-surface);
-    --card-foreground: var(--color-text);
-    --primary: var(--color-brand);
-    --primary-foreground: oklch(0.19 0.05 260);
-    --secondary: var(--color-surface-muted);
-    --secondary-foreground: var(--color-text);
-    --muted: var(--color-surface-muted);
-    --muted-foreground: var(--color-text-muted);
-    --border: var(--color-border);
-    --input: var(--color-surface-strong);
-    --ring: var(--color-focus);
-    --ms-bg: var(--color-bg);
-    --ms-bg-soft: var(--color-bg-soft);
-    --ms-surface: var(--color-surface);
-    --ms-surface-2: var(--color-surface-muted);
-    --ms-text: var(--color-text);
-    --ms-muted-text: var(--color-text-muted);
-    --ms-border: var(--color-border);
+    color-scheme: light;
+    --font-ui: "Manrope", sans-serif;
+    --font-display: "Barlow Condensed", sans-serif;
+    --color-bg: #e5f3ff;
+    --color-text: #071637;
+    --color-text-muted: #18233a;
+    --color-brand: #175aca;
+    --color-button-text: #ffffff;
+    --color-surface: #f2f8ff;
+    --color-surface-strong: #ffffff;
+    --color-border: #bdcee5;
+    --color-nav: rgb(255 255 255 / .94);
+    --color-focus: #185acf;
+    --color-danger: #b32939;
+    --color-glow: #c3e0ff;
+    --color-sky: #0750de;
+    --container-width: 1200px;
+    --section-space: 72px;
+    --radius: 20px;
 }
-
 .dark {
-    --color-bg: oklch(0.14 0.055 264);
-    --color-bg-soft: oklch(0.22 0.075 260 / 0.72);
-    --color-surface: oklch(0.22 0.075 260 / 0.72);
-    --color-surface-strong: oklch(0.25 0.075 258 / 0.9);
-    --color-surface-muted: oklch(0.28 0.085 256 / 0.74);
-    --color-text: oklch(0.98 0.01 248);
-    --color-text-muted: oklch(0.79 0.035 250);
-    --color-border: oklch(0.65 0.08 247 / 0.28);
-    --shadow-card: 0 12px 28px oklch(0.04 0.03 270 / 0.34);
+    color-scheme: dark;
+    --color-bg: #030b22;
+    --color-text: #f3f7ff;
+    --color-text-muted: #c7d5e8;
+    --color-brand: #9ccaff;
+    --color-button-text: #071637;
+    --color-surface: #0a1833;
+    --color-surface-strong: #102342;
+    --color-border: #233658;
+    --color-nav: rgb(9 18 43 / .94);
+    --color-focus: #b1d8ff;
+    --color-danger: #ffabb6;
+    --color-glow: #112c5b;
+    --color-sky: #01041b;
 }
-
 @theme inline {
+    --font-sans: var(--font-ui);
+    --color-primary: var(--color-brand);
     --color-background: var(--color-bg);
     --color-foreground: var(--color-text);
-    --color-card: var(--color-surface);
-    --color-card-foreground: var(--color-text);
-    --color-primary: var(--color-brand);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-secondary: var(--color-surface-muted);
-    --color-secondary-foreground: var(--color-text);
-    --color-muted: var(--color-surface-muted);
-    --color-muted-foreground: var(--color-text-muted);
-    --color-border: var(--color-border);
-    --color-input: var(--color-surface-strong);
-    --color-ring: var(--color-focus);
-    --font-sans: var(--font-ui);
-    --radius-sm: var(--radius-sm);
-    --radius-md: var(--radius-md);
-    --radius-lg: var(--radius-lg);
 }
-
-@layer base {
-    * { border-color: var(--color-border); }
-    body { color: var(--color-text); background: var(--color-bg); }
-}
+@media (max-width: 700px) { :root { --section-space: 48px; } }

@@ -1,69 +1,41 @@
 @import "tailwindcss";
-
 @custom-variant dark (&:where(.dark, .dark *));
-
 @import "./styles/tokens.css";
 @import "./styles/utilities.css";
-@import "./styles/navbar.css";
 @import "./styles/backgrounds.css";
+@import "./styles/navbar.css";
+@import "./styles/devices.css";
+@import "./styles/landscape.css";
 @import "./styles/hero.css";
 @import "./styles/home.css";
-@import "./styles/interior.css";
+@import "./styles/process.css";
+@import "./styles/proof.css";
 @import "./styles/services.css";
-@import "./styles/contact.css";
 @import "./styles/portfolio.css";
+@import "./styles/contact.css";
 @import "./styles/footer.css";
-@import "./styles/cohesive.css";
+
+@property --scene-sky-top { syntax: "<color>"; inherits: true; initial-value: #0750de; }
+@property --scene-sky-bottom { syntax: "<color>"; inherits: true; initial-value: #5688e1; }
+@property --paper-top { syntax: "<color>"; inherits: true; initial-value: #d9eaff; }
+@property --paper-mid { syntax: "<color>"; inherits: true; initial-value: #edf5ff; }
+@property --paper-base { syntax: "<color>"; inherits: true; initial-value: #f8fbff; }
+@property --paper-bottom { syntax: "<color>"; inherits: true; initial-value: #ffffff; }
 
 @layer base {
-  html {
-    overflow-x: hidden;
-  }
-
-  body {
-    @apply min-h-screen bg-background font-sans text-foreground antialiased;
-    overflow-x: hidden;
-    background: var(--color-bg);
-    transition: background-color 900ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .dark body {
-    background: var(--color-bg);
-  }
-
-  #root {
-    min-height: 100vh;
-  }
-
-  .ms-route-loading {
-    min-height: 100svh;
-    background: var(--color-bg);
-  }
-
-  img {
-    display: block;
-    max-width: 100%;
-  }
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  button {
-    cursor: pointer;
-  }
-
-  button:disabled { cursor: not-allowed; opacity: 0.68; }
-
-  :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 3px; }
-
-  [dir="rtl"] {
-    font-family: var(--font-arabic);
-  }
-
-  [dir="ltr"] {
-    font-family: var(--font-english);
-  }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 130px; scrollbar-gutter:stable; }
+    body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-ui); -webkit-font-smoothing: antialiased; transition:background-color 1.3s,color .6s; }
+    #root { min-height: 100vh; }
+    h1, h2, h3, p { margin: 0; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; }
+    button:disabled { cursor: not-allowed; opacity: .45; }
+    :focus-visible { outline: 2px solid var(--color-brand); outline-offset: 5px; }
+    ::selection { background: var(--color-brand); color: var(--color-button-text); }
+    [dir="rtl"] { --font-ui: "Cairo", sans-serif; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } }
 }
 

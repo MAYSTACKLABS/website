@@ -5,6 +5,23 @@
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/src/assets/logos/white.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    (() => {
+      try {
+        const requested = new URLSearchParams(location.search).get('theme');
+        const saved = localStorage.getItem('theme');
+        const dark = requested === 'dark' || (requested !== 'light' && saved !== 'light' && (saved === 'dark' || matchMedia('(prefers-color-scheme: dark)').matches));
+        document.documentElement.classList.toggle('dark', dark);
+        document.documentElement.dataset.pageSurface = location.pathname === '/' || location.pathname === '/contact' ? 'sky' : 'paper';
+      } catch {}
+    })();
+  </script>
+  <style>
+    html,body,#root{min-height:100%;margin:0;background:#d9eaff;color-scheme:light}
+    html[data-page-surface="sky"],html[data-page-surface="sky"] body,html[data-page-surface="sky"] #root{background:#0750de}
+    html.dark,html.dark body,html.dark #root{background:#030b22;color-scheme:dark}
+    html.dark[data-page-surface="sky"],html.dark[data-page-surface="sky"] body,html.dark[data-page-surface="sky"] #root{background:#01041b}
+  </style>
   <title>Maystack | Websites, Apps &amp; Business Platforms</title>
   <meta name="description" content="Maystack designs and develops polished websites, mobile apps, and custom business platforms for ambitious teams." />
   <link rel="canonical" />
@@ -24,12 +41,10 @@
       "@type": "ProfessionalService",
       "name": "Maystack",
       "description": "Product strategy, interface design, web development, mobile apps, and custom business platforms.",
-      "email": "mailto:contact@mestack.com",
+      "email": "mailto:contact@maystack.net",
       "areaServed": "Worldwide"
     }
   </script>
-  <script src="https://mcp.figma.com/mcp/html-to-design/capture.js" async></script>
-
 </head>
 
 <body>

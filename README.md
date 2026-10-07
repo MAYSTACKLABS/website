@@ -1,73 +1,36 @@
-# React + TypeScript + Vite
+# Maystack website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React, TypeScript, and Vite. English and Arabic, with light and dark themes.
 
-Currently, two official plugins are available:
+## Development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `npm install`
+- `npm run dev` — local preview.
+- `npm run build` — type check and production build.
+- `npm run lint` — source checks.
 
-## React Compiler
+## Source structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `src/app/` — routes, application entry, providers.
+- `src/components/` — shared navigation, footer, and layout.
+- `src/components/shared/` — reusable device mockups, illustrated landscape, process, and CTA.
+- `src/pages/` — route components and homepage sections.
+- `src/data/` — project records, case studies, and service content.
+- `src/config/site.ts` — email, WhatsApp, and company details.
+- `src/context/` — persistent language and theme settings.
+- `src/styles/` — design tokens plus one stylesheet per feature; imported once by `src/index.css`.
+- `src/assets/` — brand, original illustrated landscape, and actual project images.
+- `docs/design-direction.md` — user-approved reference hierarchy and visual constraints.
+- `screenshots/` — ignored local QA captures and reports; never part of the public build.
 
-## Expanding the ESLint configuration
+## Editing content
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Change project information in `src/data/projectsData.ts` and story/live-site information in `src/data/projectCaseStudies.ts`. Change service descriptions in `src/data/services.ts`. Do not scatter contact addresses through page components.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+The contact form posts to FormSubmit using the address in `src/config/site.ts`. The owner must activate/verify that destination inbox with the service. Local QA mocks delivery; it does not verify receipt.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Visual constraints
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Follow the supplied Figma design, not a new visual identity. Blue day sky, navy night sky, white condensed hero typography, original illustrated mountains/clouds, and static device previews. Preserve the approved portfolio grid. No green rebranding, recurring mountain stamps, or independent section background panels.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Approved customer quotes are required before adding testimonials. No placeholder customer claims should be published.

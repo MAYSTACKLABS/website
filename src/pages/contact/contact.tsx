@@ -1,11 +1,12 @@
 import { type FormEvent, useMemo, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, Mail, MessageCircle, Send } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext.tsx";
-import mountains from "../../assets/hero/optimized/mountains.webp";
-import cloudBank from "../../assets/hero/optimized/cloud-bank.webp";
+import Landscape from "../../components/shared/Landscape.tsx";
+import { site } from "../../config/site.ts";
+import { usePageMetadata } from "../../hooks/usePageMetadata.ts";
 
-const email = "contact@mestack.com";
-const whatsappNumber = "905019565125";
+const email = site.email;
+const whatsappNumber = site.whatsapp;
 
 type Answers = {
     intent: string;
@@ -14,6 +15,7 @@ type Answers = {
     timeline: string;
     topic: string;
     name: string;
+    phone: string;
     email: string;
     message: string;
 };
@@ -25,6 +27,7 @@ const initialAnswers: Answers = {
     timeline: "",
     topic: "",
     name: "",
+    phone: "",
     email: "",
     message: "",
 };
@@ -41,6 +44,7 @@ function Choice({ value, label, selected, onSelect }: ChoiceProps) {
         <button
             type="button"
             className={selected ? "contact-choice is-selected" : "contact-choice"}
+            aria-pressed={selected}
             onClick={() => onSelect(value)}
         >
             <span>{label}</span>
@@ -51,6 +55,7 @@ function Choice({ value, label, selected, onSelect }: ChoiceProps) {
 
 export default function Contact() {
     const { lang } = useLanguage();
+    usePageMetadata({ title: lang === "ar" ? "تواصل معنا | مايستاك" : "Start a project | Maystack", description: lang === "ar" ? "شاركنا فكرتك لنحدد الخطوة التالية." : "Tell us about your idea and we will help shape the next step." });
     const [step, setStep] = useState(0);
     const [answers, setAnswers] = useState<Answers>(initialAnswers);
     const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -98,7 +103,8 @@ export default function Contact() {
                 headers: { Accept: "application/json" },
                 body: data,
             });
-            if (!response.ok) throw new Error("Unable to send form");
+            const result = await response.json();
+            if (!response.ok || (result.success !== true && result.success !== "true")) throw new Error("Unable to send form");
             setFormStatus("success");
         } catch {
             setFormStatus("error");
@@ -200,11 +206,15 @@ export default function Contact() {
                 <div className="contact-final-fields">
                     <label>
                         <span>{lang === "ar" ? "الاسم" : "Name"}</span>
-                        <input required autoComplete="name" value={answers.name} onChange={(event) => update("name", event.target.value)} />
+                        <input required name="name" autoComplete="name" value={answers.name} onChange={(event) => update("name", event.target.value)} />
+                    </label>
+                    <label>
+                        <span>{lang === "ar" ? "رقم الهاتف (اختياري)" : "Phone number (optional)"}</span>
+                        <input name="phone" type="tel" autoComplete="tel" dir="ltr" value={answers.phone} onChange={(event) => update("phone", event.target.value)} />
                     </label>
                     <label>
                         <span>{lang === "ar" ? "البريد الإلكتروني" : "Email"}</span>
-                        <input required type="email" autoComplete="email" value={answers.email} onChange={(event) => update("email", event.target.value)} />
+                        <input required name="email" type="email" autoComplete="email" value={answers.email} onChange={(event) => update("email", event.target.value)} />
                     </label>
                     <label>
                         <span>{lang === "ar" ? "أي تفاصيل إضافية؟ (اختياري)" : "Anything else we should know? (optional)"}</span>
@@ -217,36 +227,34 @@ export default function Contact() {
 
     if (formStatus === "success") {
         return (
-            <main className="contact-experience contact-success-view">
+            <div className="contact-experience contact-success-view">
+                <Landscape className="contact-landscape" orb={false} />
                 <div className="contact-success-panel">
                     <span><Check aria-hidden="true" /></span>
                     <h1>{lang === "ar" ? "وصلت رسالتك." : "Your message is on its way."}</h1>
                     <p>{lang === "ar" ? "سنراجع التفاصيل ونرسل لك خطوة تالية واضحة قريباً." : "We’ll review the details and reply with a clear next step."}</p>
                 </div>
-            </main>
+            </div>
         );
     }
 
     return (
-        <main className="contact-experience">
-            <div className="contact-sky" aria-hidden="true" />
-            <img className="contact-mountains" src={mountains} alt="" />
-            <img className="contact-cloud-bank" src={cloudBank} alt="" />
+        <div className="contact-experience">
+            <Landscape className="contact-landscape" orb={false} />
 
             <div className="contact-layout ms-container">
                 <aside className="contact-intro ms-animate">
-                    <p className="contact-kicker">{lang === "ar" ? "تواصل معنا" : "Contact Maystack"}</p>
-                    <h1>{lang === "ar" ? "لنصنع شيئاً يستحق الإطلاق." : "Let’s build something worth launching."}</h1>
+                    <h1>{lang === "ar" ? "لنبنِ معاً شيئاً يستحق الإطلاق." : "Let’s build something worth launching."}</h1>
                     <p>{copy.intro}</p>
                     <div className="contact-direct-links">
-                        <a href={`mailto:${email}`}><Mail aria-hidden="true" /><span><small>Email</small>{email}</span></a>
-                        <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /><span><small>WhatsApp</small>+90 501 956 51 25</span></a>
+                        <a href={`mailto:${email}`}><Mail aria-hidden="true" /><span><small>{lang === "ar" ? "راسلنا عبر البريد" : "Email us"}</small><span dir="ltr">{email}</span></span></a>
+                        <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" /><span><small>{lang === "ar" ? "تحدث معنا على واتساب" : "Chat on WhatsApp"}</small><span dir="ltr">{site.phoneLabel}</span></span></a>
                     </div>
                 </aside>
 
                 <form className="contact-wizard ms-animate" onSubmit={submitForm}>
-                    <div className="contact-progress" aria-label={`${Math.round(progress)}% complete`}><span style={{ width: `${progress}%` }} /></div>
-                    <div className="contact-step" key={`${answers.intent}-${step}`}>{renderStep()}</div>
+                    <div className="contact-progress" role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100} aria-label={lang === "ar" ? "تقدم الطلب" : "Enquiry progress"}><span style={{ width: `${progress}%` }} /></div>
+                    <div className="contact-step" aria-live="polite" key={`${answers.intent}-${step}`}>{renderStep()}</div>
 
                     <div className="contact-actions">
                         {step > 0 ? (
@@ -270,7 +278,7 @@ export default function Contact() {
                     {formStatus === "error" ? <p className="contact-error" role="alert">{lang === "ar" ? "تعذر الإرسال. استخدم البريد أو واتساب." : "Sending failed. Please use email or WhatsApp."}</p> : null}
                 </form>
             </div>
-        </main>
+        </div>
     );
 }
 

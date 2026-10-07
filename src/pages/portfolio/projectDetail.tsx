@@ -1,146 +1,32 @@
-import { type CSSProperties } from "react";
-import { ArrowLeft, ArrowUpRight, CheckCircle2, Image, MonitorSmartphone } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext.tsx";
-import { projectCaseStudies } from "./projectCaseStudies.ts";
-import { getProject } from "./projectsData.ts";
+import { projectCaseStudies } from "../../data/projectCaseStudies.ts";
+import { getProject } from "../../data/projectsData.ts";
 import { usePageMetadata } from "../../hooks/usePageMetadata.ts";
-import laptopFrame from "../../assets/generated/laptop-frame-v2.png";
-import phoneFrame from "../../assets/generated/phone-frame-v2.png";
+import DeviceShowcase from "../../components/shared/DeviceShowcase.tsx";
+import PhoneMockup from "../../components/shared/PhoneMockup.tsx";
+import ProjectSummary from "../../components/shared/ProjectSummary.tsx";
 
 export default function ProjectDetail() {
     const { slug } = useParams();
     const { lang } = useLanguage();
-    const project = getProject(slug);
-    const caseStudy = slug ? projectCaseStudies[slug] : undefined;
-
-    usePageMetadata({
-        title: project ? `${project.title[lang]} Case Study | Maystack` : "Project not found | Maystack",
-        description: project?.intro[lang] ?? "Explore Maystack website, app, and business platform projects.",
-    });
-
-    if (!project || !caseStudy) {
-        return <Navigate to="/portfolio" replace />;
-    }
-
-    return (
-        <div className="ms-page project-detail-page" style={{ "--project-accent": project.accent } as CSSProperties}>
-            <section className="project-detail-hero px-5 pb-12 pt-24 md:pb-16 md:pt-28">
-                <div className="ms-container">
-                    <Link to="/portfolio" className="project-back-link">
-                        <ArrowLeft className="h-4 w-4" />
-                        {lang === "ar" ? "العودة للأعمال" : "Back to work"}
-                    </Link>
-
-                    <div className="project-detail-showcase-grid mt-8">
-                        <div className="project-detail-intro">
-                            <h1>{project.title[lang]}</h1>
-                            <p>{project.intro[lang]}</p>
-                            {caseStudy.liveUrl ? (
-                                <a className="project-top-live" href={caseStudy.liveUrl} target={caseStudy.liveUrl.startsWith("http") ? "_blank" : undefined} rel={caseStudy.liveUrl.startsWith("http") ? "noreferrer" : undefined}>
-                                    {lang === "ar" ? "عرض الموقع مباشرة" : "View live site"}<ArrowUpRight aria-hidden="true" />
-                                </a>
-                            ) : null}
-                        </div>
-                        <div className="project-detail-cover">
-                            {caseStudy.liveUrl ? (
-                                <a className="project-device-laptop" href={caseStudy.liveUrl} target={caseStudy.liveUrl.startsWith("http") ? "_blank" : undefined} rel={caseStudy.liveUrl.startsWith("http") ? "noreferrer" : undefined} aria-label={lang === "ar" ? "فتح الموقع مباشرة" : "Open live site"}>
-                                    <span className="project-device-laptop-screen"><img src={project.cover} alt={project.title[lang]} decoding="async" /></span>
-                                    <img className="project-device-laptop-frame" src={laptopFrame} alt="" aria-hidden="true" />
-                                </a>
-                            ) : (
-                                <div className="project-device-laptop">
-                                    <span className="project-device-laptop-screen"><img src={project.cover} alt={project.title[lang]} decoding="async" /></span>
-                                    <img className="project-device-laptop-frame" src={laptopFrame} alt="" aria-hidden="true" />
-                                </div>
-                            )}
-                            <div className="project-device-phone" aria-label={lang === "ar" ? "معاينة الموبايل" : "Mobile preview"}>
-                                <span className="project-device-phone-screen"><img src={project.mobileImages[0]} alt="" /></span>
-                                <img className="project-device-phone-frame" src={phoneFrame} alt="" aria-hidden="true" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="px-5 pb-14">
-                <div className="ms-container">
-                    <div className="project-case-study-grid">
-                        {(["problem", "solution", "result"] as const).map((section) => {
-                            const labels = {
-                                problem: { en: "Problem", ar: "المشكلة" },
-                                solution: { en: "Solution", ar: "الحل" },
-                                result: { en: "Result", ar: "النتيجة" },
-                            };
-                            const titles = {
-                                problem: { en: "What needed to change", ar: "ما الذي كان يحتاج إلى حل؟" },
-                                solution: { en: "What we built", ar: "ما الذي بنيناه" },
-                                result: { en: "Why it matters", ar: "لماذا يهم ذلك" },
-                            };
-
-                            return (
-                                <article className="project-detail-copy" key={section}>
-                                    <span className="project-case-label">{labels[section][lang]}</span>
-                                    <h2>{titles[section][lang]}</h2>
-                                    <p>{caseStudy[section][lang]}</p>
-                                </article>
-                            );
-                        })}
-                    </div>
-
-                    <div className="project-detail-overview mt-5">
-                        <div className="project-detail-copy">
-                            <h2>{lang === "ar" ? "عن المشروع" : "Project overview"}</h2>
-                            <p>{project.details[lang]}</p>
-                            <div className="project-technology-list">
-                                {caseStudy.technologies.map((technology) => <span key={technology}>{technology}</span>)}
-                            </div>
-                        </div>
-
-                        <div className="project-detail-highlights">
-                            <div className="project-panel-heading">
-                                <MonitorSmartphone className="h-5 w-5" />
-                                <span>{lang === "ar" ? "أهم عناصر المشروع" : "What mattered most"}</span>
-                            </div>
-                            {project.highlights.map((highlight) => (
-                                <div key={highlight.en} className="project-highlight">
-                                    <CheckCircle2 className="h-5 w-5" />
-                                    <span>{highlight[lang]}</span>
-                                </div>
-                            ))}
-                            {caseStudy.testimonial ? <blockquote className="project-testimonial-note">{caseStudy.testimonial[lang]}</blockquote> : null}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section className="px-5 pb-20">
-                <div className="ms-container">
-                    <div className="project-gallery-header">
-                        <div className="project-panel-heading">
-                            <Image className="h-5 w-5" />
-                            <span>{lang === "ar" ? "المعرض" : "Gallery"}</span>
-                        </div>
-                        <h2>{lang === "ar" ? "لقطات من التجربة" : "Screens from the build"}</h2>
-                        <p>{lang === "ar" ? "عرض واضح لشاشات الكمبيوتر والموبايل من داخل المشروع." : "Desktop and mobile views presented with room to inspect the work."}</p>
-                    </div>
-                    <div className="project-desktop-gallery">
-                        {project.desktopImages.map((image, index) => (
-                            <div key={image} className="project-desktop-shot">
-                                <img src={image} alt={`${project.title[lang]} desktop ${index + 1}`} loading="lazy" decoding="async" />
-                            </div>
-                        ))}
-                    </div>
-                    <div className="project-mobile-gallery">
-                        {project.mobileImages.map((image, index) => (
-                            <div key={image} className="project-phone-frame">
-                                <img src={image} alt={`${project.title[lang]} mobile ${index + 1}`} loading="lazy" decoding="async" />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-        </div>
-    );
+    const project=getProject(slug);
+    const study=slug?projectCaseStudies[slug]:undefined;
+    usePageMetadata({title:project?`${project.title[lang]} | Maystack`:"Selected work | Maystack",description:project?.intro[lang]??"Explore our work."});
+    if(!project||!study) return <Navigate to="/portfolio" replace />;
+    return <div className="project-detail-page">
+        <header className="ms-container project-intro">
+            <div className="project-topbar"><Link className="text-link" to="/portfolio"><ArrowLeft aria-hidden="true" />{lang==="ar"?"كل المشاريع":"Back to work"}</Link>{study.liveUrl&&<a className="button button-secondary" href={study.liveUrl} target={study.liveUrl.startsWith("http")?"_blank":undefined} rel={study.liveUrl.startsWith("http")?"noreferrer":undefined}>{lang==="ar"?"عرض الموقع":"View live site"}<ArrowUpRight aria-hidden="true" /></a>}</div>
+            <div className="project-intro-grid"><div><h1>{project.title[lang]}</h1><ProjectSummary slug={project.slug} /></div><DeviceShowcase desktop={project.desktopImages[0]} mobile={project.mobileImages[0]} name={project.title[lang]} href={study.liveUrl} priority /></div>
+        </header>
+        <section className="ms-container project-story-grid">{([{key:"problem",en:"The challenge",ar:"التحدي"},{key:"solution",en:"Our approach",ar:"منهجنا"},{key:"result",en:"The outcome",ar:"النتيجة"}] as const).map(({key,en,ar},index)=><article key={key}><p className="eyebrow">0{index+1}</p><h2>{lang==="ar"?ar:en}</h2><p>{study[key][lang]}</p></article>)}</section>
+        <section className="ms-container project-overview section-space"><div><h2>{lang==="ar"?"التفاصيل تصنع الفرق.":"The details make the difference."}</h2><p>{project.details[lang]}</p></div><ul>{project.highlights.map(item=><li key={item.en}><Check aria-hidden="true" />{item[lang]}</li>)}</ul></section>
+        <section className="ms-container project-gallery">
+            <div className="section-heading"><div><p className="eyebrow">{lang==="ar"?"داخل التجربة":"Inside the experience"}</p><h2>{lang==="ar"?"شاهد العمل عن قرب.":"See the work up close."}</h2></div></div>
+            <div className="project-desktop-gallery" role="region" aria-label={lang === "ar" ? "معرض لقطات المشروع" : "Project screenshot gallery"}>{project.desktopImages.map((image,index)=><a href={image} target="_blank" rel="noreferrer" key={image} aria-label={lang==="ar"?`افتح لقطة ${index+1}`:`Open screenshot ${index+1}`}><img src={image} alt={`${project.title[lang]} — desktop ${index+1}`} loading="lazy" /></a>)}</div>
+            <div className="project-mobile-gallery" role="region" aria-label={lang === "ar" ? "معرض شاشات الموبايل" : "Mobile screenshot gallery"}>{project.mobileImages.map((image,index)=><a href={image} target="_blank" rel="noreferrer" key={image} aria-label={`Open mobile screenshot ${index+1}`}><PhoneMockup image={image} name={`${project.title[lang]} — mobile ${index+1}`} /></a>)}</div>
+        </section>
+    </div>;
 }
 

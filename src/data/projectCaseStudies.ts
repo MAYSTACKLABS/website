@@ -27,6 +27,7 @@ export const projectCaseStudies: Record<string, ProjectCaseStudy> = {
         liveUrl: "/",
     },
     snowball: {
+        liveUrl: "https://sbscholar.org",
         problem: {
             en: "Student tasks, progress, and reviews were difficult to follow when information was spread across separate workflows and dense screens.",
             ar: "كان من الصعب متابعة مهام الطلاب وتقدمهم ومراجعاتهم عندما كانت المعلومات موزعة بين مسارات وشاشات متعددة.",

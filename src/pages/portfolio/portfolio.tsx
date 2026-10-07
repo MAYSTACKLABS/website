@@ -1,82 +1,33 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useTranslation } from "react-i18next";
 import { useLanguage } from "../../context/LanguageContext.tsx";
-import { type ProjectKind, projects } from "./projectsData.ts";
-import { projectCaseStudies } from "./projectCaseStudies.ts";
-import FlightCta from "../home/FlightCta.tsx";
+import { type ProjectKind, projects } from "../../data/projectsData.ts";
+import DeviceShowcase from "../../components/shared/DeviceShowcase.tsx";
+import { projectBriefs } from "../../data/projectBriefs.ts";
+import { usePageMetadata } from "../../hooks/usePageMetadata.ts";
 
-type FilterKey = "all" | ProjectKind;
-
-const filters: Array<{ key: FilterKey; label: { en: string; ar: string } }> = [
-    { key: "all", label: { en: "All Projects", ar: "كل المشاريع" } },
-    { key: "website", label: { en: "Websites", ar: "المواقع" } },
-    { key: "platform", label: { en: "Platforms", ar: "المنصات" } },
-];
-
-const Portfolio = () => {
-    const { t } = useTranslation();
+type Filter = "all" | ProjectKind;
+export default function Portfolio() {
     const { lang } = useLanguage();
-    const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
-    const visibleProjects = useMemo(
-        () => activeFilter === "all" ? projects : projects.filter((project) => project.kinds.includes(activeFilter)),
-        [activeFilter],
-    );
+    const [filter,setFilter] = useState<Filter>("all");
+    const ordered=[...projects.filter(p=>p.slug!=="maystack"),...projects.filter(p=>p.slug==="maystack")];
+    const visible=ordered.filter(p=>filter==="all"||p.kinds.includes(filter));
+    usePageMetadata({title:lang==="ar"?"أعمالنا | مايستاك":"Selected work | Maystack",description:lang==="ar"?"اكتشف المواقع والمنصات التي صممناها وبنيناها.":"Explore the websites and platforms we have designed and built."});
+    return <div className="portfolio-page">
+        <header className="ms-container page-intro">
+            <h1>{lang==="ar"?"أفكار طموحة. منتجات حقيقية.":"Ambitious ideas. Real world products."}</h1>
+            <p>{lang==="ar"?"مواقع ومنصات صممت بعناية وبنيت لتخدم الناس الذين يستخدمونها.":"Websites and platforms, thoughtfully designed and built around the people who use them."}</p>
+            <div className="portfolio-filters" aria-label={lang==="ar"?"تصفية المشاريع":"Filter projects"}>{([{key:"all",en:"All work",ar:"كل الأعمال"},{key:"website",en:"Websites",ar:"المواقع"},{key:"platform",en:"Platforms",ar:"المنصات"}] as const).map(({key,en,ar})=><button type="button" aria-pressed={filter===key} className={filter===key?"is-selected":""} onClick={()=>setFilter(key)} key={key}>{lang==="ar"?ar:en}<span>{key==="all"?projects.length:projects.filter(p=>p.kinds.includes(key)).length}</span></button>)}</div>
+        </header>
+        <section key={filter} className="ms-container portfolio-grid" aria-label={lang==="ar"?"المشاريع":"Projects"}>{visible.map((project)=>
+            <Link className="portfolio-project" to={`/portfolio/${project.slug}`} key={project.slug}>
+                <div className="portfolio-project-image"><DeviceShowcase desktop={project.desktopImages[0]} mobile={project.mobileImages[0]} name={project.title[lang]} /><span className="portfolio-project-arrow"><ArrowUpRight aria-hidden="true" /></span></div>
+                <div className="portfolio-project-heading"><h2>{project.title[lang]}</h2></div>
+                <p>{projectBriefs[project.slug]?.work[lang]}</p>
+            </Link>
+        )}</section>
 
-    return (
-        <div className="ms-page portfolio-page" id="work">
-            <section className="portfolio-hero ms-animate">
-                <div className="ms-container">
-                    <p className="portfolio-kicker">{lang === "ar" ? "أعمال مختارة" : "Selected work"}</p>
-                    <h1>
-                        {lang === "ar" ? "منتجات صممت لتجعل الخطوة التالية واضحة." : "Products designed to make the next move obvious."}
-                    </h1>
-                    <p className="portfolio-intro">
-                        {t("portfolio.subtitle")}
-                    </p>
-                    <div className="portfolio-filter-row">
-                        {filters.map((filter) => (
-                            <button
-                                key={filter.key}
-                                type="button"
-                                onClick={() => setActiveFilter(filter.key)}
-                                className={activeFilter === filter.key ? "ms-filter is-selected" : "ms-filter"}
-                            >
-                                {filter.label[lang]}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            <section className="portfolio-work-list-section">
-                <div className="portfolio-work-list ms-container">
-                    {visibleProjects.map((project, index) => (
-                        <Link
-                            key={project.slug}
-                            to={`/portfolio/${project.slug}`}
-                            className="portfolio-work-row"
-                        >
-                            <div className="portfolio-work-visual" data-index={String(index + 1).padStart(2, "0")}>
-                                <img src={project.cover} alt={project.title[lang]} loading="eager" decoding="async" />
-                            </div>
-                            <div className="portfolio-work-copy">
-                                <span>{project.category[lang]}</span>
-                                <h2>{project.title[lang]}</h2>
-                                <p>{project.intro[lang]}</p>
-                                <small>{lang === "ar" ? "النتيجة" : "Outcome"}</small>
-                                <p>{projectCaseStudies[project.slug].result[lang]}</p>
-                                <div className="portfolio-work-link">{lang === "ar" ? "عرض دراسة الحالة" : "View case study"}<ArrowUpRight aria-hidden="true" /></div>
-                            </div>
-                        </Link>
-                    ))}
-                </div>
-            </section>
-            <FlightCta />
-        </div>
-    );
-};
-
-export default Portfolio;
+    </div>;
+}
 
