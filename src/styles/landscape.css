@@ -18,37 +18,34 @@
     @keyframes scene-arrive { from { transform:translate3d(0,34px,0); } to { transform:translate3d(0,0,0); } }
     @keyframes orb-arrive { from { transform:translate3d(-50%,28px,0) scale(.94); opacity:.55; } to { transform:translate3d(-50%,0,0) scale(1); opacity:1; } }
     .project-cta { position:relative; isolation:isolate; padding:64px 0; }
-    .project-cta.is-scenic { min-height:620px; padding:220px 0 240px; }
+    .project-cta.is-scenic { min-height:620px; padding:64px 0 340px; }
     .project-cta.is-scenic .project-cta-content { color:var(--color-text); --color-text-muted:var(--color-text); }
     .project-cta.is-scenic .project-cta-content > p { position:relative; }
     .project-cta.is-scenic .button { background:white; border-color:white; color:#071637; }
     .project-cta.is-scenic .button-secondary { background:#bddbff; border-color:#bddbff; color:#071637; }
     .project-cta-content { position:relative; z-index:4; display:flex; flex-direction:column; align-items:center; text-align:center; }
-    .cta-scenic-heading { position:absolute; z-index:1; top:26px; inset-inline:20px; text-align:center; }
-    .project-cta .cta-scenic-heading h2 { margin:20px auto 0; max-width:760px; font-family:var(--font-ui); font-weight:400; font-size:clamp(42px,4.6vw,66px); }
+    .project-cta-content h2 { max-width:760px; font-family:var(--font-ui); font-weight:400; font-size:clamp(42px,4.6vw,66px); }
     .project-cta .eyebrow { justify-content:center; margin-bottom:20px; }
-    .project-cta h2 { font-family:var(--font-display); font-size:clamp(50px,6vw,82px); font-weight:600; }
     .project-cta-content > p:not(.eyebrow) { max-width:450px; margin:18px 0 25px; color:var(--color-text-muted); font-size:15px; }
-    .project-cta-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:14px; }
+    .project-cta-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-top:32px; }
     .cta-email { margin-top:20px; font-size:12px; color:var(--color-text-muted); }
-    .landscape-cta { inset:0; z-index:2; }
-    .landscape-cta .landscape-mountain { z-index:2; width:min(90%,1296px); left:50%; translate:-58% var(--mountain-depth,0px); bottom:-45px; scale:1 1.37; transform-origin:bottom; }
+    .landscape-cta { inset:auto 0 0; height:300px; z-index:2; }
+    .landscape-cta .landscape-mountain { z-index:2; width:min(90%,950px); left:50%; translate:-58% var(--mountain-depth,0px); bottom:-45px; scale:1 1.1; transform-origin:bottom; }
     .landscape-cta .landscape-orb { width:18%; left:52.4%; bottom:22%; }
     [dir="rtl"] .project-cta h2 { font-family:"Cairo",sans-serif; }
     @media(max-width:800px) {
-        .hero-landscape .landscape-mountain { width:160%; left:-37%; bottom:2%; }
-        .hero-landscape .landscape-orb { width:51%; left:56%; bottom:15%; }
+        .hero-landscape .landscape-mountain { width:min(160%,800px); left:50%; translate:-58.125% 0; bottom:2%; }
+        .hero-landscape .landscape-orb { width:min(51%,240px); left:50%; bottom:15%; }
         .hero-landscape { --cloud-width:180vw; --cloud-clearance:calc(16.8vw - var(--cloud-drop)); }
         .project-cta { padding:48px 0; }
-        .project-cta.is-scenic { min-height:520px; padding:185px 0 230px; }
-        .cta-scenic-heading { top:36px; }
-        .project-cta .cta-scenic-heading h2 { font-size:clamp(32px,7vw,48px); margin-top:12px; }
+        .project-cta.is-scenic { min-height:520px; padding:48px 0 280px; }
+        .project-cta-content h2 { font-size:clamp(32px,7vw,48px); }
         .project-cta.is-scenic .project-cta-content { color:var(--color-text); --color-text-muted:var(--color-text); }
         .project-cta.is-scenic .project-cta-content > p { position:static; margin-top:0; }
         .project-cta-content > p:not(.eyebrow) { font-size:13px; }
         .landscape-cta .landscape-mountain { width:170%; left:50%; bottom:0; }
         .landscape-cta .landscape-orb { width:39%; left:50%; bottom:19%; }
-        .landscape-cta { --cloud-width:190vw; --cloud-clearance:calc(17.73vw - var(--cloud-drop)); }
+        .landscape-cta { height:240px; --cloud-width:190vw; --cloud-clearance:calc(17.73vw - var(--cloud-drop)); }
         .project-cta .eyebrow { font-size:9px; }
     }
 }

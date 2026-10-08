@@ -1,9 +1,12 @@
-import { type FormEvent, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight, Check, Mail, MessageCircle, Send } from "lucide-react";
+import { type FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { ArrowLeft, Check, Mail, MessageCircle, Send } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext.tsx";
 import Landscape from "../../components/shared/Landscape.tsx";
 import { site } from "../../config/site.ts";
 import { usePageMetadata } from "../../hooks/usePageMetadata.ts";
+import { type CountryCode } from "libphonenumber-js/min";
+import PhoneField from "../../components/shared/PhoneField.tsx";
+import { parseContactPhone } from "../../utils/phone.ts";
 
 const email = site.email;
 const whatsappNumber = site.whatsapp;
@@ -58,7 +61,24 @@ export default function Contact() {
     usePageMetadata({ title: lang === "ar" ? "تواصل معنا | مايستاك" : "Start a project | Maystack", description: lang === "ar" ? "شاركنا فكرتك لنحدد الخطوة التالية." : "Tell us about your idea and we will help shape the next step." });
     const [step, setStep] = useState(0);
     const [answers, setAnswers] = useState<Answers>(initialAnswers);
+    const [phoneCountry, setPhoneCountry] = useState<CountryCode>("IQ");
     const [formStatus, setFormStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+    const stepRef = useRef<HTMLDivElement>(null);
+    const previousStep = useRef(0);
+    const submitting = useRef(false);
+
+    useEffect(() => {
+        if (previousStep.current !== step) {
+            const heading = stepRef.current?.querySelector("h2");
+            heading?.setAttribute("tabindex", "-1");
+            heading?.focus({ preventScroll: true });
+            const bounds = stepRef.current?.getBoundingClientRect();
+            if (bounds && (bounds.top < 110 || bounds.top > window.innerHeight / 2)) {
+                stepRef.current?.scrollIntoView({ block: "start", behavior: "instant" });
+            }
+        }
+        previousStep.current = step;
+    }, [step]);
 
     const isProject = answers.intent === "project";
     const lastStep = isProject ? 4 : 2;
@@ -67,7 +87,6 @@ export default function Contact() {
     const copy = useMemo(() => ({
         intro: lang === "ar" ? "أجب عن أسئلة قصيرة وسنجهز الخطوة التالية." : "Answer a few quick questions and we’ll prepare the right next step.",
         back: lang === "ar" ? "السابق" : "Back",
-        continue: lang === "ar" ? "التالي" : "Continue",
     }), [lang]);
 
     const update = (key: keyof Answers, value: string) => {
@@ -75,39 +94,42 @@ export default function Contact() {
     };
 
     const resetBranch = (intent: string) => {
-        setAnswers({ ...initialAnswers, intent });
+        setAnswers((current) => current.intent === intent ? current : {
+            ...current, intent, projectType: "", budget: "", timeline: "", topic: "",
+        });
+        setFormStatus("idle");
         setStep(1);
-    };
-
-    const canContinue = () => {
-        if (step === 0) return Boolean(answers.intent);
-        if (!isProject) return step === 1 ? Boolean(answers.topic) : true;
-        if (step === 1) return Boolean(answers.projectType);
-        if (step === 2) return Boolean(answers.budget);
-        if (step === 3) return Boolean(answers.timeline);
-        return true;
     };
 
     const submitForm = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (step !== lastStep || submitting.current || !answers.name.trim() || !answers.email.trim()) return;
+        const phone = answers.phone.trim() ? parseContactPhone(answers.phone, phoneCountry) : undefined;
+        if (answers.phone.trim() && !phone?.isPossible()) return;
+        submitting.current = true;
         setFormStatus("sending");
         const data = new FormData();
         Object.entries(answers).forEach(([key, value]) => data.set(key, value));
+        data.set("phone", phone?.formatInternational() || "");
         data.set("_subject", `${isProject ? "Project enquiry" : "Website question"} from ${answers.name}`);
         data.set("_template", "table");
         data.set("_captcha", "false");
+        data.set("_replyto", answers.email.trim());
 
         try {
             const response = await fetch(`https://formsubmit.co/ajax/${email}`, {
                 method: "POST",
                 headers: { Accept: "application/json" },
                 body: data,
+                signal: AbortSignal.timeout(20000),
             });
             const result = await response.json();
             if (!response.ok || (result.success !== true && result.success !== "true")) throw new Error("Unable to send form");
             setFormStatus("success");
         } catch {
             setFormStatus("error");
+        } finally {
+            submitting.current = false;
         }
     };
 
@@ -119,7 +141,7 @@ export default function Contact() {
                     value={option.value}
                     label={option.label}
                     selected={answers[key] === option.value}
-                    onSelect={(value) => update(key, value)}
+                    onSelect={(value) => { update(key, value); setFormStatus("idle"); setStep(step + 1); }}
                 />
             ))}
         </div>
@@ -208,10 +230,7 @@ export default function Contact() {
                         <span>{lang === "ar" ? "الاسم" : "Name"}</span>
                         <input required name="name" autoComplete="name" value={answers.name} onChange={(event) => update("name", event.target.value)} />
                     </label>
-                    <label>
-                        <span>{lang === "ar" ? "رقم الهاتف (اختياري)" : "Phone number (optional)"}</span>
-                        <input name="phone" type="tel" autoComplete="tel" dir="ltr" value={answers.phone} onChange={(event) => update("phone", event.target.value)} />
-                    </label>
+                    <PhoneField lang={lang} country={phoneCountry} value={answers.phone} onCountryChange={setPhoneCountry} onChange={(value) => update("phone", value)} />
                     <label>
                         <span>{lang === "ar" ? "البريد الإلكتروني" : "Email"}</span>
                         <input required name="email" type="email" autoComplete="email" value={answers.email} onChange={(event) => update("email", event.target.value)} />
@@ -254,28 +273,25 @@ export default function Contact() {
 
                 <form className="contact-wizard ms-animate" onSubmit={submitForm}>
                     <div className="contact-progress" role="progressbar" aria-valuenow={Math.round(progress)} aria-valuemin={0} aria-valuemax={100} aria-label={lang === "ar" ? "تقدم الطلب" : "Enquiry progress"}><span style={{ width: `${progress}%` }} /></div>
-                    <div className="contact-step" aria-live="polite" key={`${answers.intent}-${step}`}>{renderStep()}</div>
+                    <div ref={stepRef} className="contact-step" key={`${answers.intent}-${step}`}>{renderStep()}</div>
+                    {step < lastStep && <p className="contact-choice-hint">{lang === "ar" ? "اختر إجابة للانتقال إلى الخطوة التالية." : "Choose an answer to move to the next step."}</p>}
 
                     <div className="contact-actions">
                         {step > 0 ? (
-                            <button type="button" className="contact-back" onClick={() => setStep((current) => current - 1)}>
+                            <button type="button" className="contact-back" disabled={formStatus === "sending"} onClick={() => { setFormStatus("idle"); setStep((current) => current - 1); }}>
                                 <ArrowLeft aria-hidden="true" />{copy.back}
                             </button>
                         ) : <span />}
 
-                        {step < lastStep ? (
-                            <button type="button" className="contact-next" disabled={!canContinue()} onClick={() => setStep((current) => current + 1)}>
-                                {copy.continue}<ArrowRight aria-hidden="true" />
-                            </button>
-                        ) : (
-                            <button type="submit" className="contact-next" disabled={!answers.name || !answers.email || formStatus === "sending"}>
+                        {step === lastStep && (
+                            <button type="submit" className="contact-next" disabled={!answers.name.trim() || !answers.email.trim() || formStatus === "sending"}>
                                 {formStatus === "sending" ? (lang === "ar" ? "جارٍ الإرسال" : "Sending") : (lang === "ar" ? "أرسل الطلب" : "Send enquiry")}
                                 <Send aria-hidden="true" />
                             </button>
                         )}
                     </div>
 
-                    {formStatus === "error" ? <p className="contact-error" role="alert">{lang === "ar" ? "تعذر الإرسال. استخدم البريد أو واتساب." : "Sending failed. Please use email or WhatsApp."}</p> : null}
+                    {formStatus === "error" ? <p className="contact-error" role="alert">{lang === "ar" ? "لم نتمكن من تأكيد الإرسال. إجاباتك محفوظة هنا؛ حاول مجدداً أو " : "We couldn’t confirm delivery. Your answers are still here; try again or "}<a href={`mailto:${email}`}>{lang === "ar" ? "راسلنا بالبريد" : "email us"}</a>{lang === "ar" ? " أو " : " or "}<a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer">WhatsApp</a>.</p> : null}
                 </form>
             </div>
         </div>

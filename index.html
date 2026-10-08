@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/png" href="/src/assets/logos/white.png" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0750de" />
   <script>
     (() => {
       try {
@@ -13,14 +14,16 @@
         const dark = requested === 'dark' || (requested !== 'light' && saved !== 'light' && (saved === 'dark' || matchMedia('(prefers-color-scheme: dark)').matches));
         document.documentElement.classList.toggle('dark', dark);
         document.documentElement.dataset.pageSurface = location.pathname === '/' || location.pathname === '/contact' ? 'sky' : 'paper';
+        const sky = document.documentElement.dataset.pageSurface === 'sky';
+        document.querySelector('meta[name="theme-color"]').content = dark ? (sky ? '#01041b' : '#030b22') : (sky ? '#0750de' : '#d9eaff');
       } catch {}
     })();
   </script>
   <style>
-    html,body,#root{min-height:100%;margin:0;background:#d9eaff;color-scheme:light}
-    html[data-page-surface="sky"],html[data-page-surface="sky"] body,html[data-page-surface="sky"] #root{background:#0750de}
-    html.dark,html.dark body,html.dark #root{background:#030b22;color-scheme:dark}
-    html.dark[data-page-surface="sky"],html.dark[data-page-surface="sky"] body,html.dark[data-page-surface="sky"] #root{background:#01041b}
+    html,body,#root{min-height:100%;margin:0;background:var(--browser-background,#d9eaff);color-scheme:light;transition:none}
+    html[data-page-surface="sky"],html[data-page-surface="sky"] body,html[data-page-surface="sky"] #root{background:var(--browser-background,#0750de)}
+    html.dark,html.dark body,html.dark #root{background:var(--browser-background,#030b22);color-scheme:dark}
+    html.dark[data-page-surface="sky"],html.dark[data-page-surface="sky"] body,html.dark[data-page-surface="sky"] #root{background:var(--browser-background,#01041b)}
   </style>
   <title>Maystack | Websites, Apps &amp; Business Platforms</title>
   <meta name="description" content="Maystack designs and develops polished websites, mobile apps, and custom business platforms for ambitious teams." />

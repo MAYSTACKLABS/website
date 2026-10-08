@@ -13,6 +13,7 @@
 @import "./styles/services.css";
 @import "./styles/portfolio.css";
 @import "./styles/contact.css";
+@import "./styles/phone-field.css";
 @import "./styles/footer.css";
 
 @property --scene-sky-top { syntax: "<color>"; inherits: true; initial-value: #0750de; }

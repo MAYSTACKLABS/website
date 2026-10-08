@@ -16,6 +16,10 @@ The final multi-page AI reference is secondary inspiration, especially for the p
 
 ## Keep and avoid
 
+Mobile refinement approved on 8 October: center the hero copy, actions, mountain peak, orb, and flying logo. Keep the desktop composition. Center Start between the brand and theme control. The mobile navigation expands downward as one continuous header surface, with four links inside it. Single-choice enquiry steps advance on selection and retain Back navigation.
+
+Final direction on 8 October: the generated celestial-logo trial was rejected. Use the original circular sun and moon, retain the flying logo on desktop, and hide the flying logo and trails on mobile/tablet (800px and below). Keep the centered mobile scenery and copy. The mobile Start pill remains 32px tall with 6px top/bottom clearance inside the 44px arm and an extended tap area. Rejected images and prompts are archived locally under the ignored `screenshots/rejected-celestial/` directory, outside application source.
+
 - Keep the portfolio grid layout the user approved, real project screens, laptop presentation, and angled mobile preview.
 - Keep the email centralized as `contact@maystack.net`.
 - Use blue, navy, white, and ice-blue. Do not introduce green/teal branding.
