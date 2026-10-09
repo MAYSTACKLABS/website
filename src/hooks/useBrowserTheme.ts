@@ -10,6 +10,8 @@ export function useBrowserTheme() {
         const sky = pathname === "/" || pathname === "/contact";
         const color = theme === "dark" ? (sky ? "#01041b" : "#030b22") : (sky ? "#0750de" : "#d9eaff");
         const root = document.documentElement;
+        root.style.setProperty("--browser-background", color);
+        document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute("content", color);
         let frame = 0;
         const update = () => {
             frame = 0;
@@ -18,9 +20,7 @@ export function useBrowserTheme() {
             // Include the toolbar's changing height, rather than waiting for layout-viewport bottom.
             const footer = document.querySelector<HTMLElement>(".ms-footer");
             const atCloudEdge = Boolean(footer) && root.scrollHeight - visibleBottom < 180;
-            root.style.setProperty("--browser-background", atCloudEdge ? "#edf5ff" : color);
             root.dataset.browserCloudEdge = String(atCloudEdge);
-            document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')?.setAttribute("content", atCloudEdge ? "#edf5ff" : color);
         };
         const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
         const observer = new ResizeObserver(schedule);
@@ -39,6 +39,7 @@ export function useBrowserTheme() {
             window.removeEventListener("pageshow", schedule);
             window.visualViewport?.removeEventListener("scroll", schedule);
             window.visualViewport?.removeEventListener("resize", schedule);
+            delete root.dataset.browserCloudEdge;
         };
     }, [pathname, theme]);
 }

@@ -30,3 +30,9 @@ The owner rejected the pale browser-color workaround. Removed scroll-based color
 ## Safari photo follow-up — 9 October (supersedes the correction above)
 
 The supplied phone photo shows the dark area includes Safari's native navigation toolbar. Restored the previous mountain/cloud composition and footer crop after the cloud-only displacement separated the artwork. Browser background and theme-color now respond to the visual viewport (including toolbar expansion), with a light browser color scheme near the cloud edge. This targets the dark toolbar backdrop; website code cannot remove Safari's controls. Production build and lint pass. Actual iPhone Safari appearance remains unverified on this Windows workstation; no additional Chrome screenshots were used as Safari evidence.
+
+## Safari research follow-up — 9 October
+
+The owner reports the previous adjustment did not resolve the box. Removed the scroll-driven pale background and light color-scheme switch. On touch devices, reaching the cloud edge now disables vertical document overscroll and hides the bottom-fixed chat control (unless keyboard focus is inside it). The mountain/cloud layout is unchanged. These address two plausible mechanisms, not a confirmed reproduction of the reported box. WebKit explains browser background extensions near fixed viewport elements: https://bugs.webkit.org/show_bug.cgi?id=301756#c2. Safari supports overscroll behavior: https://webkit.org/blog/13152/webkit-features-in-safari-16-0/.
+
+A local WebKit 26.5 installation could not launch due to a runtime dependency failure. No WebKit screenshots or iPhone verification were obtained. The exact location of the remaining box and iOS version were requested; real-device confirmation remains necessary.

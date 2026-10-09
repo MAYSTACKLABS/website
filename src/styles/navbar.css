@@ -27,6 +27,10 @@
     .dark .quick-contact > a { background:white; color:#071637; box-shadow:0 10px 30px rgb(0 0 0 / .28); }
     .dark .quick-contact > a:hover { background:#eaf4ff; }
     .is-contact .quick-contact { display:none; }
+    /* Keep bottom-fixed UI out of Safari's cloud-edge background extension. */
+    @media (hover:none) and (pointer:coarse) {
+        html[data-browser-cloud-edge="true"] .quick-contact:not(:focus-within) { visibility:hidden; pointer-events:none; }
+    }
     @keyframes nav-wing-open { from { transform:scaleX(0); opacity:.7; } to { transform:scaleX(1); opacity:1; } }
     @keyframes brand-arrive { from { transform:translateY(-8px) scale(.94); opacity:.7; } to { transform:none; opacity:1; } }
     @keyframes nav-control-arrive { from { transform:translateX(var(--control-from)); opacity:0; } to { transform:translateX(0); opacity:1; } }
