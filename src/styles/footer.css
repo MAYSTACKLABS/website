@@ -1,4 +1,6 @@
 @layer components {
     .ms-footer { position:relative; padding:24px 0 0; overflow:hidden; }
-    .ms-footer .project-cta { margin-bottom:calc(-1 * var(--scene-bottom-crop)); }
+    .ms-footer .project-cta { margin-bottom:0; }
+    /* End within the solid cloud bank; its transparent lower tail stays outside the page. */
+    .ms-footer .landscape-cta { --cloud-drop:calc(var(--cloud-width) * .0755); }
 }

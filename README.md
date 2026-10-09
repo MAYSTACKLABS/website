@@ -15,7 +15,7 @@ React, TypeScript, and Vite. English and Arabic, with light and dark themes.
 - `src/components/` — shared navigation, footer, and layout.
 - `src/components/shared/` — reusable device mockups, illustrated landscape, process, and CTA.
 - `src/components/shared/PhoneField.tsx` and `src/utils/phone.ts` — country selection and shared phone parsing; styles live in `src/styles/phone-field.css`.
-- `src/hooks/useBrowserTheme.ts` — browser theme and overscroll background, including the pale footer edge.
+- `src/hooks/useBrowserTheme.ts` — browser theme matching the current page and light/dark setting.
 - `src/pages/` — route components and homepage sections.
 - `src/data/` — project records, case studies, and service content.
 - `src/config/site.ts` — email, WhatsApp, and company details.

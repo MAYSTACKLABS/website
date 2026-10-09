@@ -22,3 +22,7 @@
 ## Analytics and SEO
 
 SEO titles, descriptions, social metadata, and structured data exist. Canonical URLs now exclude theme/query parameters. No analytics integration or measurement ID was found in current source, Git history, reviewed earlier project chats, or the public homepage/entry script. Search Console account/DNS ownership is not verified. Analytics installation awaits the intended tracking ID.
+
+## Footer correction — 9 October
+
+The owner rejected the pale browser-color workaround. Removed scroll-based color matching and the footer's negative bottom margin. The shared footer now positions the opaque cloud bank at the actual page boundary, clipping its transparent tail beyond that boundary. Phone and desktop screenshots confirm the page ends inside the clouds, with no strip beneath. Build and lint pass.
