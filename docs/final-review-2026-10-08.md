@@ -26,3 +26,7 @@ SEO titles, descriptions, social metadata, and structured data exist. Canonical 
 ## Footer correction — 9 October
 
 The owner rejected the pale browser-color workaround. Removed scroll-based color matching and the footer's negative bottom margin. The shared footer now positions the opaque cloud bank at the actual page boundary, clipping its transparent tail beyond that boundary. Phone and desktop screenshots confirm the page ends inside the clouds, with no strip beneath. Build and lint pass.
+
+## Safari photo follow-up — 9 October (supersedes the correction above)
+
+The supplied phone photo shows the dark area includes Safari's native navigation toolbar. Restored the previous mountain/cloud composition and footer crop after the cloud-only displacement separated the artwork. Browser background and theme-color now respond to the visual viewport (including toolbar expansion), with a light browser color scheme near the cloud edge. This targets the dark toolbar backdrop; website code cannot remove Safari's controls. Production build and lint pass. Actual iPhone Safari appearance remains unverified on this Windows workstation; no additional Chrome screenshots were used as Safari evidence.
