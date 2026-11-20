@@ -2,7 +2,7 @@ import { ArrowUpRight, Check } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLanguage } from "../../context/LanguageContext.tsx";
 import { services } from "../../data/services.ts";
-import Process from "../../components/shared/Process.tsx";
+import { ProcessScene } from "../home/ProcessScene.tsx";
 import DeviceShowcase from "../../components/shared/DeviceShowcase.tsx";
 import MobileServiceVisual from "../../components/shared/MobileServiceVisual.tsx";
 import { usePageMetadata } from "../../hooks/usePageMetadata.ts";
@@ -23,7 +23,7 @@ export default function Services() {
                 </div>
             </section>
         )}</div>
-        <Process />
+        <ProcessScene />
     </div>;
 }
 

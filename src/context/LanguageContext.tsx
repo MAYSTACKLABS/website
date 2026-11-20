@@ -1,68 +1,7 @@
-/* eslint-disable react-refresh/only-export-components */
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
-
-type Lang = "en" | "ar";
-
-const LANG_CFG: Record<Lang, { dir: "ltr" | "rtl"; htmlLang: string; htmlClass: string }> = {
-    en: { dir: "ltr", htmlLang: "en", htmlClass: "lang-en" },
-    ar: { dir: "rtl", htmlLang: "ar", htmlClass: "lang-ar" },
-};
-
-type LanguageContextValue = {
-    lang: Lang;
-    setLang: (lang: Lang) => void;
-    toggleLang: () => void;
-};
-
-const LanguageContext = createContext<LanguageContextValue | null>(null);
-
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-    const { i18n } = useTranslation();
-
-    const [lang, setLangState] = useState<Lang>(() => {
-        const saved = localStorage.getItem("lang");
-        return saved === "ar" ? "ar" : "en";
-    });
-
-    const syncLanguage = useCallback((next: Lang) => {
-        localStorage.setItem("lang", next);
-
-        const cfg = LANG_CFG[next];
-        document.documentElement.lang = cfg.htmlLang;
-        document.documentElement.dir = cfg.dir;
-
-        document.documentElement.classList.remove(LANG_CFG.en.htmlClass, LANG_CFG.ar.htmlClass);
-        document.documentElement.classList.add(cfg.htmlClass);
-
-        // ✅ IMPORTANT: updates translations instantly
-        if (i18n.language !== next) {
-            void i18n.changeLanguage(next);
-        }
-    }, [i18n]);
-
-    const setLang = useCallback((next: Lang) => {
-        setLangState(next);
-    }, []);
-
-    useEffect(() => {
-        syncLanguage(lang);
-    }, [lang, syncLanguage]);
-
-    const value = useMemo<LanguageContextValue>(
-        () => ({
-            lang,
-            setLang,
-            toggleLang: () => setLang(lang === "en" ? "ar" : "en"),
-        }),
-        [lang, setLang]
-    );
-
-    return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
-}
+// Temporary shim while the remaining pages move to useLocale(). Deleted once they have.
+import { useLocale } from "../i18n/useLocale.ts";
 
 export function useLanguage() {
-    const ctx = useContext(LanguageContext);
-    if (!ctx) throw new Error("useLanguage must be used within LanguageProvider");
-    return ctx;
+    const { lang, toggleLang } = useLocale();
+    return { lang, toggleLang };
 }

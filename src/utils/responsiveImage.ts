@@ -1,6 +1,9 @@
 // Desktop screenshots ship in two widths: `name.webp` (1600px) and `name-800.webp`.
 // Data files import the large URL; this maps it to a srcset with the small sibling.
-const files = import.meta.glob<string>("../assets/projects/**/*.webp", { eager: true, import: "default" });
+const files = import.meta.glob<string>("../assets/projects/**/*.webp", {
+    eager: true,
+    import: "default",
+});
 
 const srcSets = new Map<string, string>();
 for (const [path, url] of Object.entries(files)) {

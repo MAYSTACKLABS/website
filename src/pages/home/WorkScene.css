@@ -1,0 +1,101 @@
+.work {
+    padding-block: var(--section);
+    overflow: clip;
+}
+
+.work__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.work__head .eyebrow {
+    margin-bottom: 1rem;
+}
+
+.work__track {
+    display: grid;
+    gap: 4rem;
+    width: min(100% - 2 * var(--gutter), var(--max));
+    margin-inline: auto;
+    padding: 0;
+    list-style: none;
+}
+
+.work__link {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.work__image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    transition: transform 0.8s var(--ease);
+}
+
+.work__link:hover .work__image {
+    transform: scale(1.015);
+}
+
+.work__meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 1.25rem;
+    align-items: baseline;
+}
+
+.work__index {
+    grid-row: span 2;
+    color: var(--accent);
+    font-size: var(--text-small);
+    font-variant-numeric: tabular-nums;
+}
+
+.work__name {
+    font-size: var(--text-title);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+/* Desktop with motion: one row, wider than the screen, moved by the pinned scroll. */
+@media (min-width: 801px) and (prefers-reduced-motion: no-preference) {
+    .work {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 100svh;
+        padding-block: 6rem 3rem;
+    }
+
+    .work__head {
+        margin-bottom: 2.5rem;
+    }
+
+    .work__viewport {
+        perspective: 1800px;
+    }
+
+    .work__track {
+        display: flex;
+        gap: 4vw;
+        width: max-content;
+        padding-inline: 19vw;
+    }
+
+    .work__card {
+        width: 62vw;
+        transform-style: preserve-3d;
+        will-change: transform, opacity;
+    }
+
+    .work__image {
+        max-height: 50svh;
+    }
+}

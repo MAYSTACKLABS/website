@@ -26,6 +26,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     useLayoutEffect(() => {
         document.documentElement.classList.toggle("dark", theme === "dark");
+        document
+            .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+            ?.setAttribute("content", theme === "dark" ? "#05070d" : "#f5f6f8");
         localStorage.setItem("theme", theme);
     }, [theme]);
 
@@ -33,7 +36,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         () => ({
             theme,
             setTheme,
-            toggleTheme: () => setTheme((current) => current === "dark" ? "light" : "dark"),
+            toggleTheme: () => setTheme((current) => (current === "dark" ? "light" : "dark")),
         }),
         [theme],
     );

@@ -1,0 +1,46 @@
+{
+    "nav": {
+        "label": "Main navigation",
+        "services": "Services",
+        "work": "Work",
+        "contact": "Contact",
+        "menu": "Menu",
+        "close": "Close",
+        "skip": "Skip to content",
+        "switchLanguage": "Switch to Arabic",
+        "switchTheme": "Switch colour theme"
+    },
+    "cta": {
+        "start": "Start a project",
+        "work": "See the work"
+    },
+    "footer": {
+        "eyebrow": "The summit",
+        "title": "Let’s build something worth launching."
+    },
+    "home": {
+        "meta": {
+            "title": "Maystack | Digital product design & development",
+            "description": "UI/UX design, mobile apps, websites, and custom platforms. One team from the first idea to launch."
+        },
+        "hero": {
+            "eyebrow": "Strategy · Design · Engineering",
+            "line1": "From idea",
+            "line2": "To altitude",
+            "lead": "Websites, apps and platforms, designed and built by one team, from the first question to launch."
+        },
+        "services": {
+            "eyebrow": "What we do",
+            "title": "One team. The full stack."
+        },
+        "work": {
+            "eyebrow": "Selected work",
+            "title": "Ideas made real.",
+            "all": "View all projects"
+        },
+        "process": {
+            "eyebrow": "How we work",
+            "title": "From the first question to a product that keeps getting better."
+        }
+    }
+}

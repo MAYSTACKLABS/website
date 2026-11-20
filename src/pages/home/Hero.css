@@ -1,0 +1,104 @@
+.hero {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 100svh;
+    padding-block: 8rem clamp(3rem, 8vh, 6rem);
+    overflow: clip;
+}
+
+/* A faint glow behind the summit: the only colour in the scene. */
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: auto -10% -30% 25%;
+    height: 80%;
+    background: radial-gradient(
+        closest-side,
+        color-mix(in srgb, var(--accent) 22%, transparent),
+        transparent
+    );
+    pointer-events: none;
+}
+
+.hero__scene {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.hero__ridge,
+.hero__flight {
+    fill: none;
+    stroke: var(--text);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    vector-effect: non-scaling-stroke;
+}
+
+.hero__ridge {
+    stroke-width: 1.25;
+    opacity: 0.45;
+}
+
+.hero__flight {
+    stroke: var(--accent);
+    stroke-width: 1.5;
+    stroke-dasharray: 2 6;
+}
+
+:root:not(.dark) .hero__bird {
+    filter: invert(1);
+}
+
+[dir="rtl"] .hero__scene {
+    transform: scaleX(-1);
+}
+
+.hero__copy {
+    position: relative;
+    display: grid;
+    gap: 1.75rem;
+}
+
+.hero__title {
+    font-family: var(--font-display);
+    font-size: var(--text-hero);
+    font-weight: 400;
+    line-height: 0.86;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+}
+
+[dir="rtl"] .hero__title {
+    font-size: calc(var(--text-hero) * 0.7);
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.hero__lead {
+    max-width: 34ch;
+    color: var(--muted);
+    font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+}
+
+.hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+/* Without motion the bird simply sits at its resting point. */
+@media (prefers-reduced-motion: reduce) {
+    .hero__bird {
+        transform: translate(1080px, 330px);
+    }
+}
+
+@media (max-width: 800px) {
+    .hero__scene {
+        opacity: 0.6;
+    }
+}

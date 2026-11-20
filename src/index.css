@@ -2,19 +2,11 @@
 @custom-variant dark (&:where(.dark, .dark *));
 @import "./styles/tokens.css";
 @import "./styles/utilities.css";
-@import "./styles/backgrounds.css";
-@import "./styles/navbar.css";
 @import "./styles/devices.css";
-@import "./styles/landscape.css";
-@import "./styles/hero.css";
-@import "./styles/home.css";
-@import "./styles/process.css";
-@import "./styles/proof.css";
 @import "./styles/services.css";
 @import "./styles/portfolio.css";
 @import "./styles/contact.css";
 @import "./styles/phone-field.css";
-@import "./styles/footer.css";
 
 @property --scene-sky-top { syntax: "<color>"; inherits: true; initial-value: #0750de; }
 @property --scene-sky-bottom { syntax: "<color>"; inherits: true; initial-value: #5688e1; }
@@ -25,7 +17,7 @@
 
 @layer base {
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 130px; scrollbar-gutter:stable; }
+    html { scrollbar-gutter: stable; }
     body { margin: 0; background: var(--color-bg); color: var(--color-text); font-family: var(--font-ui); -webkit-font-smoothing: antialiased; transition:background-color 1.3s,color .6s; }
     #root { min-height: 100vh; }
     h1, h2, h3, p { margin: 0; }

@@ -1,0 +1,129 @@
+.header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    padding-block: 1.25rem;
+    transition: transform 0.6s var(--ease);
+}
+
+.header.is-hidden:not(.is-open) {
+    transform: translateY(-110%);
+}
+
+.header__bar {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header__nav {
+    display: flex;
+    gap: 2rem;
+    margin-inline-start: auto;
+}
+
+.header__link {
+    color: var(--muted);
+    font-size: 0.9375rem;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.header__link:hover,
+.header__link.active {
+    color: var(--text);
+}
+
+.header__tools {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.header__tools button {
+    display: grid;
+    place-items: center;
+    min-width: 2.75rem;
+    height: 2.75rem;
+    padding: 0 0.75rem;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.header__tools button:hover {
+    background: var(--line);
+}
+
+.header__tools svg {
+    width: 1.1rem;
+}
+
+.header__menu {
+    display: none !important;
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.logo__mark {
+    width: 34px;
+    height: auto;
+}
+
+:root:not(.dark) .logo__mark {
+    filter: invert(1);
+}
+
+.logo__word {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* Phones: the links become a full-screen menu, one large link per line. */
+@media (max-width: 800px) {
+    .header__menu {
+        display: grid !important;
+    }
+
+    .header__nav {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        flex-direction: column;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: var(--gutter);
+        background: var(--bg);
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.5s var(--ease),
+            visibility 0.5s;
+    }
+
+    .is-open .header__nav {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .header__link {
+        font-family: var(--font-display);
+        font-size: clamp(3rem, 16vw, 5rem);
+        line-height: 1;
+        text-transform: uppercase;
+        color: var(--text);
+    }
+
+    .menu-open body {
+        overflow: hidden;
+    }
+}

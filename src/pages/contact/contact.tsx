@@ -1,8 +1,7 @@
 import { type FormEvent, useEffect, useMemo, useRef, useState } from "react";
 import { ArrowLeft, Check, Mail, MessageCircle, Send } from "lucide-react";
 import { useLanguage } from "../../context/LanguageContext.tsx";
-import Landscape from "../../components/shared/Landscape.tsx";
-import { site } from "../../config/site.ts";
+import { site } from "../../content/site.ts";
 import { usePageMetadata } from "../../hooks/usePageMetadata.ts";
 import { type CountryCode } from "libphonenumber-js/min";
 import PhoneField from "../../components/shared/PhoneField.tsx";
@@ -247,7 +246,7 @@ export default function Contact() {
     if (formStatus === "success") {
         return (
             <div className="contact-experience contact-success-view">
-                <Landscape className="contact-landscape" orb={false} />
+                
                 <div className="contact-success-panel">
                     <span><Check aria-hidden="true" /></span>
                     <h1>{lang === "ar" ? "وصلت رسالتك." : "Your message is on its way."}</h1>
@@ -259,7 +258,7 @@ export default function Contact() {
 
     return (
         <div className="contact-experience">
-            <Landscape className="contact-landscape" orb={false} />
+            
 
             <div className="contact-layout ms-container">
                 <aside className="contact-intro ms-animate">

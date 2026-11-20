@@ -1,0 +1,148 @@
+.services {
+    padding-block: var(--section);
+}
+
+.services__head {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 4rem;
+}
+
+.services__title {
+    font-size: var(--text-title);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
+
+.services__count-wrap {
+    display: none;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.services__count {
+    color: var(--text);
+}
+
+.services__list {
+    display: grid;
+    gap: 6rem;
+    padding: 0;
+    list-style: none;
+}
+
+.services__row {
+    display: grid;
+    gap: 2rem;
+}
+
+.services__item {
+    display: grid;
+    align-content: center;
+    gap: 1.25rem;
+    max-width: 30rem;
+}
+
+.services__name {
+    font-size: clamp(3rem, 6vw, 6rem);
+}
+
+.services__deliverables {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+.services__deliverables li {
+    padding: 0.35rem 0.85rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: var(--text-small);
+}
+
+.services__screen {
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: 0 40px 120px -40px rgb(0 0 0 / 0.6);
+}
+
+.services__screen img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top;
+}
+
+/* The phone service shows a phone-shaped screen. */
+.services__screen--mobile {
+    width: min(18rem, 70%);
+    justify-self: center;
+    border-radius: 2.5rem;
+    border-width: 6px;
+    border-color: color-mix(in srgb, var(--text) 14%, transparent);
+}
+
+.services__screen--mobile img {
+    aspect-ratio: 9 / 19.5;
+}
+
+/* Desktop with motion: one viewport, everything stacked in place, the timeline swaps it. */
+@media (min-width: 801px) and (prefers-reduced-motion: no-preference) {
+    .services {
+        height: 100svh;
+        padding-block: 7rem 4rem;
+    }
+
+    .services__inner {
+        display: grid;
+        grid-template-rows: auto 1fr;
+        height: 100%;
+    }
+
+    .services__head {
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        margin-bottom: 2rem;
+    }
+
+    .services__head .eyebrow {
+        grid-column: 1 / -1;
+    }
+
+    .services__count-wrap {
+        display: block;
+    }
+
+    .services__list {
+        display: grid;
+        min-height: 0;
+        perspective: 1600px;
+    }
+
+    .services__row {
+        grid-area: 1 / 1;
+        grid-template-columns: 5fr 7fr;
+        align-items: center;
+        gap: 4rem;
+        min-height: 0;
+    }
+
+    .services__screen {
+        transform-style: preserve-3d;
+        will-change: transform, opacity;
+    }
+
+    .services__screen--mobile {
+        max-height: 70svh;
+        width: auto;
+        aspect-ratio: 9 / 19.5;
+    }
+
+    .services__screen--mobile img {
+        height: 100%;
+    }
+}
