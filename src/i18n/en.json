@@ -42,5 +42,66 @@
             "eyebrow": "How we work",
             "title": "From the first question to a product that keeps getting better."
         }
+    },
+    "services": {
+        "meta": {
+            "title": "Design & development services | Maystack",
+            "description": "Product design, mobile applications, websites and custom platforms, brought together by one team."
+        },
+        "eyebrow": "Services",
+        "title": "From the first idea. To the final detail.",
+        "lead": "Design and development that see the whole picture. We help you build the right product, and make every part work together.",
+        "discuss": "Discuss your project"
+    },
+    "portfolio": {
+        "meta": {
+            "title": "Selected work | Maystack",
+            "description": "Explore the websites and platforms we have designed and built."
+        },
+        "eyebrow": "Work",
+        "title": "Ambitious ideas. Real products.",
+        "lead": "Websites and platforms, thoughtfully designed and built around the people who use them.",
+        "filterLabel": "Filter projects",
+        "filters": {
+            "all": "All work",
+            "website": "Websites",
+            "platform": "Platforms"
+        }
+    },
+    "project": {
+        "live": "View live site",
+        "back": "All projects",
+        "challenge": "The challenge",
+        "approach": "Our approach",
+        "outcome": "The outcome",
+        "gallery": "Project screens",
+        "next": "Next project"
+    },
+    "contact": {
+        "meta": {
+            "title": "Start a project | Maystack",
+            "description": "Tell us about your idea and we will help shape the next step."
+        },
+        "title": "Let’s build something worth launching.",
+        "intro": "Answer a few quick questions and we’ll prepare the right next step.",
+        "sentTitle": "Your message is on its way.",
+        "sentText": "We’ll review the details and reply with a clear next step.",
+        "emailUs": "Email",
+        "detailsTitle": "Where should we send the next step?",
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone number (optional)",
+        "country": "Country and calling code",
+        "phoneError": "Check the phone number and country code.",
+        "message": "Anything else we should know? (optional)",
+        "send": "Send enquiry",
+        "sending": "Sending…",
+        "back": "Back",
+        "sendError": "We couldn’t confirm delivery. Your answers are still here: try again, or email or WhatsApp us directly."
+    },
+    "notFound": {
+        "title": "Page not found",
+        "text": "The page may have moved or is no longer available.",
+        "home": "Back to home"
     }
 }

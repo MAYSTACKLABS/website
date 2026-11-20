@@ -1,0 +1,57 @@
+.project__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.project__story {
+    display: grid;
+    gap: 3rem;
+    padding-block: var(--section) 4rem;
+}
+
+.project__story .eyebrow {
+    margin-bottom: 1rem;
+}
+
+.project__facts {
+    display: grid;
+    gap: 1rem;
+    padding-bottom: var(--section);
+}
+
+.project__gallery {
+    display: grid;
+    gap: 3rem;
+}
+
+.project__phones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding-block: 3rem;
+}
+
+.project__phones .screen--phone {
+    width: min(16rem, 70vw);
+}
+
+.project__next {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    padding-block: var(--section);
+    text-align: center;
+}
+
+.project__next-link {
+    font-size: var(--text-display);
+    color: var(--text);
+}
+
+@media (min-width: 901px) {
+    .project__story {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}

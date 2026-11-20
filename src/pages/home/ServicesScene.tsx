@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useLocale } from "../../i18n/useLocale.ts";
 import { services } from "../../content/services.ts";
-import { Screenshot } from "../../components/ui/Screenshot.tsx";
+import { ServiceVisual } from "../../components/ServiceVisual.tsx";
 import { gsap, MOTION_DESKTOP, useGSAP } from "../../motion/gsap.ts";
 import "./ServicesScene.css";
 
@@ -78,23 +78,13 @@ export function ServicesScene() {
                             <div className="services__item">
                                 <h3 className="display services__name">{pick(service.title)}</h3>
                                 <p className="muted">{pick(service.description)}</p>
-                                <ul className="services__deliverables">
+                                <ul className="tags">
                                     {service.deliverables.map((item) => (
                                         <li key={item.en}>{pick(item)}</li>
                                     ))}
                                 </ul>
                             </div>
-                            <figure className={`services__screen services__screen--${service.id}`}>
-                                <Screenshot
-                                    src={
-                                        service.id === "mobile"
-                                            ? service.showcase.mobile[0]
-                                            : service.showcase.desktop[0]
-                                    }
-                                    alt={pick(service.showcase.title)}
-                                    sizes="(max-width: 800px) 92vw, 50vw"
-                                />
-                            </figure>
+                            <ServiceVisual service={service} className="services__screen" />
                         </li>
                     ))}
                 </ol>

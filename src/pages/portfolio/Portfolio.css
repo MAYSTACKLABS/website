@@ -1,0 +1,39 @@
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.filters button {
+    min-height: 2.5rem;
+    padding: 0 1.1rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: none;
+    font-size: 0.875rem;
+    transition:
+        background-color 0.3s,
+        color 0.3s;
+}
+
+.filters button[aria-pressed="true"] {
+    background: var(--text);
+    color: var(--bg);
+}
+
+.portfolio-grid {
+    display: grid;
+    gap: 5rem 3rem;
+    padding-bottom: var(--section);
+}
+
+@media (min-width: 901px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    /* Offset the second column for a calmer, editorial rhythm. */
+    .portfolio-grid > :nth-child(even) {
+        margin-top: 8rem;
+    }
+}

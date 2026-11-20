@@ -1,0 +1,30 @@
+.screen {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--surface);
+    box-shadow: 0 40px 120px -40px rgb(0 0 0 / 0.55);
+}
+
+.screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.screen--desktop img {
+    aspect-ratio: 16 / 10;
+}
+
+.screen--phone {
+    width: min(18rem, 70%);
+    justify-self: center;
+    border: 6px solid color-mix(in srgb, var(--text) 14%, transparent);
+    border-radius: 2.5rem;
+}
+
+.screen--phone img {
+    aspect-ratio: 9 / 19.5;
+}

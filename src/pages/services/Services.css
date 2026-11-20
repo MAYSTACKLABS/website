@@ -1,0 +1,29 @@
+.service {
+    display: grid;
+    align-items: center;
+    gap: 3rem;
+    padding-block: clamp(4rem, 8vw, 8rem);
+    border-top: 1px solid var(--line);
+}
+
+.service__copy {
+    display: grid;
+    gap: 1.25rem;
+    max-width: 30rem;
+}
+
+.service__title {
+    font-size: clamp(3rem, 6vw, 6rem);
+}
+
+@media (min-width: 901px) {
+    .service {
+        grid-template-columns: 5fr 7fr;
+        gap: 5rem;
+    }
+
+    /* Alternate sides so the page reads as a rhythm, not a list. */
+    .service:nth-of-type(even) .service__copy {
+        order: 2;
+    }
+}

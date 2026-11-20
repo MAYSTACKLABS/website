@@ -47,49 +47,6 @@
     font-size: clamp(3rem, 6vw, 6rem);
 }
 
-.services__deliverables {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    padding: 0;
-    list-style: none;
-}
-
-.services__deliverables li {
-    padding: 0.35rem 0.85rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    font-size: var(--text-small);
-}
-
-.services__screen {
-    overflow: hidden;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--surface);
-    box-shadow: 0 40px 120px -40px rgb(0 0 0 / 0.6);
-}
-
-.services__screen img {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    object-position: top;
-}
-
-/* The phone service shows a phone-shaped screen. */
-.services__screen--mobile {
-    width: min(18rem, 70%);
-    justify-self: center;
-    border-radius: 2.5rem;
-    border-width: 6px;
-    border-color: color-mix(in srgb, var(--text) 14%, transparent);
-}
-
-.services__screen--mobile img {
-    aspect-ratio: 9 / 19.5;
-}
-
 /* Desktop with motion: one viewport, everything stacked in place, the timeline swaps it. */
 @media (min-width: 801px) and (prefers-reduced-motion: no-preference) {
     .services {
@@ -136,13 +93,9 @@
         will-change: transform, opacity;
     }
 
-    .services__screen--mobile {
-        max-height: 70svh;
+    .services__screen.screen--phone {
         width: auto;
+        max-height: 70svh;
         aspect-ratio: 9 / 19.5;
-    }
-
-    .services__screen--mobile img {
-        height: 100%;
     }
 }

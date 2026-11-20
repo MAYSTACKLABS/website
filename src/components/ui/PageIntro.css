@@ -1,0 +1,14 @@
+.page-intro {
+    display: grid;
+    gap: 1.5rem;
+    padding-block: 10rem 5rem;
+}
+
+.page-intro__title {
+    max-width: 16ch;
+}
+
+.page-intro__lead {
+    max-width: 40ch;
+    font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+}

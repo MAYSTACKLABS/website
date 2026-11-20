@@ -1,4 +1,0 @@
-@layer components {
-    .ms-footer { position:relative; padding:24px 0 0; overflow:hidden; }
-    .ms-footer .project-cta { margin-bottom:calc(-1 * var(--scene-bottom-crop)); }
-}

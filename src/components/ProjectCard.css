@@ -1,0 +1,22 @@
+.project-card {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.project-card .screen {
+    margin-bottom: 0.75rem;
+}
+
+.project-card .screen img {
+    transition: transform 0.9s var(--ease);
+}
+
+.project-card:hover .screen img {
+    transform: scale(1.03);
+}
+
+.project-card__title {
+    font-size: var(--text-title);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+}
