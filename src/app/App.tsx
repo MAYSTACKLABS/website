@@ -9,6 +9,7 @@ const Portfolio = lazy(() => import("../pages/portfolio/Portfolio.tsx"));
 const Project = lazy(() => import("../pages/project/Project.tsx"));
 const Contact = lazy(() => import("../pages/contact/Contact.tsx"));
 const NotFound = lazy(() => import("../pages/not-found/NotFound.tsx"));
+const Lab = lazy(() => import("../pages/lab/Lab.tsx"));
 
 export default function App() {
     return (
@@ -22,6 +23,7 @@ export default function App() {
                             <Route path="/portfolio" element={<Portfolio />} />
                             <Route path="/portfolio/:slug" element={<Project />} />
                             <Route path="/contact" element={<Contact />} />
+                            {import.meta.env.DEV && <Route path="/__lab" element={<Lab />} />}
                             <Route path="*" element={<NotFound />} />
                         </Routes>
                     </Suspense>
