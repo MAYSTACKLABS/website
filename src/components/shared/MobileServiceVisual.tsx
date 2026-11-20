@@ -1,7 +1,7 @@
 import PhoneMockup from "./PhoneMockup.tsx";
-import appDashboard from "../../assets/projects/snowball/mobile1.png";
-import appOverview from "../../assets/projects/snowball/mobile-current.png";
-import appWorkspace from "../../assets/projects/snowball/mobile3.png";
+import appDashboard from "../../assets/projects/snowball/mobile1.webp";
+import appOverview from "../../assets/projects/snowball/mobile-current.webp";
+import appWorkspace from "../../assets/projects/snowball/mobile3.webp";
 
 /** Real product screens in the calibrated titanium iPhone frame. */
 export default function MobileServiceVisual() {

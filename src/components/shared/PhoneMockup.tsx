@@ -1,4 +1,4 @@
-import frame from "../../assets/generated/iphone-titanium-frame.png";
+import frame from "../../assets/generated/iphone-titanium-frame.webp";
 
 type Props = { image: string; name: string; priority?: boolean; className?: string };
 

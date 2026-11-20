@@ -6,6 +6,7 @@ import Process from "../../components/shared/Process.tsx";
 import DeviceShowcase from "../../components/shared/DeviceShowcase.tsx";
 import MobileServiceVisual from "../../components/shared/MobileServiceVisual.tsx";
 import { usePageMetadata } from "../../hooks/usePageMetadata.ts";
+import { screenshotSrcSet } from "../../utils/responsiveImage.ts";
 
 export default function Services() {
     const { lang } = useLanguage();
@@ -18,7 +19,7 @@ export default function Services() {
             <section className={`service-detail service-detail--${id}`} id={id} key={id}>
                 <div className="service-copy"><p className="eyebrow">0{index+1} <Icon aria-hidden="true" /></p><h2>{title[lang]}</h2><p>{description[lang]}</p><ul>{deliverables[lang].map(item=><li key={item}><Check aria-hidden="true" />{item}</li>)}</ul><Link className="text-link" to="/contact">{lang==="ar"?"لنبدأ":"Let’s make it happen"}<ArrowUpRight aria-hidden="true" /></Link></div>
                 <div className={`service-preview service-preview-${id}`}>
-                    {id==="mobile" ? <MobileServiceVisual /> : id==="web" ? <DeviceShowcase desktop={project.desktopImages[0]} mobile={project.mobileImages[0]} name={project.title[lang]} href={`/portfolio/${project.slug}`} /> : <div className="browser-preview"><img src={project.desktopImages[0]} alt={project.title[lang]} loading="lazy" /></div>}
+                    {id==="mobile" ? <MobileServiceVisual /> : id==="web" ? <DeviceShowcase desktop={project.desktopImages[0]} mobile={project.mobileImages[0]} name={project.title[lang]} href={`/portfolio/${project.slug}`} /> : <div className="browser-preview"><img src={project.desktopImages[0]} srcSet={screenshotSrcSet(project.desktopImages[0])} sizes="(max-width: 800px) 92vw, 680px" alt={project.title[lang]} loading="lazy" decoding="async" /></div>}
                 </div>
             </section>
         )}</div>

@@ -7,6 +7,7 @@ import { usePageMetadata } from "../../hooks/usePageMetadata.ts";
 import DeviceShowcase from "../../components/shared/DeviceShowcase.tsx";
 import PhoneMockup from "../../components/shared/PhoneMockup.tsx";
 import ProjectSummary from "../../components/shared/ProjectSummary.tsx";
+import { screenshotSrcSet } from "../../utils/responsiveImage.ts";
 
 export default function ProjectDetail() {
     const { slug } = useParams();
@@ -24,7 +25,7 @@ export default function ProjectDetail() {
         <section className="ms-container project-overview section-space"><div><h2>{lang==="ar"?"التفاصيل تصنع الفرق.":"The details make the difference."}</h2><p>{project.details[lang]}</p></div><ul>{project.highlights.map(item=><li key={item.en}><Check aria-hidden="true" />{item[lang]}</li>)}</ul></section>
         <section className="ms-container project-gallery">
             <div className="section-heading"><div><p className="eyebrow">{lang==="ar"?"داخل التجربة":"Inside the experience"}</p><h2>{lang==="ar"?"شاهد العمل عن قرب.":"See the work up close."}</h2></div></div>
-            <div className="project-desktop-gallery" role="region" aria-label={lang === "ar" ? "معرض لقطات المشروع" : "Project screenshot gallery"}>{project.desktopImages.map((image,index)=><a href={image} target="_blank" rel="noreferrer" key={image} aria-label={lang==="ar"?`افتح لقطة ${index+1}`:`Open screenshot ${index+1}`}><img src={image} alt={`${project.title[lang]} — desktop ${index+1}`} loading="lazy" /></a>)}</div>
+            <div className="project-desktop-gallery" role="region" aria-label={lang === "ar" ? "معرض لقطات المشروع" : "Project screenshot gallery"}>{project.desktopImages.map((image,index)=><a href={image} target="_blank" rel="noreferrer" key={image} aria-label={lang==="ar"?`افتح لقطة ${index+1}`:`Open screenshot ${index+1}`}><img src={image} srcSet={screenshotSrcSet(image)} sizes="(max-width: 1240px) 92vw, 1200px" alt={`${project.title[lang]} — desktop ${index+1}`} loading="lazy" decoding="async" /></a>)}</div>
             <div className="project-mobile-gallery" role="region" aria-label={lang === "ar" ? "معرض شاشات الموبايل" : "Mobile screenshot gallery"}>{project.mobileImages.map((image,index)=><a href={image} target="_blank" rel="noreferrer" key={image} aria-label={`Open mobile screenshot ${index+1}`}><PhoneMockup image={image} name={`${project.title[lang]} — mobile ${index+1}`} /></a>)}</div>
         </section>
     </div>;

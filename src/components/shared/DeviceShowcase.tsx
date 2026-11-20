@@ -1,11 +1,12 @@
-import laptopFrame from "../../assets/generated/laptop-frame-v2.png";
+import laptopFrame from "../../assets/generated/laptop-frame-v2.webp";
 import PhoneMockup from "./PhoneMockup.tsx";
+import { screenshotSrcSet } from "../../utils/responsiveImage.ts";
 
 type Props = { desktop: string; mobile?: string; name: string; href?: string; priority?: boolean };
 export default function DeviceShowcase({ desktop, mobile, name, href, priority = false }: Props) {
     const laptop = <>
-        <img className="device-laptop-frame" src={laptopFrame} alt="" aria-hidden="true" />
-        <span className="device-laptop-screen"><img src={desktop} alt={name} loading={priority ? "eager" : "lazy"} /></span>
+        <img className="device-laptop-frame" src={laptopFrame} alt="" aria-hidden="true" loading={priority ? "eager" : "lazy"} decoding="async" />
+        <span className="device-laptop-screen"><img src={desktop} srcSet={screenshotSrcSet(desktop)} sizes="(max-width: 800px) 70vw, 480px" alt={name} loading={priority ? "eager" : "lazy"} decoding="async" /></span>
     </>;
     return (
         <div className="device-showcase">

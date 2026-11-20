@@ -7,8 +7,6 @@ import "@fontsource/manrope/latin-500.css";
 import "@fontsource/manrope/latin-600.css";
 import "@fontsource/manrope/latin-700.css";
 import "@fontsource/bebas-neue/latin-400.css";
-import "@fontsource/barlow-condensed/latin-600.css";
-import "@fontsource/barlow-condensed/latin-400.css";
 import "@fontsource/quicksand/latin-400.css";
 import "@fontsource/cairo/arabic-400.css";
 import "@fontsource/cairo/arabic-500.css";
