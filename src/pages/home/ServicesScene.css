@@ -92,10 +92,4 @@
         transform-style: preserve-3d;
         will-change: transform, opacity;
     }
-
-    .services__screen.screen--phone {
-        width: auto;
-        max-height: 70svh;
-        aspect-ratio: 9 / 19.5;
-    }
 }

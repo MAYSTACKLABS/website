@@ -17,7 +17,13 @@ Premium and minimal. One focus on screen at a time. Motion explains, it never de
 - Arabic text is split by word, never by letter, so its joined letterforms stay intact.
 - Lenis provides smooth scrolling and drives GSAP's ticker; don't add CSS `scroll-behavior: smooth`.
 
+## Service demos (Stageshow)
+
+Each service is shown by an animated faux-product demo in `src/demos/<id>/`, built with the vendored Stageshow kit (`src/vendor/stageshow/kit`, MIT). All four share `src/demos/look.ts`: 680 × 440 wide, a separate 358 × 300 phone design, dark, Maystack blue. Each folder's `REHEARSAL.md` records the gold example it was copied from and what was and wasn't checked.
+
+- Preview one alone in development at `/__lab?demo=design` (or `mobile`, `web`, `platforms`).
+- Film it with the Stageshow skill: `node scripts/film.mjs "http://localhost:5173/__lab?demo=web" --out shot.png --every 700 --count 22 --gate` from the skill folder. Ship only on `rehearsal passed`.
+
 ## Next
 
-- Stageshow product demos for the services (faux UI: a design tool, a phone app, a website, a dashboard), replacing the static screenshots in the services scene.
 - Client logos and approved testimonials, when supplied.
