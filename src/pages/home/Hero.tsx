@@ -3,10 +3,10 @@ import { useLocale } from "../../i18n/useLocale.ts";
 import { ButtonLink } from "../../components/ui/ButtonLink.tsx";
 import { SplitHeading } from "../../motion/SplitHeading.tsx";
 import { gsap, MOTION, useGSAP } from "../../motion/gsap.ts";
-import { HeroStack } from "./HeroStack.tsx";
+import { HeroPeak } from "./HeroPeak.tsx";
 import "./Hero.css";
 
-/** The opening statement, on the open sky. */
+/** The opening statement beside misty peaks, with the Maystack bird over the summit. */
 export function Hero() {
     const { t } = useLocale();
     const ref = useRef<HTMLElement>(null);
@@ -54,7 +54,7 @@ export function Hero() {
                         </ButtonLink>
                     </div>
                 </div>
-                <HeroStack />
+                <HeroPeak />
             </div>
         </section>
     );

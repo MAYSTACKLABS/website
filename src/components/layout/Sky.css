@@ -2,9 +2,65 @@
     position: fixed;
     inset: 0;
     z-index: -1;
-    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 70%);
     overflow: hidden;
     pointer-events: none;
+    background: var(--sky-1-bottom);
+}
+
+/* Three moments of the same sky; later ones fade in over earlier ones as you scroll. */
+.sky__phase {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: background 1s var(--ease);
+}
+
+.sky__phase--1 {
+    opacity: 1;
+    background: linear-gradient(180deg, var(--sky-1-top), var(--sky-1-bottom));
+}
+
+.sky__phase--2 {
+    background: linear-gradient(180deg, var(--sky-2-top), var(--sky-2-bottom));
+}
+
+.sky__phase--3 {
+    background: linear-gradient(180deg, var(--sky-3-top), var(--sky-3-bottom));
+}
+
+/* First light: a warm glow rising from the bottom edge near the end of the page. */
+.sky__glow {
+    position: absolute;
+    inset: 40% -20% -30%;
+    opacity: 0;
+    background: radial-gradient(ellipse at 50% 100%, var(--sky-glow), transparent 65%);
+}
+
+.sky__starfield {
+    position: absolute;
+    inset: 0;
+}
+
+/* Night to dawn. */
+.dark {
+    --sky-1-top: #03050d;
+    --sky-1-bottom: #0a1230;
+    --sky-2-top: #070b22;
+    --sky-2-bottom: #1c1d52;
+    --sky-3-top: #0d1236;
+    --sky-3-bottom: #3d2c63;
+    --sky-glow: rgb(255 150 110 / 0.32);
+}
+
+/* Day: first light to clear morning. */
+:root:not(.dark) {
+    --sky-1-top: #c4d6f7;
+    --sky-1-bottom: #eef3fc;
+    --sky-2-top: #b5cdf6;
+    --sky-2-bottom: #f1f4fb;
+    --sky-3-top: #c8c6f0;
+    --sky-3-bottom: #fbe9e1;
+    --sky-glow: rgb(255 190 150 / 0.45);
 }
 
 .sky__stars {
