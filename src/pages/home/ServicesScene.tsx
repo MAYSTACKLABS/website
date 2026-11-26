@@ -43,14 +43,9 @@ export function ServicesScene() {
                 tl.addLabel("s0");
                 for (let i = 1; i < services.length; i++) {
                     tl.to(copies[i - 1], { autoAlpha: 0, y: -60 })
-                        .to(screens[i - 1], { autoAlpha: 0, rotateX: 28, y: -160, z: -300 }, "<")
+                        .to(screens[i - 1], { autoAlpha: 0, y: -50, scale: 0.97 }, "<")
                         .fromTo(copies[i], { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0 }, "<0.25")
-                        .fromTo(
-                            screens[i],
-                            { autoAlpha: 0, rotateY: -40, x: 240, z: -400 },
-                            { autoAlpha: 1, rotateY: 0, x: 0, z: 0 },
-                            "<",
-                        )
+                        .fromTo(screens[i], { autoAlpha: 0, y: 50, scale: 0.97 }, { autoAlpha: 1, y: 0, scale: 1 }, "<")
                         .addLabel(`s${i}`);
                 }
             });

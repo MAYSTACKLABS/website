@@ -43,13 +43,21 @@
     --range-x: calc(50vw - 0.581 * var(--range-w));
 }
 
-/* Below the clouds' scalloped underside, the same cloud colour carries on to the page end. */
+/* In the footer the clouds stay solid and run to the page end... */
+.footer__scene .scenery__clouds {
+    -webkit-mask-image: none;
+    mask-image: none;
+}
+
+/* ...and their scalloped underside melts into one soft cloud-coloured base, with no edge. */
 .footer__land::after {
     content: "";
     position: absolute;
+    z-index: 1;
     inset: auto 0 0;
-    height: 5vw;
-    background: var(--cloud-floor);
+    height: 12vw;
+    background: linear-gradient(to bottom, transparent, var(--cloud-floor) 60%);
+    pointer-events: none;
 }
 
 /* Buttons and copyright, written on the clouds. */
@@ -76,13 +84,13 @@
 }
 
 :root {
-    --cloud-floor: #c9dcf7;
+    --cloud-floor: #d3e3fa;
     --cloud-ink: #3f5a85;
 }
 
 .dark {
-    --cloud-floor: #4d5e7f;
-    --cloud-ink: #c8d4ee;
+    --cloud-floor: #4f6181;
+    --cloud-ink: #d4def3;
 }
 
 @media (max-width: 800px) {
@@ -91,9 +99,6 @@
         margin-top: -34vw;
     }
 
-    .footer__land::after {
-        height: 10vw;
-    }
 }
 
 /* On the clouds, the secondary button needs its own backing to stay readable. */
@@ -111,5 +116,11 @@
 @media (max-width: 800px) {
     [dir="rtl"] .footer__land {
         margin-top: -26vw;
+    }
+}
+
+@media (max-width: 800px) {
+    .footer__land::after {
+        height: 26vw;
     }
 }

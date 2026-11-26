@@ -35,7 +35,7 @@ export default function Services() {
                             {t("services.discuss")}
                         </ButtonLink>
                     </Reveal>
-                    <Reveal stagger={0} effect="unveil">
+                    <Reveal stagger={0}>
                         <ServiceVisual service={service} />
                     </Reveal>
                 </section>
