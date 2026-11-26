@@ -169,7 +169,7 @@
     font-size: var(--text-small);
 }
 
-.phone__row {
+.phone-field__row {
     display: grid;
     grid-template-columns: 9rem 1fr;
     gap: 0.5rem;

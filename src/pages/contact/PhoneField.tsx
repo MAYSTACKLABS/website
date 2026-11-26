@@ -41,9 +41,9 @@ export function PhoneField({ country, value, onCountryChange, onChange }: Props)
     };
 
     return (
-        <fieldset className="field phone">
+        <fieldset className="field phone-field">
             <legend>{t("contact.phone")}</legend>
-            <div className="phone__row" dir="ltr">
+            <div className="phone-field__row" dir="ltr">
                 <select
                     aria-label={t("contact.country")}
                     value={country}

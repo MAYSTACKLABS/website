@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { Moon, Sun } from "lucide-react";
 import { useLocale } from "../../i18n/useLocale.ts";
 import { useTheme } from "../../context/ThemeContext.tsx";
-import { navigation } from "../../content/site.ts";
+import { navigation, site } from "../../content/site.ts";
 import { ScrollTrigger, useGSAP } from "../../motion/gsap.ts";
 import { setScrollLocked } from "../../motion/lenis.ts";
 import { Logo } from "./Logo.tsx";
@@ -47,11 +47,26 @@ export function Header() {
             >
                 <Logo />
                 <nav className="header__nav" id="site-menu" aria-label={t("nav.label")}>
-                    {navigation.map((link) => (
-                        <NavLink key={link.to} to={link.to} className="header__link">
+                    {navigation.map((link, index) => (
+                        <NavLink
+                            key={link.to}
+                            to={link.to}
+                            className="header__link"
+                            style={{ "--n": index } as React.CSSProperties}
+                        >
+                            <span className="header__num" aria-hidden="true">
+                                {String(index + 1).padStart(2, "0")}
+                            </span>
                             {t(link.label)}
                         </NavLink>
                     ))}
+                    {/* Phone menu only: the direct ways to reach us. */}
+                    <div className="header__contact">
+                        <a href={`mailto:${site.email}`}>{site.email}</a>
+                        <a href={`https://wa.me/${site.whatsapp}`} target="_blank" rel="noreferrer">
+                            WhatsApp · <bdi>{site.phoneLabel}</bdi>
+                        </a>
+                    </div>
                 </nav>
                 <div className="header__tools">
                     <button type="button" onClick={toggleLang} aria-label={t("nav.switchLanguage")}>

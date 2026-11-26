@@ -2,7 +2,7 @@ import { useRef } from "react";
 import type { Project } from "../../content/projects/types.ts";
 import { Laptop, Phone } from "../../components/ui/Devices.tsx";
 import { Screenshot } from "../../components/ui/Screenshot.tsx";
-import { gsap, MOTION, ScrollTrigger, useGSAP } from "../../motion/gsap.ts";
+import { gsap, MOTION_DESKTOP, ScrollTrigger, useGSAP } from "../../motion/gsap.ts";
 import "./Showcase.css";
 
 /**
@@ -19,7 +19,8 @@ export function Showcase({ project, name }: { project: Project; name: string }) 
 
     useGSAP(
         () => {
-            gsap.matchMedia().add(MOTION, () => {
+            // Desktop only: phones get a simple sideways gallery instead (below).
+            gsap.matchMedia().add(MOTION_DESKTOP, () => {
                 const strips = gsap.utils.toArray<HTMLElement>(".showcase__strip");
                 // How far each strip must travel: its height minus the screen it sits in.
                 const travel = (strip: HTMLElement) => -(strip.scrollHeight - strip.parentElement!.clientHeight);
@@ -70,6 +71,18 @@ export function Showcase({ project, name }: { project: Project; name: string }) 
                         </span>
                     </Phone>
                 )}
+            </div>
+
+            {/* Phones: swipe sideways through the screens, one at a time. */}
+            <div className="showcase__swipe" aria-label={name}>
+                {project.desktop.map((src, i) => (
+                    <Laptop key={src} className="showcase__swipe-item" src={src} alt={`${name} — ${i + 1}`} sizes="85vw" eager />
+                ))}
+                {project.mobile.map((src, i) => (
+                    <div key={src} className="showcase__swipe-item showcase__swipe-item--phone">
+                        <Phone src={src} alt={`${name} — mobile ${i + 1}`} eager />
+                    </div>
+                ))}
             </div>
         </section>
     );

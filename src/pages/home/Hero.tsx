@@ -24,7 +24,8 @@ export function Hero() {
                 // The hero holds still while the page slides over it; only the layers drift a
                 // little for depth (clouds rise more than the range, so its foot stays hidden).
                 gsap.timeline({
-                    scrollTrigger: { trigger: ref.current, start: "top top", end: () => `+=${innerHeight}`, scrub: 0.6 },
+                    scrollTrigger: { trigger: ref.current, start: "top top", // Phones fade the hero out in half the distance, so the services arrive quickly.
+                        end: () => `+=${innerHeight * (innerWidth <= 800 ? 0.5 : 1)}`, scrub: 0.6 },
                     defaults: { ease: "none" },
                 })
                     .to(".hero__copy", { yPercent: -15, autoAlpha: 0 }, 0)

@@ -93,4 +93,19 @@
     .hero__copy {
         gap: 1.1rem;
     }
+
+    /* The title fills the width, and the two buttons share that same width. */
+    .hero__title {
+        font-size: 22.6vw;
+    }
+
+    .hero__actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero__actions .button {
+        justify-content: center;
+        width: 100%;
+    }
 }

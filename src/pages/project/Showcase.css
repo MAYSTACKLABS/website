@@ -36,22 +36,44 @@
     object-fit: initial !important;
 }
 
-/* Phones: use the full width so both devices stay readable side by side. */
+/* The sideways gallery is for phones only. */
+.showcase__swipe {
+    display: none;
+}
+
 @media (max-width: 800px) {
-    .showcase {
+    .showcase.container {
         width: 100%;
-        padding-inline: 0.75rem;
+        padding-inline: 0;
     }
 
     .showcase__stage {
-        gap: 0.5rem;
+        display: none;
     }
 
-    .showcase__laptop {
-        flex-basis: 72%;
+    .showcase__swipe {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        width: 100%;
+        padding: 1rem var(--gutter) 1.5rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: var(--gutter);
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
     }
 
-    .showcase__phone {
-        flex-basis: 25%;
+    .showcase__swipe::-webkit-scrollbar {
+        display: none;
+    }
+
+    .showcase__swipe-item {
+        flex: 0 0 86%;
+        scroll-snap-align: start;
+    }
+
+    .showcase__swipe-item--phone {
+        flex-basis: 46%;
     }
 }
