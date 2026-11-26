@@ -21,7 +21,7 @@ export function ProcessScene() {
                     scrollTrigger: {
                         trigger: ref.current,
                         start: "top top",
-                        end: `+=${process.length * 50}%`,
+                        end: `+=${process.length * 65}%`,
                         pin: true,
                         scrub: 1,
                         snap: { snapTo: "labels", duration: 0.5 },

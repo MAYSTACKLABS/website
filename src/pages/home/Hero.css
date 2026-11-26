@@ -4,7 +4,8 @@
     align-items: flex-start;
     min-height: 100svh;
     padding-block: clamp(8rem, 18vh, 12rem) 0;
-    overflow: clip;
+    overflow-x: clip;
+    overflow-y: visible;
 }
 
 .hero__scene {
@@ -20,7 +21,7 @@
     bottom: -2%;
     width: 92%;
     max-width: none;
-    mask-image: linear-gradient(#000 55%, transparent 92%);
+    mask-image: linear-gradient(#000 30%, rgb(0 0 0 / 0.55) 55%, transparent 85%);
     transition: filter 1.2s var(--ease);
 }
 
@@ -31,7 +32,7 @@
 .hero__orb {
     position: absolute;
     inset-inline-start: 66%;
-    bottom: 22%;
+    bottom: 36%;
     width: min(17vw, 280px);
     aspect-ratio: 1;
 }
@@ -62,6 +63,20 @@
 .hero__sun {
     opacity: 1;
     transform: none;
+}
+
+/* A soft glare along the foot of the range, so it melts into light instead of ending. */
+.hero__scene::after {
+    content: "";
+    position: absolute;
+    inset: auto -10% -12% -10%;
+    height: 45%;
+    background: radial-gradient(ellipse 60% 70% at 62% 100%, var(--glare), transparent 70%);
+    filter: blur(20px);
+}
+
+[dir="rtl"] .hero__scene::after {
+    background: radial-gradient(ellipse 60% 70% at 38% 100%, var(--glare), transparent 70%);
 }
 
 [dir="rtl"] .hero__range {

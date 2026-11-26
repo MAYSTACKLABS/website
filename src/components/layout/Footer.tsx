@@ -6,7 +6,7 @@ import { SplitHeading } from "../../motion/SplitHeading.tsx";
 import mountains from "../../assets/scene/mountains.webp";
 import "./Footer.css";
 
-/** The valley: one closing statement between two peaks, then the ways to reach us. */
+/** The summit: one closing statement in front of the range, then the ways to reach us. */
 export function Footer() {
     const { t } = useLocale();
     const onContactPage = useLocation().pathname === "/contact";
@@ -15,9 +15,8 @@ export function Footer() {
         <footer className="footer">
             {!onContactPage && (
                 <section className="footer__summit">
-                    {/* Two peaks, one from each side; the closing line sits in the valley. */}
-                    <img className="footer__peak footer__peak--start" src={mountains} alt="" aria-hidden="true" loading="lazy" />
-                    <img className="footer__peak footer__peak--end" src={mountains} alt="" aria-hidden="true" loading="lazy" />
+                    {/* The same range as the hero, rising behind the closing line and fading into a glare. */}
+                    <img className="footer__peak" src={mountains} alt="" aria-hidden="true" loading="lazy" />
                     <SplitHeading className="display footer__title" effect="blur">
                         {t("footer.title")}
                     </SplitHeading>

@@ -16,6 +16,7 @@
     --on-accent: #05070d;
     --sky-top: #0e2150;
     --sky-bottom: #05070d;
+    --glare: rgb(120 160 255 / 0.22);
 
     /* Type */
     --font-display: "Bebas Neue", "Cairo", sans-serif;
@@ -46,6 +47,7 @@
     --on-accent: #ffffff;
     --sky-top: #b9d4ff;
     --sky-bottom: #f2f6ff;
+    --glare: rgb(255 255 255 / 0.95);
 }
 
 [dir="rtl"] {
@@ -78,6 +80,7 @@
     body {
         min-height: 100svh;
         background: transparent;
+        overflow-x: clip;
         color: var(--text);
         font: 400 var(--text-body) / 1.6 var(--font-body);
         -webkit-font-smoothing: antialiased;

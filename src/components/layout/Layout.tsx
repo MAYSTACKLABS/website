@@ -4,6 +4,7 @@ import { SmoothScroll } from "../../motion/SmoothScroll.tsx";
 import { Header } from "./Header.tsx";
 import { Footer } from "./Footer.tsx";
 import { Sky } from "./Sky.tsx";
+import { WhatsAppButton } from "./WhatsAppButton.tsx";
 
 export function Layout({ children }: { children: ReactNode }) {
     const { t, lang } = useLocale();
@@ -17,6 +18,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <Header />
             <main id="main" key={lang}>{children}</main>
             <Footer />
+            <WhatsAppButton />
         </SmoothScroll>
     );
 }
