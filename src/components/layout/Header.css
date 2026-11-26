@@ -59,6 +59,13 @@
     gap: 0.25rem;
 }
 
+/* On phones the nav becomes an overlay, so the tools must push themselves to the far edge. */
+@media (max-width: 800px) {
+    .header__tools {
+        margin-inline-start: auto;
+    }
+}
+
 .header__tools button {
     display: grid;
     place-items: center;

@@ -76,16 +76,18 @@
         padding-top: 6.5rem;
     }
 
+    /* Smaller range and moon on phones, so the scene stays in the lower part of the screen
+       and never reaches the buttons. Peak centred; its foot sits inside the cloud bank. */
     .hero__scene {
-        --range-w: 240vw;
-        --range-x: -89.4vw;
-        --range-y: -9vw;
+        --range-w: 200vw;
+        --range-x: -66.2vw;
+        --range-y: -6vw;
         --clouds-w: 260vw;
         --clouds-y: -16vw;
     }
 
     .hero__scene .scenery__orb {
-        width: 15%;
+        width: 13%;
     }
 
     .hero__copy {
