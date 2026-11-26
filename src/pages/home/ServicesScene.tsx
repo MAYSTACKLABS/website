@@ -54,12 +54,9 @@ export function ServicesScene() {
     );
 
     return (
-        <section ref={ref} className="services" aria-labelledby="services-title">
+        <section ref={ref} className="services" aria-label={t("home.services.title")}>
             <div className="services__inner container">
                 <header className="services__head">
-                    <h2 id="services-title" className="services__title">
-                        {t("home.services.title")}
-                    </h2>
                     <p className="services__count-wrap" aria-hidden="true">
                         <span className="services__count">01</span> /{" "}
                         {String(services.length).padStart(2, "0")}

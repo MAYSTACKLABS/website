@@ -61,7 +61,8 @@
     }
 
     .services__head {
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 1fr;
+        justify-items: end;
         align-items: end;
         margin-bottom: 2rem;
     }
