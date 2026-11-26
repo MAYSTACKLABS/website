@@ -77,11 +77,6 @@ export function ServicesScene() {
                             <div className="services__item">
                                 <h3 className="display services__name">{pick(service.title)}</h3>
                                 <p className="muted">{pick(service.description)}</p>
-                                <ul className="tags">
-                                    {service.deliverables.map((item) => (
-                                        <li key={item.en}>{pick(item)}</li>
-                                    ))}
-                                </ul>
                             </div>
                             <ServiceVisual service={service} className="services__screen" />
                         </li>

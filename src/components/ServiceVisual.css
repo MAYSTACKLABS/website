@@ -1,0 +1,125 @@
+.service-visual {
+    display: grid;
+    place-items: center;
+    width: 100%;
+}
+
+.service-visual .laptop,
+.service-visual .device-set {
+    width: min(100%, 62svh * 1.5);
+}
+
+/* UI/UX: a wireframe sits over the real screen and wipes away, then is drawn again. */
+.sv-wire {
+    position: absolute;
+    inset: 0;
+    background: #f4f6fb;
+    animation: sv-wipe 7s var(--ease) infinite;
+}
+
+.sv-wire i {
+    position: absolute;
+    border: 1.5px dashed #9aa6c2;
+    border-radius: 4px;
+}
+
+.sv-wire__nav {
+    inset: 5% 5% auto;
+    height: 7%;
+}
+
+.sv-wire__hero {
+    left: 5%;
+    top: 20%;
+    width: 46%;
+    height: 14%;
+    background: #e4e9f4;
+}
+
+.sv-wire__line {
+    left: 5%;
+    top: 40%;
+    width: 40%;
+    height: 4%;
+}
+
+.sv-wire__line--short {
+    top: 48%;
+    width: 28%;
+}
+
+.sv-wire__button {
+    left: 5%;
+    top: 60%;
+    width: 16%;
+    height: 8%;
+    border-style: solid !important;
+    border-color: var(--accent) !important;
+}
+
+.sv-wire__image {
+    right: 5%;
+    top: 20%;
+    width: 40%;
+    height: 66%;
+    background:
+        linear-gradient(to top right, transparent calc(50% - 1px), #9aa6c2, transparent calc(50% + 1px)),
+        linear-gradient(to top left, transparent calc(50% - 1px), #9aa6c2, transparent calc(50% + 1px));
+}
+
+@keyframes sv-wipe {
+    0%,
+    30% {
+        clip-path: inset(0 0 0 0);
+    }
+    50%,
+    85% {
+        clip-path: inset(0 0 0 100%);
+    }
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
+}
+
+/* Mobile: two whole phones, standing in 3D. */
+.sv-phones {
+    position: relative;
+    width: min(100%, 58svh);
+    aspect-ratio: 1.05;
+    perspective: 1200px;
+}
+
+.sv-phones .phone {
+    position: absolute;
+    top: 0;
+    width: 58%;
+}
+
+.sv-phones__back {
+    left: 4%;
+    top: 6% !important;
+    transform: rotateY(24deg) scale(0.9);
+    opacity: 0.85;
+}
+
+.sv-phones__front {
+    right: 4%;
+    transform: rotateY(-16deg) rotateX(4deg);
+    animation: sv-float 6s ease-in-out infinite;
+}
+
+@keyframes sv-float {
+    50% {
+        translate: 0 -10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sv-wire {
+        display: none;
+    }
+
+    .sv-phones__front {
+        animation: none;
+    }
+}

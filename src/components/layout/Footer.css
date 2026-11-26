@@ -1,14 +1,21 @@
-.footer__summit {
+.footer {
+    position: relative;
+    overflow-x: clip;
+}
+
+.footer__content {
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
-    padding-block: var(--section);
+    padding-top: var(--section);
     text-align: center;
 }
 
 .footer__title {
-    max-width: 14ch;
+    max-width: 12ch;
 }
 
 .footer__actions {
@@ -18,103 +25,53 @@
     gap: 0.75rem;
 }
 
-.footer__bar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 1rem;
-    padding-block: 2rem;
-    color: var(--muted);
-    font-size: var(--text-small);
-}
-
-/* Leave room for the WhatsApp button in the corner. */
-.footer__bar {
-    padding-left: max(var(--gutter), 5.5rem);
-}
-
-.footer__bar a:hover {
-    color: var(--text);
-}
-
-.footer__summit {
+/* The land: tall enough for the range, clipped at the page end inside solid cloud. */
+.footer__land {
     position: relative;
+    height: 30vw;
     overflow: clip;
-    padding-inline: var(--gutter);
 }
 
-.footer__summit {
-    justify-content: flex-start;
-    padding-bottom: clamp(18rem, 34vw, 30rem);
-}
-
-.footer__summit > :not(.footer__scene) {
-    position: relative;
-    z-index: 1;
+/* Below the clouds' scalloped underside, the same cloud colour carries on to the page end. */
+.footer__land::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0;
+    height: 5vw;
+    background: var(--cloud-floor);
 }
 
 .footer__scene {
+    z-index: 1;
+}
+
+.footer__copy {
     position: absolute;
-    inset: auto 0 0;
-    height: clamp(16rem, 32vw, 28rem);
-    pointer-events: none;
+    z-index: 2;
+    left: 0;
+    right: 0;
+    bottom: 1.25rem;
+    color: var(--cloud-ink);
+    font-size: var(--text-small);
+    text-align: center;
 }
 
-.footer__peak {
-    position: absolute;
-    left: 50%;
-    bottom: 4vw;
-    width: min(90vw, 1100px);
-    max-width: none;
-    translate: -56% 0;
-    mask-image: linear-gradient(#000 75%, transparent 95%);
-    transition: filter 1.2s var(--ease);
+:root {
+    --cloud-floor: #c9dcf7;
+    --cloud-ink: #3f5a85;
 }
 
-.dark .footer__peak {
-    filter: brightness(0.62) saturate(0.9);
-}
-
-.footer__orb {
-    position: absolute;
-    left: 58%;
-    bottom: 40%;
-    width: min(14vw, 200px);
-    transition:
-        transform 0.9s var(--ease),
-        opacity 0.6s ease;
-}
-
-.footer__moon,
-.dark .footer__sun {
-    opacity: 0;
-    transform: translateY(60%);
-}
-
-.dark .footer__moon {
-    opacity: 1;
-    transform: none;
-}
-
-.footer__clouds {
-    bottom: 0;
-}
-
-[dir="rtl"] .footer__scene {
-    transform: scaleX(-1);
-}
-
-.footer__title {
-    max-width: 12ch;
+.dark {
+    --cloud-floor: #4d5e7f;
+    --cloud-ink: #c8d4ee;
 }
 
 @media (max-width: 800px) {
-    .footer__peak {
-        width: 170vw;
+    .footer__land {
+        height: 70vw;
     }
 
-    .footer__orb {
-        width: 30vw;
-        left: 52%;
+    .footer__land::after {
+        height: 10vw;
     }
 }

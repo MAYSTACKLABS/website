@@ -1,18 +1,12 @@
 import { useRef } from "react";
 import { useLocale } from "../../i18n/useLocale.ts";
 import { ButtonLink } from "../../components/ui/ButtonLink.tsx";
+import { Scenery } from "../../components/Scenery.tsx";
 import { SplitHeading } from "../../motion/SplitHeading.tsx";
 import { gsap, MOTION, useGSAP } from "../../motion/gsap.ts";
-import mountains from "../../assets/scene/mountains.webp";
-import sun from "../../assets/scene/sun.webp";
-import moon from "../../assets/scene/moon.webp";
-import clouds from "../../assets/scene/clouds.webp";
 import "./Hero.css";
 
-/**
- * The Maystack range under the shared sky. The sun rises behind it by day and the moon by
- * night; its foot sits in a bank of clouds, as on the first Maystack site, so it never ends in a hard edge.
- */
+/** The Maystack range in its sea of clouds, with the sun by day and the moon by night. */
 export function Hero() {
     const { t } = useLocale();
     const ref = useRef<HTMLElement>(null);
@@ -20,20 +14,20 @@ export function Hero() {
     useGSAP(
         () => {
             gsap.matchMedia().add(MOTION, () => {
+                // Arrival: the scene fades in as one piece (mountain and clouds never move apart,
+                // so the foot of the range can never slip out of the clouds), then the sun or moon rises.
                 gsap.timeline({ defaults: { duration: 1.6, ease: "power3.out" } })
-                    .from(".hero__range", { y: 60, autoAlpha: 0 })
-                    .from(".hero__orb", { y: 80, autoAlpha: 0, duration: 2 }, 0.2)
-                    .from(".hero__clouds", { y: 40, duration: 1.8 }, 0)
-                    .from(".hero__fade", { autoAlpha: 0, y: 16, stagger: 0.08, duration: 1 }, 0.8);
+                    .from(".hero__scene", { autoAlpha: 0, duration: 1.2 })
+                    .from(".scenery__orb", { y: 90, autoAlpha: 0, duration: 2 }, 0.3)
+                    .from(".hero__fade", { autoAlpha: 0, y: 16, stagger: 0.08, duration: 1 }, 0.6);
 
+                // Leaving: the copy lifts away and the sun or moon sets behind the peak.
                 gsap.timeline({
-                    scrollTrigger: { trigger: ref.current, start: "top top", end: "bottom top", scrub: 0.8 },
+                    scrollTrigger: { trigger: ref.current, start: "top top", end: "bottom top", scrub: 0.6 },
                     defaults: { ease: "none" },
                 })
                     .to(".hero__copy", { yPercent: -25, autoAlpha: 0 }, 0)
-                    .to(".hero__orb", { y: 140 }, 0)
-                    .to(".hero__range", { y: 60 }, 0)
-                    .to(".hero__clouds", { y: -40 }, 0);
+                    .to(".scenery__orb", { yPercent: 60 }, 0);
             });
         },
         { scope: ref },
@@ -41,14 +35,7 @@ export function Hero() {
 
     return (
         <section ref={ref} className="hero">
-            <div className="hero__scene" aria-hidden="true">
-                <div className="hero__orb">
-                    <img className="hero__sun" src={sun} alt="" decoding="async" />
-                    <img className="hero__moon" src={moon} alt="" decoding="async" />
-                </div>
-                <img className="hero__range" src={mountains} alt="" fetchPriority="high" />
-                <img className="clouds hero__clouds" src={clouds} alt="" fetchPriority="high" />
-            </div>
+            <Scenery className="hero__scene" orb eager />
 
             <div className="hero__copy container">
                 <p className="eyebrow hero__fade">{t("home.hero.eyebrow")}</p>

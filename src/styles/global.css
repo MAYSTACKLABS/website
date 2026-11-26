@@ -189,17 +189,3 @@
     }
 }
 
-/* The cloud bank from the first Maystack site: it hides the foot of every mountain. */
-.clouds {
-    position: absolute;
-    left: 50%;
-    width: max(112vw, 900px);
-    max-width: none;
-    translate: -50% 0;
-    pointer-events: none;
-    transition: filter 1.2s var(--ease), opacity 1.2s var(--ease);
-}
-
-.dark .clouds {
-    filter: brightness(0.36) sepia(0.6) hue-rotate(180deg) saturate(2.4);
-}

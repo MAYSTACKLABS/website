@@ -1,29 +1,47 @@
+import type { ReactNode } from "react";
 import laptopFrame from "../../assets/scene/laptop-frame-v2.webp";
 import phoneFrame from "../../assets/scene/iphone-titanium-frame.webp";
 import { Screenshot } from "./Screenshot.tsx";
 import "./Devices.css";
 
-type Common = { src: string; alt: string; className?: string; eager?: boolean; sizes?: string };
+type Common = {
+    /** One screenshot; or pass children to fill the screen yourself (e.g. a slideshow). */
+    src?: string;
+    alt?: string;
+    children?: ReactNode;
+    className?: string;
+    eager?: boolean;
+    sizes?: string;
+};
 
-/** A screenshot inside the laptop frame. */
-export function Laptop({ src, alt, className = "", eager, sizes = "(max-width: 800px) 80vw, 40vw" }: Common) {
+/** A laptop: the frame image with a screen cut into it. */
+export function Laptop({
+    src,
+    alt = "",
+    children,
+    className = "",
+    eager,
+    sizes = "(max-width: 800px) 80vw, 40vw",
+}: Common) {
     return (
         <div className={`laptop ${className}`}>
             <img className="laptop__frame" src={laptopFrame} alt="" aria-hidden="true" decoding="async" />
             <span className="laptop__screen">
-                <Screenshot src={src} alt={alt} sizes={sizes} eager={eager} />
+                {src && <Screenshot src={src} alt={alt} sizes={sizes} eager={eager} />}
+                {children}
             </span>
         </div>
     );
 }
 
-/** A full phone, frame and screen, that can be tilted in 3D by its parent. */
-export function Phone({ src, alt, className = "", eager }: Common) {
+/** A whole phone, frame and screen, never cropped. */
+export function Phone({ src, alt = "", children, className = "", eager }: Common) {
     return (
         <div className={`phone ${className}`}>
             <img className="phone__frame" src={phoneFrame} alt="" aria-hidden="true" decoding="async" />
             <span className="phone__screen">
-                <img src={src} alt={alt} loading={eager ? "eager" : "lazy"} decoding="async" />
+                {src && <img src={src} alt={alt} loading={eager ? "eager" : "lazy"} decoding="async" />}
+                {children}
             </span>
             <span className="phone__island" aria-hidden="true" />
         </div>

@@ -1,0 +1,78 @@
+.showcase {
+    display: grid;
+    justify-items: center;
+    gap: 1.5rem;
+    padding-block: 2rem;
+}
+
+/* Laptop and phone stand side by side on the same baseline, at every screen size. */
+.showcase__stage {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: clamp(0.75rem, 3vw, 3rem);
+    width: min(100%, 75svh * 1.75);
+}
+
+.showcase__laptop {
+    flex: 0 0 74%;
+}
+
+.showcase__phone {
+    flex: 0 0 21%;
+}
+
+/* Every page of the project sits in the same screen; the first shows, the rest wait below. */
+.showcase__slide {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.showcase__slide:not(:first-child) {
+    visibility: hidden;
+}
+
+.showcase__dots {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.showcase__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--line);
+    transition:
+        background-color 0.3s,
+        width 0.3s var(--ease);
+}
+
+.showcase__dot.is-current {
+    width: 22px;
+    border-radius: 3px;
+    background: var(--accent);
+}
+
+/* Phones: use the full width so both devices stay readable side by side. */
+@media (max-width: 800px) {
+    .showcase {
+        width: 100%;
+        padding-inline: 0.75rem;
+    }
+
+    .showcase__stage {
+        gap: 0.5rem;
+    }
+
+    .showcase__laptop {
+        flex-basis: 72%;
+    }
+
+    .showcase__phone {
+        flex-basis: 25%;
+    }
+}

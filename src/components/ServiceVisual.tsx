@@ -1,39 +1,54 @@
-import { Suspense } from "react";
 import type { Service } from "../content/services.ts";
-import { demos } from "../demos/index.ts";
 import { useLocale } from "../i18n/useLocale.ts";
-import { ProductScreen } from "./ui/ProductScreen.tsx";
+import { DeviceSet, Laptop, Phone } from "./ui/Devices.tsx";
+import "./ServiceVisual.css";
 
 /**
- * A service shown by its Stageshow demo. While the demo's code loads, the showcase
- * project's screenshot stands in: a phone for mobile, a window for the rest.
+ * Each service on the device it lives on, always whole (never a cropped phone):
+ * - UI/UX: a laptop where a wireframe is drawn, then wiped away to reveal the finished screen;
+ * - Mobile: two full phones standing in 3D, gently floating;
+ * - Web: a laptop with its phone version in front;
+ * - Platforms: a laptop running the platform.
  */
-export function ServiceVisual({
-    service,
-    className = "",
-}: {
-    service: Service;
-    className?: string;
-}) {
+export function ServiceVisual({ service, className = "" }: { service: Service; className?: string }) {
     const { pick } = useLocale();
-    const Demo = demos[service.id];
-    const phone = service.id === "mobile";
     const { showcase } = service;
+    const name = pick(showcase.title);
 
-    const fallback = (
-        <ProductScreen
-            device={phone ? "phone" : "desktop"}
-            src={phone ? showcase.mobile[0] : showcase.desktop[0]}
-            alt={pick(showcase.title)}
-            sizes={phone ? undefined : "(max-width: 800px) 92vw, 50vw"}
-        />
-    );
+    let visual;
+    switch (service.id) {
+        case "design":
+            visual = (
+                <Laptop src={showcase.desktop[0]} alt={name}>
+                    <span className="sv-wire" aria-hidden="true">
+                        <i className="sv-wire__nav" />
+                        <i className="sv-wire__hero" />
+                        <i className="sv-wire__line" />
+                        <i className="sv-wire__line sv-wire__line--short" />
+                        <i className="sv-wire__button" />
+                        <i className="sv-wire__image" />
+                    </span>
+                </Laptop>
+            );
+            break;
+        case "mobile":
+            visual = (
+                <div className="sv-phones">
+                    <Phone src={showcase.mobile[1] ?? showcase.mobile[0]} className="sv-phones__back" />
+                    <Phone src={showcase.mobile[0]} alt={name} className="sv-phones__front" />
+                </div>
+            );
+            break;
+        case "web":
+            visual = <DeviceSet desktop={showcase.desktop[0]} mobile={showcase.mobile[0]} alt={name} />;
+            break;
+        default:
+            visual = <Laptop src={showcase.desktop[1] ?? showcase.desktop[0]} alt={name} />;
+    }
 
     return (
-        <div className={`service-visual ${className}`} role="img" aria-label={pick(service.title)}>
-            <Suspense fallback={fallback}>
-                <Demo />
-            </Suspense>
+        <div className={`service-visual service-visual--${service.id} ${className}`} role="img" aria-label={pick(service.title)}>
+            {visual}
         </div>
     );
 }

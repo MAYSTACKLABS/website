@@ -1,6 +1,6 @@
 .whatsapp-fab {
     position: fixed;
-    left: clamp(1rem, 2.5vw, 1.75rem);
+    right: clamp(1rem, 2.5vw, 1.75rem);
     bottom: clamp(1rem, 2.5vw, 1.75rem);
     z-index: 50;
     display: grid;
@@ -8,18 +8,21 @@
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 50%;
-    background: #25d366;
-    color: #fff;
-    box-shadow: 0 12px 30px -8px rgb(37 211 102 / 0.55);
-    transition: transform 0.3s var(--ease);
+    background: #fff;
+    color: #0b1220;
+    box-shadow: 0 10px 30px -10px rgb(5 7 13 / 0.45);
+    transition:
+        transform 0.3s var(--ease),
+        box-shadow 0.3s var(--ease);
 }
 
 .whatsapp-fab:hover {
-    transform: scale(1.06);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 36px -12px rgb(5 7 13 / 0.55);
 }
 
 .whatsapp-fab svg {
-    width: 1.75rem;
-    height: 1.75rem;
-    fill: currentColor;
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke-width: 1.75;
 }

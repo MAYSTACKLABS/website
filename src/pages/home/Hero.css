@@ -3,91 +3,30 @@
     display: flex;
     align-items: flex-start;
     min-height: 100svh;
-    padding-block: clamp(8rem, 18vh, 12rem) 0;
+    padding-block: clamp(7rem, 16vh, 11rem) 0;
     overflow-x: clip;
-    overflow-y: visible;
 }
 
+/* The cloud sea hangs a little below the hero (negative offsets in Scenery.css). */
 .hero__scene {
-    position: absolute;
     inset: 0;
-    pointer-events: none;
+    z-index: 0;
 }
 
-/* The foot of the range dissolves into the sky, so there is no edge where the hero ends. */
-.hero__range {
-    position: absolute;
-    inset-inline-start: 18%;
-    bottom: 6vw;
-    width: 92%;
-    max-width: none;
-    mask-image: linear-gradient(#000 75%, transparent 95%);
-    transition: filter 1.2s var(--ease);
-}
-
-.dark .hero__range {
-    filter: brightness(0.62) saturate(0.9);
-}
-
-.hero__orb {
-    position: absolute;
-    inset-inline-start: 66%;
-    bottom: 36%;
-    width: min(17vw, 280px);
-    aspect-ratio: 1;
-}
-
-.hero__orb img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transition:
-        transform 0.9s var(--ease),
-        opacity 0.6s ease;
-}
-
-/* Day and night trade places: one sets behind the range as the other rises. */
-.hero__moon,
-.dark .hero__sun {
-    opacity: 0;
-    transform: translateY(70%);
-}
-
-.dark .hero__moon {
-    opacity: 1;
-    transform: none;
-}
-
-.hero__sun {
-    opacity: 1;
-    transform: none;
-}
-
-.hero__clouds {
-    bottom: -8vw;
-}
-
-.hero__range,
-.hero__clouds,
-.hero__orb {
+.hero__scene .scenery__orb {
     will-change: transform;
-}
-
-[dir="rtl"] .hero__range {
-    transform: scaleX(-1);
 }
 
 .hero__copy {
     position: relative;
+    z-index: 1;
     display: grid;
     gap: 1.5rem;
 }
 
 .hero__title {
     font-family: var(--font-display);
-    font-size: clamp(4rem, 9vw, 9rem);
+    font-size: clamp(3.75rem, 9vw, 9rem);
     font-weight: 400;
     line-height: 0.88;
     letter-spacing: -0.01em;
@@ -95,7 +34,7 @@
 }
 
 [dir="rtl"] .hero__title {
-    font-size: clamp(3rem, 6vw, 6.25rem);
+    font-size: clamp(2.75rem, 6vw, 6.25rem);
     font-weight: 800;
     line-height: 1.2;
 }
@@ -103,7 +42,7 @@
 .hero__lead {
     max-width: 34ch;
     color: var(--muted);
-    font-size: clamp(1.0625rem, 1.4vw, 1.25rem);
+    font-size: clamp(1rem, 1.4vw, 1.25rem);
 }
 
 .hero__actions {
@@ -112,21 +51,14 @@
     gap: 0.75rem;
 }
 
+/* Phones: copy at the top, the scene fills the lower part of the screen. */
 @media (max-width: 800px) {
-    .hero__range {
-        inset-inline-start: -60%;
-        width: 190%;
-        bottom: 14vw;
+    .hero {
+        min-height: max(100svh, 46rem);
+        padding-top: 6.5rem;
     }
 
-    .hero__orb {
-        inset-inline-start: 44%;
-        bottom: 52vw;
-        width: 30vw;
-    }
-
-    .hero__clouds {
-        width: 220vw;
-        bottom: -10vw;
+    .hero__copy {
+        gap: 1.1rem;
     }
 }

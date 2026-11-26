@@ -31,6 +31,12 @@ export function Header() {
             onUpdate: (self) => ref.current?.classList.toggle("is-hidden", self.direction === 1),
             onLeaveBack: () => ref.current?.classList.remove("is-hidden"),
         });
+        // Once the page has moved, the bar gets a frosted backing so it reads over anything.
+        ScrollTrigger.create({
+            start: 40,
+            end: "max",
+            toggleClass: { targets: ref.current!, className: "is-scrolled" },
+        });
     });
 
     return (
