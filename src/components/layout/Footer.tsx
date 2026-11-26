@@ -2,14 +2,10 @@ import { useLocation } from "react-router-dom";
 import { useLocale } from "../../i18n/useLocale.ts";
 import { site } from "../../content/site.ts";
 import { ButtonLink } from "../ui/ButtonLink.tsx";
-import { Scenery } from "../Scenery.tsx";
 import { SplitHeading } from "../../motion/SplitHeading.tsx";
 import "./Footer.css";
 
-/**
- * Every page ends in the cloud sea. The closing line stands behind the range, with the
- * peak centred in front of it; the buttons and copyright sit on the clouds.
- */
+/** The closing line, the ways to reach us, and the copyright. */
 export function Footer() {
     const { t } = useLocale();
     const onContactPage = useLocation().pathname === "/contact";
@@ -21,9 +17,7 @@ export function Footer() {
                     {t("footer.title")}
                 </SplitHeading>
             )}
-            <div className="footer__land">
-                <Scenery className="footer__scene" />
-                <div className="footer__base">
+            <div className="footer__base">
                     {!onContactPage && (
                         <div className="footer__actions">
                             <ButtonLink to="/contact">{t("cta.start")}</ButtonLink>
@@ -35,7 +29,6 @@ export function Footer() {
                     <p className="footer__copy" dir="ltr">
                         © {new Date().getFullYear()} Maystack
                     </p>
-                </div>
             </div>
         </footer>
     );

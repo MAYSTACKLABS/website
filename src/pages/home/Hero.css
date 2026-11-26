@@ -1,20 +1,18 @@
 .hero {
     position: relative;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     min-height: 100svh;
-    padding-block: clamp(7rem, 16vh, 11rem) 0;
+    padding-block: 7rem 3rem;
     overflow-x: clip;
 }
 
-/* The cloud sea hangs a little below the hero (negative offsets in Scenery.css). */
-.hero__scene {
-    inset: 0;
-    z-index: 0;
-}
-
-.hero__scene .scenery__orb {
-    will-change: transform;
+/* Copy on one side, the stack on the other. */
+.hero__inner {
+    display: grid;
+    grid-template-columns: 1.05fr 1fr;
+    align-items: center;
+    gap: clamp(2rem, 4vw, 4rem);
 }
 
 .hero__copy {
@@ -26,7 +24,7 @@
 
 .hero__title {
     font-family: var(--font-display);
-    font-size: clamp(3.75rem, 9vw, 9rem);
+    font-size: clamp(3.5rem, 7vw, 7.5rem);
     font-weight: 400;
     line-height: 0.88;
     letter-spacing: -0.01em;
@@ -51,14 +49,23 @@
     gap: 0.75rem;
 }
 
-/* Phones: copy at the top, the scene fills the lower part of the screen. */
-@media (max-width: 800px) {
+/* Phones and narrow tablets: the stack sits under the copy. */
+@media (max-width: 900px) {
     .hero {
-        min-height: max(100svh, 46rem);
         padding-top: 6.5rem;
+    }
+
+    .hero__inner {
+        grid-template-columns: 1fr;
     }
 
     .hero__copy {
         gap: 1.1rem;
+    }
+
+    .hero .stack {
+        width: min(100%, 26rem);
+        justify-self: center;
+        margin-top: -1rem;
     }
 }

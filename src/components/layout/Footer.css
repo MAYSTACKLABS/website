@@ -1,23 +1,20 @@
 .footer {
     position: relative;
-    overflow-x: clip;
-    padding-top: var(--section);
+    display: grid;
+    justify-items: center;
+    gap: 2rem;
+    padding: var(--section) var(--gutter) 2rem;
+    text-align: center;
 }
 
 .footer--plain {
-    padding-top: 0;
+    padding-top: 3rem;
 }
 
-/* The closing line, large, standing behind the mountain. */
 .footer__title {
-    position: relative;
-    z-index: 0;
     max-width: 22ch;
-    margin-inline: auto;
-    padding-inline: var(--gutter);
     font-size: clamp(3.25rem, 8vw, 10rem);
     line-height: 0.9;
-    text-align: center;
 }
 
 [dir="rtl"] .footer__title {
@@ -25,50 +22,10 @@
     line-height: 1.15;
 }
 
-/* The land: pulled up under the title so the peak rises in front of its last line. */
-.footer__land {
-    position: relative;
-    z-index: 1;
-    height: 36vw;
-    margin-top: -18vw;
-    overflow: clip;
-}
-
-.footer--plain .footer__land {
-    margin-top: 0;
-}
-
-/* Peak in the exact centre: 58.1% of the mountain's width is its highest tip. */
-.footer__scene {
-    --range-x: calc(50vw - 0.581 * var(--range-w));
-}
-
-/* In the footer the clouds stay solid and run to the page end... */
-.footer__scene .scenery__clouds {
-    -webkit-mask-image: none;
-    mask-image: none;
-}
-
-/* ...and their scalloped underside melts into one soft cloud-coloured base, with no edge. */
-.footer__land::after {
-    content: "";
-    position: absolute;
-    z-index: 1;
-    inset: auto 0 0;
-    height: 12vw;
-    background: linear-gradient(to bottom, transparent, var(--cloud-floor) 60%);
-    pointer-events: none;
-}
-
-/* Buttons and copyright, written on the clouds. */
 .footer__base {
-    position: absolute;
-    z-index: 2;
-    inset: auto 0 0;
     display: grid;
     justify-items: center;
-    gap: 1rem;
-    padding: 0 var(--gutter) 1.25rem;
+    gap: clamp(3rem, 8vw, 6rem);
 }
 
 .footer__actions {
@@ -79,48 +36,31 @@
 }
 
 .footer__copy {
-    color: var(--cloud-ink);
+    color: var(--muted);
     font-size: var(--text-small);
 }
 
-:root {
-    --cloud-floor: #d3e3fa;
-    --cloud-ink: #3f5a85;
-}
-
-.dark {
-    --cloud-floor: #4f6181;
-    --cloud-ink: #d4def3;
+.footer__title,
+.footer__base {
+    width: 100%;
+    min-width: 0;
 }
 
 @media (max-width: 800px) {
-    .footer__land {
-        height: 88vw;
-        margin-top: -34vw;
+    .footer {
+        padding-bottom: 6rem;
     }
 
-}
-
-/* On the clouds, the secondary button needs its own backing to stay readable. */
-.footer__actions .button--ghost {
-    background: color-mix(in srgb, var(--surface) 80%, transparent);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-}
-
-/* Arabic lines are taller, so the range overlaps less to keep the last line readable. */
-[dir="rtl"] .footer__land {
-    margin-top: -14vw;
-}
-
-@media (max-width: 800px) {
-    [dir="rtl"] .footer__land {
-        margin-top: -26vw;
+    .footer__title {
+        font-size: clamp(2.5rem, 12vw, 4rem);
     }
-}
 
-@media (max-width: 800px) {
-    .footer__land::after {
-        height: 26vw;
+    [dir="rtl"] .footer__title {
+        font-size: clamp(2rem, 9vw, 3rem);
+    }
+
+    .footer__actions {
+        flex-direction: column;
+        align-items: center;
     }
 }
