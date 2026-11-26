@@ -1,18 +1,35 @@
-import { useRef } from "react";
+import { useRef, useSyncExternalStore } from "react";
 import { useLocale } from "../../i18n/useLocale.ts";
 import { ButtonLink } from "../../components/ui/ButtonLink.tsx";
 import { SplitHeading } from "../../motion/SplitHeading.tsx";
 import { gsap, MOTION, useGSAP } from "../../motion/gsap.ts";
 import mark from "../../assets/logos/white.png";
+import { MAIN_EDGE, RIDGES, SUMMIT } from "../../components/mountains.ts";
 import "./Hero.css";
 
-// Scene geometry, in the SVG's 1440 × 900 space.
-const FLIGHT = "M 300 900 C 640 820 980 640 1190 380 S 1440 -40 1540 -120";
-const RIDGE =
-    "M 0 900 L 160 820 L 290 850 L 450 730 L 590 790 L 800 600 L 940 700 L 1040 660 L 1200 780 L 1320 740 L 1440 810";
-const LANDED = 0.72; // how far along the flight path the bird rests after the intro
+// The bird glides in from the lower edge and lands just above the summit.
+const PERCH = { x: SUMMIT.x, y: SUMMIT.y - 34 };
+const FLIGHT = `M 240 900 C 520 820 760 650 880 500 S ${PERCH.x - 40} ${PERCH.y + 10} ${PERCH.x} ${PERCH.y}`;
+
+// Back to front. Nearer layers travel further as the page scrolls, which gives the depth.
+const LAYERS = [
+    { key: "far", depth: 40 },
+    { key: "mid", depth: 90 },
+    { key: "main", depth: 150 },
+    { key: "near", depth: 240 },
+] as const;
+
+// Phones see a narrow slice of the scene, so they frame it around the summit instead of the centre.
+const NARROW = "(max-width: 800px)";
+const subscribeNarrow = (onChange: () => void) => {
+    const query = matchMedia(NARROW);
+    query.addEventListener("change", onChange);
+    return () => query.removeEventListener("change", onChange);
+};
+const isNarrow = () => matchMedia(NARROW).matches;
 
 export function Hero() {
+    const narrow = useSyncExternalStore(subscribeNarrow, isNarrow);
     const { t } = useLocale();
     const ref = useRef<HTMLElement>(null);
 
@@ -25,38 +42,45 @@ export function Hero() {
                     alignOrigin: [0.5, 0.5],
                 };
 
-                // Arrival: the ridge draws, the trail follows the bird to its resting point.
-                gsap.timeline({ defaults: { duration: 2.4, ease: "expo.inOut" } })
-                    .from(".hero__ridge", { drawSVG: 0 })
+                // Arrival: the range settles back to front, the skyline draws, the bird lands.
+                gsap.timeline({ defaults: { duration: 1.6, ease: "power3.out" } })
+                    .from(".hero__layer", { y: 50, autoAlpha: 0, stagger: 0.12 })
+                    .from(".hero__edge", { drawSVG: 0, duration: 2.2, ease: "power2.inOut" }, 0.2)
                     .fromTo(
                         ".hero__flight",
                         { drawSVG: 0 },
-                        { drawSVG: `0% ${LANDED * 100}%` },
-                        0.3,
+                        { drawSVG: "100%", duration: 2, ease: "power2.inOut" },
+                        0.6,
                     )
                     .fromTo(
                         ".hero__bird",
-                        { motionPath: { ...flight, end: 0 } },
-                        { motionPath: { ...flight, start: 0, end: LANDED } },
-                        0.3,
+                        { autoAlpha: 0, motionPath: { ...flight, end: 0 } },
+                        {
+                            autoAlpha: 1,
+                            motionPath: { ...flight, start: 0, end: 1 },
+                            duration: 2,
+                            ease: "power2.inOut",
+                        },
+                        0.6,
                     )
-                    .from(
-                        ".hero__fade",
-                        { autoAlpha: 0, y: 24, stagger: 0.1, duration: 1.2, ease: "expo.out" },
-                        1.2,
-                    );
+                    .to(".hero__flight", { autoAlpha: 0.25, duration: 1 }, ">")
+                    .from(".hero__fade", { autoAlpha: 0, y: 16, stagger: 0.08, duration: 1 }, 1);
 
-                // Departure: scrolling away lifts the copy; the bird stays perched with the ridge.
-                gsap.timeline({
+                // Departure: the copy lifts away while the range sinks at different speeds.
+                const leave = gsap.timeline({
                     scrollTrigger: {
                         trigger: ref.current,
                         start: "top top",
                         end: "bottom top",
-                        scrub: 1,
+                        scrub: 0.8,
                     },
-                })
-                    .to(".hero__copy", { yPercent: -30, autoAlpha: 0, ease: "none" }, 0)
-                    .to([".hero__ridge", ".hero__flight", ".hero__bird"], { y: 120, ease: "none" }, 0);
+                    defaults: { ease: "none" },
+                });
+                leave.to(".hero__copy", { yPercent: -20, autoAlpha: 0 }, 0);
+                LAYERS.forEach(({ key, depth }) =>
+                    leave.to(`.hero__layer--${key}`, { y: depth }, 0),
+                );
+                leave.to([".hero__edge", ".hero__flight", ".hero__bird"], { y: 150 }, 0);
             });
         },
         { scope: ref },
@@ -66,18 +90,41 @@ export function Hero() {
         <section ref={ref} className="hero">
             <svg
                 className="hero__scene"
-                viewBox="0 0 1440 900"
+                viewBox={narrow ? `${SUMMIT.x - 380} 0 760 900` : "0 0 1440 900"}
                 preserveAspectRatio="xMidYMax slice"
                 aria-hidden="true"
             >
-                <path className="hero__ridge" d={RIDGE} />
+                <defs>
+                    {LAYERS.map(({ key }) => (
+                        <linearGradient key={key} id={`hero-${key}`} x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" className={`hero__stop-top--${key}`} />
+                            <stop offset="1" className="hero__stop-base" />
+                        </linearGradient>
+                    ))}
+                    <linearGradient id="hero-edge" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0" className="hero__stop-fade" />
+                        <stop offset="0.45" className="hero__stop-accent" />
+                        <stop offset="0.8" className="hero__stop-accent-2" />
+                        <stop offset="1" className="hero__stop-fade" />
+                    </linearGradient>
+                </defs>
+
+                {LAYERS.map(({ key }) => (
+                    <path
+                        key={key}
+                        className={`hero__layer hero__layer--${key}`}
+                        d={RIDGES[key]}
+                        fill={`url(#hero-${key})`}
+                    />
+                ))}
+                <path className="hero__edge" d={MAIN_EDGE} stroke="url(#hero-edge)" />
                 <path className="hero__flight" d={FLIGHT} />
-                <image className="hero__bird" href={mark} width="120" height="93" />
+                <image className="hero__bird" href={mark} width="72" height="56" />
             </svg>
 
             <div className="hero__copy container">
                 <p className="eyebrow hero__fade">{t("home.hero.eyebrow")}</p>
-                <SplitHeading as="h1" trigger="load" delay={0.4} className="hero__title">
+                <SplitHeading as="h1" trigger="load" delay={0.3} className="hero__title">
                     {t("home.hero.line1")}
                     <br />
                     {t("home.hero.line2")}

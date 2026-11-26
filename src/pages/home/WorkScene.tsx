@@ -69,7 +69,7 @@ export function WorkScene() {
             <header className="work__head container">
                 <div>
                     <p className="eyebrow">{t("home.work.eyebrow")}</p>
-                    <SplitHeading className="display">{t("home.work.title")}</SplitHeading>
+                    <SplitHeading className="display" effect="blur">{t("home.work.title")}</SplitHeading>
                 </div>
                 <ButtonLink to="/portfolio" variant="text">
                     {t("home.work.all")}

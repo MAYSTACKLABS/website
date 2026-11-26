@@ -32,3 +32,33 @@
 .footer__bar a:hover {
     color: var(--text);
 }
+
+.footer__summit {
+    position: relative;
+    overflow: clip;
+    padding-inline: var(--gutter);
+}
+
+.footer__summit > :not(.footer__range) {
+    position: relative;
+}
+
+.footer__range {
+    position: absolute;
+    inset: auto 0 0;
+    width: 100%;
+    height: 70%;
+    pointer-events: none;
+}
+
+.footer__stop-top {
+    stop-color: color-mix(in srgb, var(--accent) 12%, var(--surface));
+}
+
+.footer__stop-base {
+    stop-color: var(--bg);
+}
+
+[dir="rtl"] .footer__range {
+    transform: scaleX(-1);
+}

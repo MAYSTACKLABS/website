@@ -4,7 +4,7 @@ import { process } from "../../content/process.ts";
 import { gsap, MOTION_DESKTOP, useGSAP } from "../../motion/gsap.ts";
 import "./ProcessScene.css";
 
-/** Pinned on desktop: a giant step number, one step's words, and a line climbing five checkpoints. */
+/** Pinned on desktop: one step at a time, swapped through a focus pull, with a line of five checkpoints. */
 export function ProcessScene() {
     const { t, pick } = useLocale();
     const ref = useRef<HTMLElement>(null);
@@ -30,12 +30,12 @@ export function ProcessScene() {
 
                 tl.addLabel("p0").set(dots[0], { className: "process__dot is-reached" });
                 for (let i = 1; i < steps.length; i++) {
-                    tl.to(steps[i - 1], { autoAlpha: 0, yPercent: -40 })
+                    tl.to(steps[i - 1], { autoAlpha: 0, filter: "blur(14px)", scale: 1.04 })
                         .fromTo(
                             steps[i],
-                            { autoAlpha: 0, yPercent: 40 },
-                            { autoAlpha: 1, yPercent: 0 },
-                            "<0.2",
+                            { autoAlpha: 0, filter: "blur(14px)", scale: 0.96 },
+                            { autoAlpha: 1, filter: "blur(0px)", scale: 1 },
+                            "<0.35",
                         )
                         .to(".process__fill", { scaleX: i / (steps.length - 1), ease: "none" }, "<")
                         .set(dots[i], { className: "process__dot is-reached" })

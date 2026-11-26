@@ -65,11 +65,11 @@ export default function Project() {
 
             <section className="project__gallery container" aria-label={t("project.gallery")}>
                 {project.desktop.slice(1).map((src, index) => (
-                    <Reveal key={src} stagger={0}>
+                    <Reveal key={src} stagger={0} effect="unveil">
                         <ProductScreen src={src} alt={`${name} — ${index + 2}`} sizes="92vw" />
                     </Reveal>
                 ))}
-                <Reveal className="project__phones">
+                <Reveal className="project__phones" effect="focus">
                     {project.mobile.map((src, index) => (
                         <ProductScreen
                             key={src}

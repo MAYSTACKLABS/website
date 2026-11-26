@@ -38,7 +38,7 @@ export default function Portfolio() {
                 </div>
             </PageIntro>
 
-            <Reveal key={filter} className="portfolio-grid container">
+            <Reveal key={filter} className="portfolio-grid container" effect="focus">
                 {visible.map((project) => (
                     <ProjectCard key={project.slug} project={project} />
                 ))}

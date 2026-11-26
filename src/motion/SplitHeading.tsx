@@ -9,6 +9,8 @@ type Props = {
     /** "load" plays once on mount; "view" plays when scrolled into view. */
     trigger?: "load" | "view";
     delay?: number;
+    /** rise: letters lift out of a mask. blur: words come into focus one by one (React Bits' BlurText idea). */
+    effect?: "rise" | "blur";
 };
 
 /**
@@ -21,6 +23,7 @@ export function SplitHeading({
     children,
     trigger = "view",
     delay = 0,
+    effect = "rise",
 }: Props) {
     const ref = useRef<HTMLHeadingElement>(null);
     const { lang } = useLocale();
@@ -28,27 +31,41 @@ export function SplitHeading({
     useGSAP(
         () => {
             gsap.matchMedia().add(MOTION, () => {
-                const byWord = lang === "ar";
+                const blur = effect === "blur";
+                const byWord = blur || lang === "ar";
+                const scrollTrigger =
+                    trigger === "view"
+                        ? { trigger: ref.current, start: "top 85%", once: true }
+                        : undefined;
                 const split = SplitText.create(ref.current, {
                     type: byWord ? "lines,words" : "lines,chars",
-                    mask: "lines",
+                    mask: blur ? undefined : "lines",
                     autoSplit: true,
                     onSplit: (self) =>
-                        gsap.from(byWord ? self.words : self.chars, {
-                            yPercent: 110,
-                            duration: 1.2,
-                            delay,
-                            stagger: byWord ? 0.06 : 0.018,
-                            scrollTrigger:
-                                trigger === "view"
-                                    ? { trigger: ref.current, start: "top 85%", once: true }
-                                    : undefined,
-                        }),
+                        blur
+                            ? gsap.from(self.words, {
+                                  autoAlpha: 0,
+                                  filter: "blur(12px)",
+                                  y: 12,
+                                  duration: 1,
+                                  ease: "power2.out",
+                                  delay,
+                                  stagger: 0.07,
+                                  clearProps: "filter",
+                                  scrollTrigger,
+                              })
+                            : gsap.from(byWord ? self.words : self.chars, {
+                                  yPercent: 110,
+                                  duration: 1.2,
+                                  delay,
+                                  stagger: byWord ? 0.06 : 0.018,
+                                  scrollTrigger,
+                              }),
                 });
                 return () => split.revert();
             });
         },
-        { scope: ref, dependencies: [lang], revertOnUpdate: true },
+        { scope: ref, dependencies: [lang, effect], revertOnUpdate: true },
     );
 
     return (

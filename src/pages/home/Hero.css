@@ -7,7 +7,7 @@
     overflow: clip;
 }
 
-/* A faint glow behind the summit: the only colour in the scene. */
+/* A faint glow behind the summit. */
 .hero::before {
     content: "";
     position: absolute;
@@ -15,7 +15,7 @@
     height: 80%;
     background: radial-gradient(
         closest-side,
-        color-mix(in srgb, var(--accent) 22%, transparent),
+        color-mix(in srgb, var(--accent) 14%, transparent),
         transparent
     );
     pointer-events: none;
@@ -29,24 +29,57 @@
     overflow: visible;
 }
 
-.hero__ridge,
+/* Layered range: each layer fades from a tinted crest into the page background. */
+.hero__stop-base {
+    stop-color: var(--bg);
+}
+
+.hero__stop-top--far {
+    stop-color: color-mix(in srgb, var(--accent) 16%, var(--bg));
+}
+
+.hero__stop-top--mid {
+    stop-color: color-mix(in srgb, var(--accent-2) 14%, var(--surface));
+}
+
+.hero__stop-top--main {
+    stop-color: color-mix(in srgb, var(--accent) 12%, var(--surface));
+}
+
+.hero__stop-top--near {
+    stop-color: color-mix(in srgb, var(--text) 3%, var(--bg));
+}
+
+.hero__stop-fade {
+    stop-color: var(--accent);
+    stop-opacity: 0;
+}
+
+.hero__stop-accent {
+    stop-color: var(--accent);
+}
+
+.hero__stop-accent-2 {
+    stop-color: var(--accent-2);
+}
+
+.hero__edge,
 .hero__flight {
     fill: none;
-    stroke: var(--text);
     stroke-linecap: round;
     stroke-linejoin: round;
     vector-effect: non-scaling-stroke;
 }
 
-.hero__ridge {
+.hero__edge {
     stroke-width: 1.25;
-    opacity: 0.45;
 }
 
 .hero__flight {
-    stroke: var(--accent);
-    stroke-width: 1.5;
-    stroke-dasharray: 2 6;
+    stroke: var(--muted);
+    stroke-width: 1;
+    stroke-dasharray: 2 7;
+    opacity: 0.6;
 }
 
 :root:not(.dark) .hero__bird {
@@ -90,15 +123,19 @@
     gap: 0.75rem;
 }
 
-/* Without motion the bird simply sits at its resting point. */
+/* Without motion the bird simply sits on the summit. */
 @media (prefers-reduced-motion: reduce) {
+    .hero__flight {
+        display: none;
+    }
+
     .hero__bird {
-        transform: translate(1080px, 330px);
+        transform: translate(1024px, 310px);
     }
 }
 
 @media (max-width: 800px) {
     .hero__scene {
-        opacity: 0.6;
+        opacity: 0.7;
     }
 }
