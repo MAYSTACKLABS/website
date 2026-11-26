@@ -32,14 +32,17 @@ export function SplitHeading({
         () => {
             gsap.matchMedia().add(MOTION, () => {
                 const blur = effect === "blur";
-                const byWord = blur || lang === "ar";
+                const arabic = lang === "ar";
+                const byWord = blur || arabic;
                 const scrollTrigger =
                     trigger === "view"
                         ? { trigger: ref.current, start: "top 85%", once: true }
                         : undefined;
                 const split = SplitText.create(ref.current, {
                     type: byWord ? "lines,words" : "lines,chars",
-                    mask: blur ? undefined : "lines",
+                    // Arabic letters reach well below the line box, so a line mask would cut them:
+                    // Arabic words fade up unmasked instead.
+                    mask: blur || arabic ? undefined : "lines",
                     autoSplit: true,
                     onSplit: (self) =>
                         blur
@@ -55,7 +58,8 @@ export function SplitHeading({
                                   scrollTrigger,
                               })
                             : gsap.from(byWord ? self.words : self.chars, {
-                                  yPercent: 110,
+                                  yPercent: arabic ? 30 : 110,
+                                  autoAlpha: arabic ? 0 : 1,
                                   duration: 1.2,
                                   delay,
                                   stagger: byWord ? 0.06 : 0.018,
