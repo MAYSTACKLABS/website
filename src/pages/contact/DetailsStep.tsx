@@ -1,5 +1,4 @@
 import type { CountryCode } from "libphonenumber-js/min";
-import { ArrowUpRight } from "lucide-react";
 import { useLocale } from "../../i18n/useLocale.ts";
 import { PhoneField } from "./PhoneField.tsx";
 import "../../components/ui/ButtonLink.css";
@@ -56,7 +55,6 @@ export function DetailsStep({ details, onChange, country, onCountryChange, sendi
             </label>
             <button type="submit" className="button button--primary" disabled={sending}>
                 <span>{t(sending ? "contact.sending" : "contact.send")}</span>
-                <ArrowUpRight className="button__icon" aria-hidden="true" />
             </button>
         </div>
     );

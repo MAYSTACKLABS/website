@@ -1,5 +1,6 @@
 import { useEffect, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
+import { useLocale } from "../i18n/useLocale.ts";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "./gsap.ts";
 import { scroller } from "./lenis.ts";
@@ -7,6 +8,7 @@ import { scroller } from "./lenis.ts";
 /** Lenis smooth scrolling driven by GSAP's ticker, so ScrollTrigger reads the same position. */
 export function SmoothScroll({ children }: { children: ReactNode }) {
     const { pathname, hash } = useLocation();
+    const { lang } = useLocale();
 
     useEffect(() => {
         if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -32,7 +34,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
         else if (target) target.scrollIntoView();
         else window.scrollTo(0, 0);
         requestAnimationFrame(() => ScrollTrigger.refresh());
-    }, [pathname, hash]);
+    }, [pathname, hash, lang]);
 
     return children;
 }

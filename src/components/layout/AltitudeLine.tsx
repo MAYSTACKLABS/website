@@ -2,9 +2,9 @@ import { useRef } from "react";
 import { gsap, MOTION_DESKTOP, ScrollTrigger, useGSAP } from "../../motion/gsap.ts";
 import "./AltitudeLine.css";
 
-const SUMMIT_METRES = 8848;
+const START_METRES = 10000;
 
-/** A hairline on the page edge that fills as you scroll, with an altitude readout. */
+/** A hairline that fills as you descend, with an altitude readout: ∞ at the top, 0 at the footer. */
 export function AltitudeLine() {
     const ref = useRef<HTMLDivElement>(null);
 
@@ -18,9 +18,10 @@ export function AltitudeLine() {
                     end: "max",
                     onUpdate: ({ progress }) => {
                         gsap.set(fill, { scaleY: progress });
-                        readout.textContent = Math.round(progress * SUMMIT_METRES)
-                            .toString()
-                            .padStart(4, "0");
+                        readout.textContent =
+                            progress < 0.005
+                                ? "∞"
+                                : Math.round((1 - progress) * START_METRES).toString();
                     },
                 });
             });
@@ -34,7 +35,7 @@ export function AltitudeLine() {
                 <span className="altitude__fill" />
             </span>
             <span className="altitude__label">
-                ALT <output>0000</output> M
+                ALT <output>∞</output> M
             </span>
         </div>
     );

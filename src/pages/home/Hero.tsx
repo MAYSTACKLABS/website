@@ -6,8 +6,7 @@ import { gsap, MOTION, useGSAP } from "../../motion/gsap.ts";
 import mark from "../../assets/logos/white.png";
 import "./Hero.css";
 
-// Scene geometry, in the SVG's 1440 × 900 space. The flight path runs past the top edge
-// so the bird can leave the frame as the visitor scrolls on.
+// Scene geometry, in the SVG's 1440 × 900 space.
 const FLIGHT = "M 300 900 C 640 820 980 640 1190 380 S 1440 -40 1540 -120";
 const RIDGE =
     "M 0 900 L 160 820 L 290 850 L 450 730 L 590 790 L 800 600 L 940 700 L 1040 660 L 1200 780 L 1320 740 L 1440 810";
@@ -47,7 +46,7 @@ export function Hero() {
                         1.2,
                     );
 
-                // Departure: scrolling away lifts the copy and sends the bird off the top edge.
+                // Departure: scrolling away lifts the copy; the bird stays perched with the ridge.
                 gsap.timeline({
                     scrollTrigger: {
                         trigger: ref.current,
@@ -57,13 +56,7 @@ export function Hero() {
                     },
                 })
                     .to(".hero__copy", { yPercent: -30, autoAlpha: 0, ease: "none" }, 0)
-                    .to(".hero__ridge", { y: 120, ease: "none" }, 0)
-                    .to(".hero__flight", { drawSVG: "0% 100%", ease: "none" }, 0)
-                    .to(
-                        ".hero__bird",
-                        { motionPath: { ...flight, start: LANDED, end: 1 }, ease: "none" },
-                        0,
-                    );
+                    .to([".hero__ridge", ".hero__flight", ".hero__bird"], { y: 120, ease: "none" }, 0);
             });
         },
         { scope: ref },

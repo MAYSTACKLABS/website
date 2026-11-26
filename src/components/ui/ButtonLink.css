@@ -17,24 +17,6 @@
         border-color 0.3s var(--ease);
 }
 
-.button__icon {
-    width: 1.1em;
-    height: 1.1em;
-    transition: transform 0.4s var(--ease);
-}
-
-.button:hover .button__icon {
-    transform: translate(2px, -2px);
-}
-
-[dir="rtl"] .button__icon {
-    transform: scaleX(-1);
-}
-
-[dir="rtl"] .button:hover .button__icon {
-    transform: scaleX(-1) translate(2px, -2px);
-}
-
 .button--primary {
     background: var(--text);
     color: var(--bg);

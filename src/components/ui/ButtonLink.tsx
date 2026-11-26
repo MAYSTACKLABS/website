@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
 import "./ButtonLink.css";
 
 type Props = {
@@ -13,12 +12,7 @@ type Props = {
 /** Every call-to-action on the site. Internal paths use the router; web links open a new tab. */
 export function ButtonLink({ to, children, variant = "primary", className = "" }: Props) {
     const classes = `button button--${variant} ${className}`;
-    const content = (
-        <>
-            <span>{children}</span>
-            <ArrowUpRight className="button__icon" aria-hidden="true" />
-        </>
-    );
+    const content = <span>{children}</span>;
 
     if (to.startsWith("/")) {
         return (

@@ -6,7 +6,7 @@ import { Footer } from "./Footer.tsx";
 import { AltitudeLine } from "./AltitudeLine.tsx";
 
 export function Layout({ children }: { children: ReactNode }) {
-    const { t } = useLocale();
+    const { t, lang } = useLocale();
 
     return (
         <SmoothScroll>
@@ -15,7 +15,7 @@ export function Layout({ children }: { children: ReactNode }) {
             </a>
             <Header />
             <AltitudeLine />
-            <main id="main">{children}</main>
+            <main id="main" key={lang}>{children}</main>
             <Footer />
         </SmoothScroll>
     );
