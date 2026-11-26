@@ -77,14 +77,10 @@
     font-size: var(--text-small);
 }
 
+/* The clouds are bright in both themes, so their base and the copyright on them are too. */
 :root {
     --cloud-floor: #d3e3fa;
     --cloud-ink: #3f5a85;
-}
-
-.dark {
-    --cloud-floor: #4f6181;
-    --cloud-ink: #d4def3;
 }
 
 @media (max-width: 800px) {

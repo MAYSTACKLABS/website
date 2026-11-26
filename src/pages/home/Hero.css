@@ -1,28 +1,37 @@
+/* The hero stays in place (sticky) while the rest of the page slides up over it. */
 .hero {
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 0;
     display: flex;
     align-items: center;
-    min-height: 100svh;
-    padding-block: 7rem 3rem;
-    overflow-x: clip;
+    height: 100svh;
+    min-height: 34rem;
+    overflow: clip;
 }
 
-.hero__inner {
-    display: grid;
-    align-items: center;
-}
-
-/* The scene fills the right and lower part of the hero; the copy reads over its open sky. */
-.hero .peak {
-    position: absolute;
-    right: -2vw;
-    bottom: 0;
+/*
+ * Framing, as in the reference: a large range with its summit at 70% across, the moon or sun
+ * behind the tip, and a deep cloud bank in front running to the bottom edge.
+ */
+.hero__scene {
+    inset: 0;
     z-index: 0;
-    width: min(72vw, 1200px);
+    --range-w: 115vw;
+    --range-x: 3.2vw;
+    --range-y: -7vw;
+    --clouds-w: 140vw;
+    --clouds-y: -12vw;
 }
 
-.hero__copy {
-    max-width: 36rem;
+.hero__scene .scenery__orb {
+    width: 20%;
+}
+
+.hero__scene .scenery__range,
+.hero__scene .scenery__clouds,
+.hero__scene .scenery__orb {
+    will-change: transform;
 }
 
 .hero__copy {
@@ -34,7 +43,7 @@
 
 .hero__title {
     font-family: var(--font-display);
-    font-size: clamp(3.5rem, 7vw, 7.5rem);
+    font-size: clamp(3.75rem, 9vw, 9rem);
     font-weight: 400;
     line-height: 0.88;
     letter-spacing: -0.01em;
@@ -59,27 +68,27 @@
     gap: 0.75rem;
 }
 
-/* Phones and narrow tablets: the stack sits under the copy. */
-@media (max-width: 900px) {
+/* Phones: copy at the top, the scene fills the lower part of the screen. */
+@media (max-width: 800px) {
     .hero {
+        align-items: flex-start;
+        min-height: 40rem;
         padding-top: 6.5rem;
     }
 
+    .hero__scene {
+        --range-w: 240vw;
+        --range-x: -89.4vw;
+        --range-y: -9vw;
+        --clouds-w: 260vw;
+        --clouds-y: -16vw;
+    }
+
+    .hero__scene .scenery__orb {
+        width: 15%;
+    }
 
     .hero__copy {
         gap: 1.1rem;
-    }
-
-    .hero {
-        flex-direction: column;
-        align-items: stretch;
-        padding-bottom: 0;
-    }
-
-    .hero .peak {
-        position: relative;
-        right: auto;
-        width: 130vw;
-        margin: 1.5rem 0 0 -22vw;
     }
 }

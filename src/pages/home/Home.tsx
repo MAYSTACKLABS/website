@@ -4,6 +4,7 @@ import { Hero } from "./Hero.tsx";
 import { ServicesScene } from "./ServicesScene.tsx";
 import { WorkScene } from "./WorkScene.tsx";
 import { ProcessScene } from "./ProcessScene.tsx";
+import "./Home.css";
 
 /** The Ascent: hero, services, work and process, one focus at a time. The footer is the summit. */
 export default function Home() {
@@ -13,9 +14,13 @@ export default function Home() {
     return (
         <>
             <Hero />
-            <ServicesScene />
-            <WorkScene />
-            <ProcessScene />
+            {/* Everything after the hero sits on one solid sheet with rounded corners,
+                which rises over the foot of the hero scene. */}
+            <div className="home-sheet">
+                <ServicesScene />
+                <WorkScene />
+                <ProcessScene />
+            </div>
         </>
     );
 }

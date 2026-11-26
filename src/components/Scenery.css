@@ -44,16 +44,6 @@
     max-width: none;
 }
 
-/* Day and night are two files; only one shows. */
-.scenery__night,
-.dark .scenery__day {
-    display: none;
-}
-
-.dark .scenery__night {
-    display: block;
-}
-
 /* Sun or moon: centred on the highest tip, behind the mountain. */
 .scenery__orb {
     position: absolute;

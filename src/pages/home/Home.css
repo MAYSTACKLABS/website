@@ -1,0 +1,7 @@
+/* Everything after the hero: one card that slides up over the still hero. Rounded, no border. */
+.home-sheet {
+    position: relative;
+    z-index: 1;
+    border-radius: clamp(1.75rem, 3vw, 3rem);
+    background: var(--bg);
+}
