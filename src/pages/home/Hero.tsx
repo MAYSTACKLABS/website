@@ -30,7 +30,9 @@ export function Hero() {
                     .to(".hero__copy", { yPercent: -15, autoAlpha: 0 }, 0)
                     .to(".scenery__orb", { y: 24 }, 0)
                     .to(".scenery__range", { y: -12 }, 0)
-                    .to(".scenery__clouds", { y: -48 }, 0);
+                    .to(".scenery__clouds", { y: -48 }, 0)
+                    // By the time the card reaches the top, the hero is gone completely.
+                    .fromTo(".hero__scene", { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.6, immediateRender: false }, 0.4);
             });
         },
         { scope: ref },
