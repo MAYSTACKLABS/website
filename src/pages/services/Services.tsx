@@ -26,11 +26,6 @@ export default function Services() {
                         <p className="eyebrow">{String(index + 1).padStart(2, "0")}</p>
                         <h2 className="display service__title">{pick(service.title)}</h2>
                         <p className="muted">{pick(service.description)}</p>
-                        <ul className="tags">
-                            {service.deliverables.map((item) => (
-                                <li key={item.en}>{pick(item)}</li>
-                            ))}
-                        </ul>
                         <ButtonLink to="/contact" variant="text">
                             {t("services.discuss")}
                         </ButtonLink>
