@@ -11,10 +11,19 @@ export function Sky() {
 
     useGSAP(() => {
         if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        // Each field moves by a transform (cheap for the GPU) and wraps after one tile.
+        const fields = [
+            { el: ref.current!.querySelector<HTMLElement>(".sky__stars--far")!, speed: 0.04, tile: 380 },
+            { el: ref.current!.querySelector<HTMLElement>(".sky__stars--near")!, speed: 0.12, tile: 620 },
+            { el: ref.current!.querySelector<HTMLElement>(".sky__stars--twinkle")!, speed: 0.2, tile: 760 },
+        ];
         ScrollTrigger.create({
             start: 0,
             end: "max",
-            onUpdate: (self) => ref.current?.style.setProperty("--sky-scroll", String(self.scroll())),
+            onUpdate: (self) => {
+                const y = self.scroll();
+                for (const f of fields) f.el.style.transform = `translate3d(0, ${-((y * f.speed) % f.tile)}px, 0)`;
+            },
         });
     });
 

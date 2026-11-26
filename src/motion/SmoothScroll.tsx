@@ -13,7 +13,7 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     useEffect(() => {
         if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-        const lenis = new Lenis({ anchors: true, autoRaf: false });
+        const lenis = new Lenis({ anchors: true, autoRaf: false, lerp: 0.14 });
         const tick = (time: number) => lenis.raf(time * 1000);
         lenis.on("scroll", ScrollTrigger.update);
         gsap.ticker.add(tick);

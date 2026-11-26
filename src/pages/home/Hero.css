@@ -18,10 +18,10 @@
 .hero__range {
     position: absolute;
     inset-inline-start: 18%;
-    bottom: -2%;
+    bottom: 6vw;
     width: 92%;
     max-width: none;
-    mask-image: linear-gradient(#000 30%, rgb(0 0 0 / 0.55) 55%, transparent 85%);
+    mask-image: linear-gradient(#000 75%, transparent 95%);
     transition: filter 1.2s var(--ease);
 }
 
@@ -65,18 +65,14 @@
     transform: none;
 }
 
-/* A soft glare along the foot of the range, so it melts into light instead of ending. */
-.hero__scene::after {
-    content: "";
-    position: absolute;
-    inset: auto -10% -12% -10%;
-    height: 45%;
-    background: radial-gradient(ellipse 60% 70% at 62% 100%, var(--glare), transparent 70%);
-    filter: blur(20px);
+.hero__clouds {
+    bottom: -8vw;
 }
 
-[dir="rtl"] .hero__scene::after {
-    background: radial-gradient(ellipse 60% 70% at 38% 100%, var(--glare), transparent 70%);
+.hero__range,
+.hero__clouds,
+.hero__orb {
+    will-change: transform;
 }
 
 [dir="rtl"] .hero__range {
@@ -118,14 +114,19 @@
 
 @media (max-width: 800px) {
     .hero__range {
-        inset-inline-start: -30%;
-        width: 170%;
-        bottom: 0;
+        inset-inline-start: -60%;
+        width: 190%;
+        bottom: 14vw;
     }
 
     .hero__orb {
-        inset-inline-start: 46%;
-        bottom: 26%;
-        width: 46vw;
+        inset-inline-start: 44%;
+        bottom: 52vw;
+        width: 30vw;
+    }
+
+    .hero__clouds {
+        width: 220vw;
+        bottom: -10vw;
     }
 }

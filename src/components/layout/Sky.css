@@ -1,16 +1,16 @@
 .sky {
-    --sky-scroll: 0;
     position: fixed;
     inset: 0;
     z-index: -1;
     background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 70%);
-    transition: background 1.2s var(--ease);
+    overflow: hidden;
     pointer-events: none;
 }
 
 .sky__stars {
     position: absolute;
-    inset: 0;
+    inset: 0 0 -800px;
+    will-change: transform;
     opacity: 0;
     transition: opacity 1.2s var(--ease);
 }
@@ -29,7 +29,6 @@
         radial-gradient(1.6px 1.6px at 330px 40px, #fff6, transparent),
         radial-gradient(1.6px 1.6px at 210px 350px, #fff7, transparent);
     background-size: 380px 380px;
-    background-position: 0 calc(var(--sky-scroll) * -0.04px);
 }
 
 .sky__stars--near {
@@ -40,7 +39,6 @@
         radial-gradient(2px 2px at 520px 280px, #fff, transparent),
         radial-gradient(2px 2px at 180px 520px, #dfe8ff, transparent);
     background-size: 620px 620px;
-    background-position: 0 calc(var(--sky-scroll) * -0.12px);
 }
 
 .sky__stars--twinkle {
@@ -49,7 +47,6 @@
         radial-gradient(2px 2px at 700px 90px, #cfdcff, transparent),
         radial-gradient(3px 3px at 480px 560px, #fff, transparent);
     background-size: 900px 760px;
-    background-position: 0 calc(var(--sky-scroll) * -0.2px);
 }
 
 .dark .sky__stars--twinkle {
