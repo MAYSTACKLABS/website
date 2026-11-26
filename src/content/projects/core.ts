@@ -1,4 +1,6 @@
 import type { Project } from "./types.ts";
+import fullDesktop from "../../assets/projects/core/full-desktop.webp";
+import fullMobile from "../../assets/projects/core/full-mobile.webp";
 import cover from "../../assets/projects/core/cover.webp";
 import one from "../../assets/projects/core/1.webp";
 import two from "../../assets/projects/core/2.webp";
@@ -34,7 +36,9 @@ export const core: Project = {
         { en: "Fast, polished interface", ar: "واجهة سريعة ومصقولة" },
     ],
     stack: ["React", "TypeScript", "Responsive Web Design", "Motion Design"],
-    liveUrl: "https://www.corebhub.com",
+    liveUrl: "https://corebhub.com/home",
     desktop: [one, two, three, cover],
     mobile: [mobileOne, mobileTwo, mobileThree],
+    fullDesktop,
+    fullMobile,
 };

@@ -12,7 +12,10 @@ import "./Showcase.css";
  */
 export function Showcase({ project, name }: { project: Project; name: string }) {
     const ref = useRef<HTMLElement>(null);
-    const pages = Math.max(project.desktop.length, project.mobile.length);
+    // A full-page capture of the live site if there is one, else the screens stacked.
+    const desktop = project.fullDesktop ? [project.fullDesktop] : project.desktop;
+    const mobile = project.fullMobile ? [project.fullMobile] : project.mobile;
+    const pages = project.fullDesktop ? 5 : Math.max(desktop.length, mobile.length);
 
     useGSAP(
         () => {
@@ -46,7 +49,7 @@ export function Showcase({ project, name }: { project: Project; name: string }) 
             <div className="showcase__stage">
                 <Laptop className="showcase__laptop">
                     <span className="showcase__strip">
-                        {project.desktop.map((src, i) => (
+                        {desktop.map((src, i) => (
                             <Screenshot
                                 key={src}
                                 src={src}
@@ -58,10 +61,10 @@ export function Showcase({ project, name }: { project: Project; name: string }) 
                         ))}
                     </span>
                 </Laptop>
-                {project.mobile.length > 0 && (
+                {mobile.length > 0 && (
                     <Phone className="showcase__phone">
                         <span className="showcase__strip">
-                            {project.mobile.map((src, i) => (
+                            {mobile.map((src, i) => (
                                 <img key={src} src={src} alt={`${name} — mobile ${i + 1}`} decoding="async" onLoad={refresh} />
                             ))}
                         </span>

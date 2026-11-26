@@ -16,4 +16,7 @@ export type Project = {
     /** The first desktop and mobile screens are the project's cover. */
     desktop: string[];
     mobile: string[];
+    /** Optional full-page captures of the live site; the project page scrolls through them. */
+    fullDesktop?: string;
+    fullMobile?: string;
 };

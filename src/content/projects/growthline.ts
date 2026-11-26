@@ -1,4 +1,6 @@
 import type { Project } from "./types.ts";
+import fullDesktop from "../../assets/projects/growthline/full-desktop.webp";
+import fullMobile from "../../assets/projects/growthline/full-mobile.webp";
 import one from "../../assets/projects/growthline/1.webp";
 import two from "../../assets/projects/growthline/2.webp";
 import three from "../../assets/projects/growthline/3.webp";
@@ -35,4 +37,7 @@ export const growthline: Project = {
     stack: ["React", "TypeScript", "Responsive Web Design", "SEO-ready Structure"],
     desktop: [one, two, three],
     mobile: [mobileOne, mobileTwo, mobileThree],
+    liveUrl: "https://www.gl-bd.com/",
+    fullDesktop,
+    fullMobile,
 };
