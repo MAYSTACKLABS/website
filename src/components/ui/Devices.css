@@ -1,0 +1,89 @@
+.laptop {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1.5;
+}
+
+.laptop__frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.laptop__screen {
+    position: absolute;
+    left: 14%;
+    top: 9.5%;
+    width: 72%;
+    height: 61.5%;
+    overflow: hidden;
+    clip-path: polygon(1.7% 0, 98.3% 0, 100% 100%, 0 100%);
+    border-radius: 3px;
+    background: #07121a;
+}
+
+.laptop__screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+/* Phone: the frame sits on top, the screenshot fills the black glass under it. */
+.phone {
+    position: relative;
+    aspect-ratio: 2 / 3;
+    filter: drop-shadow(0 30px 40px rgb(0 0 0 / 0.35));
+}
+
+.phone__frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    transform: scaleX(-1);
+}
+
+.phone__screen {
+    position: absolute;
+    left: 19.5%;
+    top: 5.6%;
+    width: 60%;
+    height: 87.8%;
+    overflow: hidden;
+    border-radius: 15% / 7%;
+    background: #030810;
+}
+
+.phone__screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+}
+
+.device-set {
+    position: relative;
+    padding-inline-end: 8%;
+    padding-bottom: 4%;
+}
+
+.device-set__phone {
+    position: absolute;
+    inset-inline-end: 0;
+    bottom: 0;
+    width: 26%;
+}
+
+.phone__island {
+    position: absolute;
+    top: 7.3%;
+    left: 41%;
+    width: 18%;
+    height: 3.7%;
+    border-radius: 999px;
+    background: #030406;
+}

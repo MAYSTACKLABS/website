@@ -21,7 +21,7 @@ export function ProcessScene() {
                     scrollTrigger: {
                         trigger: ref.current,
                         start: "top top",
-                        end: `+=${process.length * 80}%`,
+                        end: `+=${process.length * 50}%`,
                         pin: true,
                         scrub: 1,
                         snap: { snapTo: "labels", duration: 0.5 },
@@ -50,7 +50,6 @@ export function ProcessScene() {
         <section ref={ref} className="process" aria-labelledby="process-title">
             <div className="process__inner container">
                 <header>
-                    <p className="eyebrow">{t("home.process.eyebrow")}</p>
                     <h2 id="process-title" className="process__title">
                         {t("home.process.title")}
                     </h2>

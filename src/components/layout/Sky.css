@@ -1,0 +1,72 @@
+.sky {
+    --sky-scroll: 0;
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 70%);
+    transition: background 1.2s var(--ease);
+    pointer-events: none;
+}
+
+.sky__stars {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1.2s var(--ease);
+}
+
+.dark .sky__stars {
+    opacity: 1;
+}
+
+/* Tiled star fields: each tile is a handful of soft dots; scroll shifts the tiles upward. */
+.sky__stars--far {
+    background-image:
+        radial-gradient(1.6px 1.6px at 20px 30px, #fff9, transparent),
+        radial-gradient(1.6px 1.6px at 140px 90px, #fff8, transparent),
+        radial-gradient(1.6px 1.6px at 260px 210px, #fff7, transparent),
+        radial-gradient(1.6px 1.6px at 90px 300px, #fff8, transparent),
+        radial-gradient(1.6px 1.6px at 330px 40px, #fff6, transparent),
+        radial-gradient(1.6px 1.6px at 210px 350px, #fff7, transparent);
+    background-size: 380px 380px;
+    background-position: 0 calc(var(--sky-scroll) * -0.04px);
+}
+
+.sky__stars--near {
+    background-image:
+        radial-gradient(2px 2px at 60px 120px, #fff, transparent),
+        radial-gradient(2px 2px at 420px 60px, #dfe8ff, transparent),
+        radial-gradient(2px 2px at 300px 400px, #fff, transparent),
+        radial-gradient(2px 2px at 520px 280px, #fff, transparent),
+        radial-gradient(2px 2px at 180px 520px, #dfe8ff, transparent);
+    background-size: 620px 620px;
+    background-position: 0 calc(var(--sky-scroll) * -0.12px);
+}
+
+.sky__stars--twinkle {
+    background-image:
+        radial-gradient(3px 3px at 110px 200px, #fff, transparent),
+        radial-gradient(2px 2px at 700px 90px, #cfdcff, transparent),
+        radial-gradient(3px 3px at 480px 560px, #fff, transparent);
+    background-size: 900px 760px;
+    background-position: 0 calc(var(--sky-scroll) * -0.2px);
+}
+
+.dark .sky__stars--twinkle {
+    animation: sky-twinkle 4s ease-in-out infinite alternate;
+}
+
+@keyframes sky-twinkle {
+    from {
+        opacity: 0.25;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .dark .sky__stars--twinkle {
+        animation: none;
+    }
+}

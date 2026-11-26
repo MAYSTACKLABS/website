@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Moon, Sun } from "lucide-react";
+import { MessageCircle, Moon, Sun } from "lucide-react";
 import { useLocale } from "../../i18n/useLocale.ts";
 import { useTheme } from "../../context/ThemeContext.tsx";
-import { navigation } from "../../content/site.ts";
+import { navigation, site } from "../../content/site.ts";
 import { ScrollTrigger, useGSAP } from "../../motion/gsap.ts";
 import { setScrollLocked } from "../../motion/lenis.ts";
 import { Logo } from "./Logo.tsx";
@@ -48,6 +48,15 @@ export function Header() {
                     ))}
                 </nav>
                 <div className="header__tools">
+                    <a
+                        className="header__whatsapp"
+                        href={`https://wa.me/${site.whatsapp}`}
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <MessageCircle aria-hidden="true" />
+                        <span>WhatsApp</span>
+                    </a>
                     <button type="button" onClick={toggleLang} aria-label={t("nav.switchLanguage")}>
                         {lang === "en" ? "ع" : "EN"}
                     </button>

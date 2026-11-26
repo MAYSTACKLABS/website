@@ -39,26 +39,56 @@
     padding-inline: var(--gutter);
 }
 
-.footer__summit > :not(.footer__range) {
+.footer__summit {
+    min-height: min(100svh, 58rem);
+    justify-content: flex-end;
+    padding-bottom: clamp(6rem, 16vh, 10rem);
+}
+
+.footer__summit > :not(.footer__peak) {
     position: relative;
+    z-index: 1;
 }
 
-.footer__range {
+.footer__peak {
     position: absolute;
-    inset: auto 0 0;
-    width: 100%;
-    height: 70%;
+    bottom: -4%;
+    width: min(78vw, 1250px);
+    max-width: none;
     pointer-events: none;
+    mask-image: linear-gradient(#000 50%, transparent 95%);
+    transition: filter 1.2s var(--ease);
 }
 
-.footer__stop-top {
-    stop-color: color-mix(in srgb, var(--accent) 12%, var(--surface));
+.dark .footer__peak {
+    filter: brightness(0.55) saturate(0.9);
 }
 
-.footer__stop-base {
-    stop-color: var(--bg);
+/* The left peak shows its right-hand slopes, the right peak is mirrored: a valley between. */
+.footer__peak--start {
+    left: -30vw;
 }
 
-[dir="rtl"] .footer__range {
+.footer__peak--end {
+    right: -30vw;
     transform: scaleX(-1);
+}
+
+.footer__title {
+    max-width: 12ch;
+}
+
+@media (max-width: 800px) {
+    .footer__peak {
+        width: 95vw;
+        bottom: -2%;
+    }
+
+    .footer__peak--start {
+        left: -45vw;
+    }
+
+    .footer__peak--end {
+        right: -45vw;
+    }
 }

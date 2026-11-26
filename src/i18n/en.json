@@ -12,10 +12,9 @@
     },
     "cta": {
         "start": "Start a project",
-        "work": "See the work"
+        "work": "Our work"
     },
     "footer": {
-        "eyebrow": "Base camp",
         "title": "Let’s build something worth launching."
     },
     "home": {
@@ -30,16 +29,12 @@
             "lead": "Websites, apps and platforms, designed and built by one team, from the first question to launch."
         },
         "services": {
-            "eyebrow": "What we do",
             "title": "One team. The full stack."
         },
         "work": {
-            "eyebrow": "Selected work",
-            "title": "Ideas made real.",
-            "all": "View all projects"
+            "title": "Ideas made real."
         },
         "process": {
-            "eyebrow": "How we work",
             "title": "From the first question to a product that keeps getting better."
         }
     },

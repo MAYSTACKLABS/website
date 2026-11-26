@@ -1,13 +1,50 @@
 import { useRef } from "react";
 import { useLocale } from "../../i18n/useLocale.ts";
-import { services } from "../../content/services.ts";
-import { ServiceVisual } from "../../components/ServiceVisual.tsx";
-import { gsap, MOTION_DESKTOP, useGSAP } from "../../motion/gsap.ts";
+import { services, type Service } from "../../content/services.ts";
+import { DeviceSet, Laptop, Phone } from "../../components/ui/Devices.tsx";
+import { gsap, MOTION, MOTION_DESKTOP, useGSAP } from "../../motion/gsap.ts";
 import "./ServicesScene.css";
 
+/** Each service shown on the device it lives on. */
+function Visual({ service }: { service: Service }) {
+    const { pick } = useLocale();
+    const { showcase } = service;
+    const alt = pick(showcase.title);
+
+    switch (service.id) {
+        case "design":
+            // A design board: screens laid out as on a canvas, spreading apart as the card arrives.
+            return (
+                <div className="board">
+                    <div className="board__sheet board__sheet--wide">
+                        <img src={showcase.desktop[0]} alt={alt} loading="lazy" />
+                    </div>
+                    <div className="board__sheet board__sheet--tall board__sheet--a">
+                        <img src={showcase.mobile[0]} alt="" loading="lazy" />
+                    </div>
+                    <div className="board__sheet board__sheet--tall board__sheet--b">
+                        <img src={showcase.mobile[1] ?? showcase.mobile[0]} alt="" loading="lazy" />
+                    </div>
+                    <span className="board__cursor" aria-hidden="true" />
+                </div>
+            );
+        case "mobile":
+            return (
+                <div className="phones">
+                    <Phone src={showcase.mobile[1] ?? showcase.mobile[0]} alt="" className="phones__back" />
+                    <Phone src={showcase.mobile[0]} alt={alt} className="phones__front" />
+                </div>
+            );
+        case "web":
+            return <DeviceSet desktop={showcase.desktop[0]} mobile={showcase.mobile[0]} alt={alt} />;
+        default:
+            return <Laptop src={showcase.desktop[0]} alt={alt} />;
+    }
+}
+
 /**
- * Pinned on desktop: one service at a time. Its words swap on the left while its screen
- * turns into view in 3D on the right. Phones and reduced motion get a plain list.
+ * Stacked cards: each service holds near the top while the next slides up over it,
+ * and the one underneath steps back.
  */
 export function ServicesScene() {
     const { t, pick } = useLocale();
@@ -15,44 +52,45 @@ export function ServicesScene() {
 
     useGSAP(
         () => {
-            gsap.matchMedia().add(MOTION_DESKTOP, () => {
-                const copies = gsap.utils.toArray<HTMLElement>(".services__item");
-                const screens = gsap.utils.toArray<HTMLElement>(".services__screen");
-                const counter = ref.current!.querySelector(".services__count")!;
-
-                gsap.set([copies.slice(1), screens.slice(1)], { autoAlpha: 0 });
-                const tl = gsap.timeline({
-                    defaults: { duration: 1, ease: "power3.inOut" },
-                    scrollTrigger: {
-                        trigger: ref.current,
-                        start: "top top",
-                        end: `+=${services.length * 100}%`,
-                        pin: true,
-                        scrub: 1,
-                        snap: { snapTo: "labels", duration: 0.6, ease: "power2.inOut" },
-                        onUpdate: ({ progress }) => {
-                            const index = Math.min(
-                                services.length - 1,
-                                Math.round(progress * (services.length - 1)),
-                            );
-                            counter.textContent = String(index + 1).padStart(2, "0");
-                        },
-                    },
+            const mm = gsap.matchMedia();
+            mm.add(MOTION_DESKTOP, () => {
+                const cards = gsap.utils.toArray<HTMLElement>(".services__card");
+                cards.forEach((card, i) => {
+                    const next = cards[i + 1];
+                    if (next) {
+                        gsap.to(card, {
+                            scale: 0.95,
+                            filter: "brightness(0.82)",
+                            ease: "none",
+                            scrollTrigger: { trigger: next, start: "top bottom", end: "top 20%", scrub: true },
+                        });
+                    }
                 });
+            });
+            mm.add(MOTION, () => {
+                gsap.from(".board__sheet--a", {
+                    x: -40, y: 30, rotate: -6, scrollTrigger: { trigger: ".board", start: "top 85%", end: "top 35%", scrub: 1 },
+                });
+                gsap.from(".board__sheet--b", {
+                    x: 60, y: 50, rotate: 8, scrollTrigger: { trigger: ".board", start: "top 85%", end: "top 35%", scrub: 1 },
+                });
+                gsap.fromTo(
+                    ".board__cursor",
+                    { x: "-120%", y: "160%" },
+                    { x: "0%", y: "0%", scrollTrigger: { trigger: ".board", start: "top 70%", end: "top 30%", scrub: 1 } },
+                );
 
-                tl.addLabel("s0");
-                for (let i = 1; i < services.length; i++) {
-                    tl.to(copies[i - 1], { autoAlpha: 0, y: -60 })
-                        .to(screens[i - 1], { autoAlpha: 0, rotateX: 28, y: -160, z: -300 }, "<")
-                        .fromTo(copies[i], { autoAlpha: 0, y: 60 }, { autoAlpha: 1, y: 0 }, "<0.25")
-                        .fromTo(
-                            screens[i],
-                            { autoAlpha: 0, rotateY: -40, x: 240, z: -400 },
-                            { autoAlpha: 1, rotateY: 0, x: 0, z: 0 },
-                            "<",
-                        )
-                        .addLabel(`s${i}`);
-                }
+                // The phones turn in 3D as the card travels through the screen.
+                gsap.fromTo(
+                    ".phones__front",
+                    { rotateY: -32, rotateX: 8 },
+                    { rotateY: 14, rotateX: -4, ease: "none", scrollTrigger: { trigger: ".phones", start: "top bottom", end: "bottom top", scrub: 1 } },
+                );
+                gsap.fromTo(
+                    ".phones__back",
+                    { rotateY: -18, x: "8%" },
+                    { rotateY: 22, x: "-6%", ease: "none", scrollTrigger: { trigger: ".phones", start: "top bottom", end: "bottom top", scrub: 1 } },
+                );
             });
         },
         { scope: ref },
@@ -60,22 +98,22 @@ export function ServicesScene() {
 
     return (
         <section ref={ref} className="services" aria-labelledby="services-title">
-            <div className="services__inner container">
-                <header className="services__head">
-                    <p className="eyebrow">{t("home.services.eyebrow")}</p>
-                    <h2 id="services-title" className="services__title">
-                        {t("home.services.title")}
-                    </h2>
-                    <p className="services__count-wrap" aria-hidden="true">
-                        <span className="services__count">01</span> /{" "}
-                        {String(services.length).padStart(2, "0")}
-                    </p>
-                </header>
+            <div className="container">
+                <h2 id="services-title" className="services__title">
+                    {t("home.services.title")}
+                </h2>
 
                 <ol className="services__list">
-                    {services.map((service) => (
-                        <li key={service.id} className="services__row">
-                            <div className="services__item">
+                    {services.map((service, index) => (
+                        <li
+                            key={service.id}
+                            className="services__card"
+                            style={{ "--i": index } as React.CSSProperties}
+                        >
+                            <div className="services__copy">
+                                <span className="services__index">
+                                    {String(index + 1).padStart(2, "0")}
+                                </span>
                                 <h3 className="display services__name">{pick(service.title)}</h3>
                                 <p className="muted">{pick(service.description)}</p>
                                 <ul className="tags">
@@ -84,7 +122,9 @@ export function ServicesScene() {
                                     ))}
                                 </ul>
                             </div>
-                            <ServiceVisual service={service} className="services__screen" />
+                            <div className="services__visual" role="img" aria-label={pick(service.title)}>
+                                <Visual service={service} />
+                            </div>
                         </li>
                     ))}
                 </ol>

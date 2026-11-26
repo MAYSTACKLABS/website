@@ -3,7 +3,7 @@ import { useLocale } from "../../i18n/useLocale.ts";
 import { SmoothScroll } from "../../motion/SmoothScroll.tsx";
 import { Header } from "./Header.tsx";
 import { Footer } from "./Footer.tsx";
-import { AltitudeLine } from "./AltitudeLine.tsx";
+import { Sky } from "./Sky.tsx";
 
 export function Layout({ children }: { children: ReactNode }) {
     const { t, lang } = useLocale();
@@ -13,8 +13,8 @@ export function Layout({ children }: { children: ReactNode }) {
             <a className="visually-hidden" href="#main">
                 {t("nav.skip")}
             </a>
+            <Sky />
             <Header />
-            <AltitudeLine />
             <main id="main" key={lang}>{children}</main>
             <Footer />
         </SmoothScroll>

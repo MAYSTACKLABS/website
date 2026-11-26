@@ -2,8 +2,7 @@ import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useLocale } from "../../i18n/useLocale.ts";
 import { clientProjects } from "../../content/projects/index.ts";
-import { ButtonLink } from "../../components/ui/ButtonLink.tsx";
-import { Screenshot } from "../../components/ui/Screenshot.tsx";
+import { DeviceSet } from "../../components/ui/Devices.tsx";
 import { SplitHeading } from "../../motion/SplitHeading.tsx";
 import { gsap, MOTION_DESKTOP, useGSAP } from "../../motion/gsap.ts";
 import "./WorkScene.css";
@@ -67,13 +66,7 @@ export function WorkScene() {
     return (
         <section ref={ref} className="work" aria-label={t("home.work.title")}>
             <header className="work__head container">
-                <div>
-                    <p className="eyebrow">{t("home.work.eyebrow")}</p>
-                    <SplitHeading className="display" effect="blur">{t("home.work.title")}</SplitHeading>
-                </div>
-                <ButtonLink to="/portfolio" variant="text">
-                    {t("home.work.all")}
-                </ButtonLink>
+                <SplitHeading className="display" effect="blur">{t("home.work.title")}</SplitHeading>
             </header>
 
             <div className="work__viewport">
@@ -81,11 +74,11 @@ export function WorkScene() {
                     {clientProjects.map((project, index) => (
                         <li key={project.slug} className="work__card">
                             <Link to={`/portfolio/${project.slug}`} className="work__link">
-                                <Screenshot
+                                <DeviceSet
                                     className="work__image"
-                                    src={project.desktop[0]}
+                                    desktop={project.desktop[0]}
+                                    mobile={project.mobile[0]}
                                     alt={pick(project.title)}
-                                    sizes="(max-width: 800px) 92vw, 62vw"
                                 />
                                 <div className="work__meta">
                                     <span className="work__index">

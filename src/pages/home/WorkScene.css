@@ -1,5 +1,5 @@
 .work {
-    padding-block: var(--section);
+    padding-block: clamp(4rem, 10vw, 8rem);
     overflow: clip;
 }
 
@@ -32,11 +32,6 @@
 
 .work__image {
     width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: cover;
-    object-position: top;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
     transition: transform 0.8s var(--ease);
 }
 
@@ -86,16 +81,17 @@
         display: flex;
         gap: 4vw;
         width: max-content;
-        padding-inline: 19vw;
+        padding-inline: 29vw;
     }
 
     .work__card {
-        width: 62vw;
+        width: min(42vw, 44rem);
         transform-style: preserve-3d;
         will-change: transform, opacity;
     }
 
     .work__image {
-        max-height: 50svh;
+        width: min(100%, 62svh * 1.5);
+        margin-inline: auto;
     }
 }
