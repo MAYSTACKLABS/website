@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useLayoutEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useLayoutEffect, useMemo, useState } from "react";
 
 type Theme = "light" | "dark";
 
@@ -29,14 +29,28 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         document
             .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
             ?.setAttribute("content", theme === "dark" ? "#05070d" : "#f5f6f8");
-        localStorage.setItem("theme", theme);
     }, [theme]);
+
+    // Until the visitor picks a theme, keep following the system light/dark setting live.
+    useEffect(() => {
+        const query = matchMedia("(prefers-color-scheme: dark)");
+        const follow = () => {
+            if (!localStorage.getItem("theme")) setTheme(query.matches ? "dark" : "light");
+        };
+        query.addEventListener("change", follow);
+        return () => query.removeEventListener("change", follow);
+    }, []);
 
     const value = useMemo<ThemeContextValue>(
         () => ({
             theme,
             setTheme,
-            toggleTheme: () => setTheme((current) => (current === "dark" ? "light" : "dark")),
+            toggleTheme: () =>
+                setTheme((current) => {
+                    const next = current === "dark" ? "light" : "dark";
+                    localStorage.setItem("theme", next);
+                    return next;
+                }),
         }),
         [theme],
     );

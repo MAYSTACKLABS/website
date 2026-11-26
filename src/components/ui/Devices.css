@@ -1,5 +1,6 @@
 .laptop {
     position: relative;
+    isolation: isolate;
     width: 100%;
     aspect-ratio: 1.5;
 }
@@ -65,17 +66,50 @@
     object-position: top;
 }
 
+/*
+ * Laptop and phone side by side: the phone stands beside the laptop screen, its body lined up
+ * with the screen (the screen spans 9.5%–71% of the laptop height).
+ */
 .device-set {
-    position: relative;
-    padding-inline-end: 8%;
-    padding-bottom: 4%;
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5%;
+}
+
+.device-set > .laptop {
+    flex: 0 0 75%;
 }
 
 .device-set__phone {
+    flex: 0 0 22.5%;
+    margin-top: 3%;
+}
+
+/* A soft contact shadow so the laptop sits on a surface instead of floating. */
+.laptop::after {
+    content: "";
     position: absolute;
-    inset-inline-end: 0;
-    bottom: 0;
-    width: 26%;
+    z-index: -1;
+    left: 4%;
+    right: 4%;
+    bottom: 6%;
+    height: 8%;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, rgb(0 0 0 / 0.45), transparent);
+    filter: blur(6px);
+}
+
+/* At night, a faint pool of light under it, as if on a lit desk. */
+.dark .laptop::before {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    left: -6%;
+    right: -6%;
+    bottom: -6%;
+    height: 26%;
+    border-radius: 50%;
+    background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 22%, transparent), transparent);
 }
 
 .phone__island {
