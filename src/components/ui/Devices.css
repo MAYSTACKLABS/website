@@ -36,7 +36,8 @@
 .phone {
     position: relative;
     aspect-ratio: 2 / 3;
-    filter: drop-shadow(0 30px 40px rgb(0 0 0 / 0.35));
+    /* A close, soft contact shadow: just enough to lift the phone off the page. */
+    filter: drop-shadow(0 6px 8px rgb(5 7 13 / 0.18)) drop-shadow(0 16px 22px rgb(5 7 13 / 0.12));
 }
 
 .phone__frame {
