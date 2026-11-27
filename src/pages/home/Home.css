@@ -1,23 +1,8 @@
 /*
- * Everything after the hero: one card that slides up over the still hero. Rounded, no border.
- * Its colour follows the sky (blue at the top, warming towards the footer), so it blends in
- * rather than reading as a white panel.
+ * Everything after the hero slides up over the still hero. No panel of its own: the sections
+ * sit straight on the sky, so the page stays one continuous background.
  */
 .home-sheet {
     position: relative;
     z-index: 1;
-    border-radius: clamp(1.75rem, 3vw, 3rem);
-    background: linear-gradient(180deg, var(--sheet-top), var(--sheet-mid) 55%, var(--sheet-bottom));
-}
-
-:root {
-    --sheet-top: #d9e5fb;
-    --sheet-mid: #e6ebfa;
-    --sheet-bottom: #efe6ee;
-}
-
-.dark {
-    --sheet-top: #060a18;
-    --sheet-mid: #0b1029;
-    --sheet-bottom: #171734;
 }

@@ -28,12 +28,12 @@ export function Hero() {
                         end: () => `+=${innerHeight * (innerWidth <= 800 ? 0.5 : 1)}`, scrub: 0.6 },
                     defaults: { ease: "none" },
                 })
-                    .to(".hero__copy", { yPercent: -15, autoAlpha: 0 }, 0)
+                    .to(".hero__copy", { yPercent: -15, autoAlpha: 0, duration: 0.4 }, 0)
                     .to(".scenery__orb", { y: 24 }, 0)
                     .to(".scenery__range", { y: -12 }, 0)
                     .to(".scenery__clouds", { y: -48 }, 0)
                     // By the time the card reaches the top, the hero is gone completely.
-                    .fromTo(".hero__scene", { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.6, immediateRender: false }, 0.4);
+                    .fromTo(".hero__scene", { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.45, immediateRender: false }, 0.15);
             });
         },
         { scope: ref },
